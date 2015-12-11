@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Test.php
+		File name		: Authenticate.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 12th Dec 2015
+		Date Created	: 12 Dec 2015
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -11,24 +11,18 @@
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ***********************************************************************************/
-class Test extends CI_Controller
+
+class Authenticate extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library("session");
     }
 
-    public function index()
+    public function login()
     {
-        redirect("test/test");
+        $this->load->view("admin/authenticate/login_page");
     }
 
-    public function test()
-    {
-        $data = array(
-            "header" => "Video Game Portal"
-        );
-        $this->load->view("templates/test_page", $data);
-    }
-
-} //end Test
+} //end class Authenticate
