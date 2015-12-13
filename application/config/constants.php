@@ -86,12 +86,20 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*
 |--------------------------------------------------------------------------
+| Date Time
+|--------------------------------------------------------------------------
+|
+| This is used for the setting of timezones in PHP's DateTime object
+|
+*/
+define('DATETIMEZONE',		'Asia/Singapore');
+
+/*
+|--------------------------------------------------------------------------
 | Custom Constants
 |--------------------------------------------------------------------------
 */
-define("LOCAL_STATIC_REPO", "../../../static_repo/");
-define("DB_POKEMON", "pokemon");
-define("TABLE_ABILITY", "abilities");
-define("TABLE_TYPE", "types");
-
+define("DB_VIDEOGAMES", "videogame_catalogue");
+define("SITE_NAME", "Video Game Catalogue");
+define("AUTHOR", "Davina Leong");
 define("RESOURCES_FOLDER", "http://localhost/videogame_portal/resources/");

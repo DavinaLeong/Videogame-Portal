@@ -1,8 +1,23 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<!----------------------------------------------------------------------------------
+	- File Info -
+		File name		: login_page.php
+		Author(s)		: DAVINA Leong Shi Yun
+		Date Created	: 12 Dec 2015
+
+	- Contact Info -
+		Email	: leong.shi.yun@gmail.com
+		Mobile	: (+65) 9369 3752 [Singapore]
+
+	All content © DAVINA Leong Shi Yun. All Rights Reserved.
+----------------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php $this->load->view("admin/admin_navbar"); ?>
+    <link href="<?=RESOURCES_FOLDER?>/css/parsley.css" rel="stylesheet"/>
+    <script src="<?=RESOURCES_FOLDER?>/js/parsley.js"></script>
+
     <title>Video Game Portal Admin</title>
 
     <style>
@@ -49,7 +64,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="form-signin" action="login" method="post" >
+        <form class="form-signin" action="login" method="post" data-parsley-validate>
             <h2 class="form-signin-heading">Please sign in</h2>
             <?php if($this->session->userdata('message')):?>
 
