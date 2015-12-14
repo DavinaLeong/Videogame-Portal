@@ -38,7 +38,7 @@ class Authenticate extends CI_Controller
         // Check if there is an existing session
         if($this->session->userdata("uid") || $this->session->userdata("access"))
         {
-            $this->Common_functions->log_message($this->session->userdata("uid"), "has been logged out.");
+            $this->User_log_model->log_message($this->session->userdata("uid"), "has been logged out.");
             $this->session->unset_userdata("uid");
             $this->session->unset_userdata("access");
             $this->session->set_userdata("message", "Session has expired and you've been logged out.");
