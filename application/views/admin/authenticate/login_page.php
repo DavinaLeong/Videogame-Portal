@@ -14,7 +14,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php $this->load->view("admin/admin_navbar"); ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
     <link href="<?=RESOURCES_FOLDER?>/css/parsley.css" rel="stylesheet"/>
     <script src="<?=RESOURCES_FOLDER?>/js/parsley.js"></script>
 

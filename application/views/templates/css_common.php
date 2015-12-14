@@ -14,4 +14,5 @@
 
     <link href="<?=RESOURCES_FOLDER?>css/bootstrap.min.css" rel="stylesheet"/>
     <link href="<?=RESOURCES_FOLDER?>css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="<?=RESOURCES_FOLDER?>css/parsley.css" rel="stylesheet"/>
     <link href="<?=RESOURCES_FOLDER?>css/styles_admin.css" rel="stylesheet"/>

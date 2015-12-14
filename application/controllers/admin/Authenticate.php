@@ -61,15 +61,6 @@ class Authenticate extends CI_Controller
         }
     }
 
-    public function log_message($uid, $message="")
-    {
-        $this->load->model("User_model");
-        $this->load->model("User_log_model");
-
-        $user = $this->User_model->get_by_uid($uid);
-        $this->User_log_model->log_message("User | " . $user["uid"] . " | " .  $user["username"] . " " . $message);
-    }
-
     private function _handle_login_form()
     {
         $this->_set_login_validation_rules();
@@ -84,7 +75,7 @@ class Authenticate extends CI_Controller
                     {
                         $this->session->set_userdata("uid", $user["uid"]);
                         $this->session->set_userdata("access", $user["access"]);
-                        $this->log_message($user["uid"], " has logged in.");
+                        $this->User_log_model->log_message($user["uid"], " has logged in.");
 
                         redirect("admin/authenticate/start", "refresh");
                     }
