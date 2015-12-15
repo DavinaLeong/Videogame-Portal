@@ -41,11 +41,7 @@
             </table>
         </div>
 
-
-        <div id="footer">
-            <hr/>
-            <?=SITE_NAME?> &copy; <?=AUTHOR?>, <?=date("Y")?>
-        </div>
+        <?php $this->load->view("admin/admin_footer"); ?>
     </div>
 
     <?php $this->load->view("templates/js_common"); ?>

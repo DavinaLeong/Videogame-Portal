@@ -61,6 +61,7 @@ class User_model extends CI_Model
 
         $now = new DateTime("now");
         $this->db->set('last_updated', $now->format('c'));
+        $this->db->set('date_added', $now->format('c'));
         $this->db->insert('user', $temp_array);
         return $this->db->insert_id();
     }

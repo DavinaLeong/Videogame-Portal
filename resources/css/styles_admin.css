@@ -27,7 +27,7 @@ body
 {
     font-style: italic;
     font-size: 10pt;
-    color: #999;
+    color: #444;
 }
 
 .space
@@ -38,4 +38,12 @@ body
 .indent
 {
     margin-left: 20px;
+}
+
+.search-results
+{
+    font-size: 10pt;
+    font-style: italic;
+    text-align: right;
+    color: #888;
 }

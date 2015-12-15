@@ -111,10 +111,7 @@
             </div>
         </form>
 
-        <div id="footer">
-            <hr/>
-            <?=SITE_NAME?> &copy; <?=AUTHOR?>, <?=date("Y")?>
-        </div>
+        <?php $this->load->view("admin/admin_footer"); ?>
     </div>
 
 </body>

@@ -33,7 +33,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users"> </i> User <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/user/do_validate_access/add_user')?>"><i class="fa fa-plus"></i> Add User</a></li>
-            <li><a href="#"><i class="fa fa-file-text-o"></i> Browse Users</a></li>
+            <li><a href="<?=site_url('admin/user/do_validate_access/browse_user')?>"><i class="fa fa-file-text-o"></i> Browse Users</a></li>
           </ul>
         </li>
       </ul>

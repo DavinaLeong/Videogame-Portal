@@ -17,6 +17,7 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model("User_model");
         $this->load->model("User_log_model");
     }
 
@@ -25,7 +26,7 @@ class User extends CI_Controller
         redirect("admin/user/load_page/add_user");
     }
 
-    public function do_validate_access($page="")
+    public function do_validate_access($page="", $offset=0)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
@@ -33,6 +34,10 @@ class User extends CI_Controller
             {
                 case "add_user":
                     redirect("admin/user/add_user");
+                    break;
+
+                case "browse_user":
+                    redirect("admin/user/browse_user/" . $offset);
                     break;
 
                 default:
@@ -49,9 +54,6 @@ class User extends CI_Controller
 
     public function add_user()
     {
-        $this->load->model("User_model");
-        $this->load->library("form_validation");
-
         $this->_add_user_set_form_validation_rules();
 
         if($this->form_validation->run())
@@ -70,6 +72,22 @@ class User extends CI_Controller
         }
 
         $this->load->view("admin/user/add_user_page");
+    }
+
+    public function browse_user($offset=0)
+    {
+        $this->load->library("Pagination");
+        $this->load->library("Pagination_helper");
+
+        $per_page = 20;
+        $data = array(
+            "users" => $this->User_model->get_all_limit_offset($per_page, $offset),
+            "per_page" => $per_page,
+            "offset" => $offset,
+            "total_rows" => $this->User_model->count_all()
+        );
+
+        $this->load->view("admin/user/browse_user_page", $data);
     }
 
     private function _add_user_set_form_validation_rules()
