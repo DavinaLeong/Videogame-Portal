@@ -20,6 +20,13 @@
     $this->load->view("templates/js_common");
     ?>
     <title>Video Game Portal Admin</title>
+
+    <style text="type/css">
+    .button-col
+    {
+        width: 15%;
+    }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -67,8 +74,7 @@
                     <th>Status</th>
                     <th>Date Added</th>
                     <th>Last Updated</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
+                    <th class="button-col">&nbsp;</th>
                 </tr>
 
                 <?php foreach($users as $index=>$user): ?>
@@ -127,10 +133,8 @@
                         echo $display_last_updated->format("d M Y");
                         ?>
                         </td>
-                        <td>
+                        <td class="button-col">
                             <button name="view_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        </td>
-                        <td>
                             <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                         </td>
                     </tr>
