@@ -55,7 +55,7 @@
             {
                 $current_showen = $total_rows;
             }
-            echo $offset_str . " &ndash; " . $current_showen . " of " .  $total_rows . " shown"
+            echo $offset_str . " &ndash; " . $current_showen . " of " .  $total_rows . " users shown."
             ?>
             </p>
             <table class="table table-hover">
@@ -69,7 +69,6 @@
                     <th>Last Updated</th>
                     <th>&nbsp;</th>
                     <th>&nbsp;</th>
-                    <th>&nbsp;</th>
                 </tr>
 
                 <?php foreach($users as $index=>$user): ?>
@@ -78,23 +77,44 @@
                         <td><?=$user["name"]?></td>
                         <td><?=$user["username"]?></td>
                         <td>
-                            <?php switch($user["access"])
-                            {
-                                case "A":
-                                    echo "admin";
-                                    break;
+                        <?php switch($user["access"])
+                        {
+                            case "A":
+                                echo "Admin";
+                                break;
 
-                                case "U":
-                                    echo "user";
-                                    break;
+                            case "U":
+                                echo "User";
+                                break;
 
-                                default:
-                                    echo "NA";
-                                    break;
-                            }
-                            ?>
+                            case "M":
+                                echo "Manager";
+                                break;
+
+                            default:
+                                echo "<span class='text-danger'>invalid</span>";
+                                break;
+                        }
+                        ?>
                         </td>
-                        <td><?=$user["status"]?></td>
+                        <td>
+                        <?php
+                        switch($user["status"])
+                        {
+                            case "Active":
+                                echo "<span class='text-success'>" . $user["status"] . "</span>";
+                                break;
+
+                            case "Not Active":
+                                echo "<span class='text-danger'>" . $user["status"] . "</span>";
+                                break;
+
+                            default:
+                                echo "";
+                                break;
+                        }
+                        ?>
+                        </td>
                         <td>
                         <?php
                         $display_date_added = new Datetime($user["date_added"], new DateTimeZone(DATETIMEZONE));
@@ -107,13 +127,16 @@
                         echo $display_last_updated->format("d M Y");
                         ?>
                         </td>
-                        <td><button name="view_post" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button></td>
-                        <td><button name="edit_post" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button></td>
-                        <td><button name="delete_post" type="button" class="btn btn-default"><i class="fa fa-trash"></i> Delete</button></td>
+                        <td>
+                            <button name="view_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                        </td>
+                        <td>
+                            <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <p class="search-results"><?= $offset_str . " &ndash; " . $current_showen . " of " .  $total_rows . " shown" ?></p>
+            <p class="search-results"><?= $offset_str . " &ndash; " . $current_showen . " of " .  $total_rows . " users shown." ?></p>
         </div>
 
         <!-- Pagination -->

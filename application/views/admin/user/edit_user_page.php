@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!----------------------------------------------------------------------------------
 	- File Info -
-		File name		: add_user_page.php
+		File name		: edit_user_page.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 12 Dec 2015
 
@@ -26,9 +26,9 @@
         <?php $this->load->view("admin/admin_navbar"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-plus"></i> Add New User</h1>
+            <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User's Details</h1>
             <p class="lead">
-                Fill in the fields and click <span class="text-info">Submit</span> to create a new user.
+                Edit in the fields and click <span class="text-info">Submit</span> to save changes.
             </p>
         </div>
 
@@ -54,29 +54,14 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Name <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" placeholder="name" value="<?=set_value('name')?>" required/>
+                            <input type="text" class="form-control" name="name" placeholder="name" value="<?=$user["name"]?>" required/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" placeholder="username" value="<?=set_value('username')?>" required/>
-                        </div>
-                    </div>
-                    <div class="space col-sm-12">&nbsp;</div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-sm-3 control-label">Password <span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <input id="password" type="password" class="form-control" name="password" placeholder="password" value="<?=set_value('password')?>" required data-parsley-minlength="8"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm_password" class="col-sm-3 control-label">Confirm Password <span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="password" value="<?=set_value('password')?>" required data-parsley-minlength="8" data-parsley-equalto="#password"/>
+                            <input type="text" class="form-control" name="username" placeholder="username" value="<?=$user["username"]?>" required/>
                         </div>
                     </div>
                     <div class="space col-sm-12">&nbsp;</div>
@@ -85,8 +70,14 @@
                         <label for="status" class="col-sm-3 control-label">Account Status <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status">
-                                <option>Active</option>
-                                <option>Not Active</option>
+                                <option
+                                    value="Active" <?= set_select('status', 'Active', $user['status'] == "Active" ? TRUE : FALSE) ?> >
+                                    Active
+                                </option>
+                                <option
+                                    value="Not Active" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
+                                    Not Active
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -95,9 +86,18 @@
                         <label for="access" class="col-sm-3 control-label">Access Rights <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="access">
-                                <option>A</option>
-                                <option>M</option>
-                                <option>U</option>
+                                <option
+                                    value="Active" <?= set_select('access', 'A', $user['access'] == "A" ? TRUE : FALSE) ?> >
+                                    A
+                                </option>
+                                <option
+                                    value="M" <?= set_select('access', 'M', $user['access'] == "M" ? TRUE : FALSE) ?> >
+                                    M
+                                </option>
+                                <option
+                                    value="U" <?= set_select('access', 'U', $user['access'] == "U" ? TRUE : FALSE) ?> >
+                                    U
+                                </option>
                             </select>
                         </div>
                     </div>

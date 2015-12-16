@@ -30,13 +30,24 @@
     <div class="collapse navbar-collapse" id="admin_navbar">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users"> </i> User <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users"> </i> User <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/user/do_validate_access/add_user')?>"><i class="fa fa-plus"></i> Add User</a></li>
-            <li><a href="<?=site_url('admin/user/do_validate_access/browse_user')?>"><i class="fa fa-file-text-o"></i> Browse Users</a></li>
+            <li><a href="<?=site_url('admin/user/add_user')?>"><i class="fa fa-plus"></i> Add User</a></li>
+            <li><a href="<?=site_url('admin/user/browse_user')?>"><i class="fa fa-file-text-o"></i> Browse Users</a></li>
           </ul>
         </li>
       </ul>
+
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-gamepad"></i> Owned Videogames <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?=site_url('admin/videogame/add_videogame')?>"><i class="fa fa-plus"></i> Add Video Game</a></li>
+            <li><a href="<?=site_url('admin/videogame/browse_videogame')?>"><i class="fa fa-file-text-o"></i> Browse Video Games</a></li>
+          </ul>
+        </li>
+      </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

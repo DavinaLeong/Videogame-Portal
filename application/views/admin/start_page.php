@@ -25,20 +25,10 @@
         <?php $this->load->view("admin/admin_navbar"); ?>
 
         <div class="page-header">
-            <h1><i class="fa fa-gamepad"></i> Welcome to <span class="text-primary"><?=SITE_NAME?></span> <i class="fa fa-gamepad"></i></h1>
+            <h1><i class="text-info fa fa-gamepad"></i> Welcome to <span class="text-primary"><?=SITE_NAME?></span></h1>
             <p class="lead">
                 Click on any of the links listed in the navbar above.
             </p>
-
-            <table class="table bordered" style="font-size: 20pt; text-align: center">
-                <tr>
-                    <td><i class="fa fa-globe"></i></td>
-                    <td><i class="fa fa-windows"></i></td>
-                    <td><i class="fa fa-apple"></i></td>
-                    <td><i class="fa fa-android"></i></td>
-                    <td><i class="fa fa-steam-square"></i></td>
-                </tr>
-            </table>
         </div>
 
         <?php $this->load->view("admin/admin_footer"); ?>

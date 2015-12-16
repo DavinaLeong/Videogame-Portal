@@ -56,7 +56,8 @@ class User_model extends CI_Model
             'password_hash'=>$user['password_hash'],
             'name'=>$user['name'],
             'access'=>$user['access'],
-            'status'=>$user['status']
+            'status'=>$user['status'],
+            'avatar_url'=>$user['avatar_url']
         );
 
         $now = new DateTime("now");
@@ -70,10 +71,34 @@ class User_model extends CI_Model
     {
         $temp_array = array(
             'username'=>$user['username'],
-            'password_hash'=>$user['password_hash'],
             'name'=>$user['name'],
             'access'=>$user['access'],
-            'status'=>$user['status']
+            'status'=>$user['status'],
+            'avatar_url'=>$user['avatar_url']
+        );
+
+        $now = new DateTime("now");
+        $this->db->set('last_updated', $now->format('c'));
+        $this->db->update('user', $temp_array, array('uid' => $user['uid']));
+        return $this->db->affected_rows();
+    }
+
+    public function update_password($user)
+    {
+        $temp_array = array(
+            'password_hash'=>$user['password_hash']
+        );
+
+        $now = new DateTime("now");
+        $this->db->set('last_updated', $now->format('c'));
+        $this->db->update('user', $temp_array, array('uid' => $user['uid']));
+        return $this->db->affected_rows();
+    }
+
+    public function update_avatar_url($user)
+    {
+        $temp_array = array(
+            'avatar_url'=>$user['avatar_url']
         );
 
         $now = new DateTime("now");
