@@ -61,9 +61,10 @@
               <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/authenticate/logout')?>"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a href="<?=site_url('admin/authenticate/change_password')?>"><i class="fa fa-key"></i> Change
+                Password</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#"><i class="fa fa-key"></i> Change Password</a></li>
+            <li><a href="<?=site_url('admin/authenticate/logout')?>"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>
         </li>
       </ul>

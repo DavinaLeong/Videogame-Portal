@@ -29,6 +29,12 @@
     $this->load->view("templates/css_common");
     $this->load->view("templates/js_common");
     ?>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
+
     <title>Video Game Portal Admin</title>
 
     <style type="type/css">
@@ -37,13 +43,25 @@
         width: 15%;
     }
     </style>
+
+    <script>
+        $(document).ready(function()
+        {
+            $("#users_table").dataTable();
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <?php $this->load->view("admin/admin_navbar"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-file-text-o"></i> Browse Users</h1>
+            <h1>
+                <i class="text-info fa fa-file-text-o"></i> Browse Users&nbsp;
+                <button onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')" type="button"
+                        class="btn btn-danger"><i class="fa
+            fa-plus"></i> Add New User</button>
+            </h1>
         </div>
 
         <?php if($this->session->userdata('message')):?>
@@ -56,100 +74,84 @@
         <?php endif;?>
 
         <div class="table-responsive">
-            <p class="search-results">
-            <?php
-            if($offset <= 0)
-            {
-                $offset_str = "1";
-            }
-            else
-            {
-                $offset_str = $offset;
-            }
-
-            $current_shown = $offset + $per_page;
-            if($current_shown > $total_rows)
-            {
-                $current_shown = $total_rows;
-            }
-            echo $offset_str . " &ndash; " . $current_shown . " of " .  $total_rows . " users shown."
-            ?>
-            </p>
-            <table class="table table-hover">
+            <table class="table table-hover" id="users_table">
+                <thead>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Username</th>
                     <th>Access</th>
-                    <th>Status</th>
                     <th>Avatar</th>
+                    <th>Status</th>
                     <th>Date Added</th>
                     <th>Last Updated</th>
                     <th class="button-col">&nbsp;</th>
                 </tr>
+                </thead>
 
+                <tbody>
                 <?php foreach($users as $index=>$user): ?>
                     <tr>
                         <td><?= $index + 1 + $offset; ?></td>
                         <td><?=$user["name"]?></td>
                         <td><?=$user["username"]?></td>
                         <td>
-                        <?php switch($user["access"])
-                        {
-                            case "A":
-                                echo "Admin";
-                                break;
+                            <?php switch($user["access"])
+                            {
+                                case "A":
+                                    echo "Admin";
+                                    break;
 
-                            case "U":
-                                echo "User";
-                                break;
+                                case "U":
+                                    echo "User";
+                                    break;
 
-                            case "M":
-                                echo "Manager";
-                                break;
+                                case "M":
+                                    echo "Manager";
+                                    break;
 
-                            default:
-                                echo "<span class='text-danger'>invalid</span>";
-                                break;
-                        }
-                        ?>
+                                default:
+                                    echo "<span class='text-danger'>invalid</span>";
+                                    break;
+                            }
+                            ?>
                         </td>
                         <td>
-                        <?php if($user["avatar_url"]): ?>
-                            <img class="img-rounded" src="<?=site_url('uploads/' . $user["avatar_url"])?>" alt="<?=$user['username']?>_avatar" width="50px" height="50px"/>
-                        <?php else: ?>
-                            <i style="color: #ccc; margin-left: 10px">No avatar</i>
-                        <?php endif; ?>
+                            <?php if($user["avatar_url"]): ?>
+                                <img class="img-rounded" src="<?=site_url('uploads/' . $user["avatar_url"])?>" alt="<?=$user['username']?>_avatar" width="50px" height="50px"/>
+                            <?php else: ?>
+                                <i style="color: #ccc; margin-left: 10px">No avatar</i>
+                            <?php endif; ?>
                         </td>
                         <td>
-                        <?php
-                        switch($user["status"])
-                        {
-                            case "Active":
-                                echo "<span class='text-success'>" . $user["status"] . "</span>";
-                                break;
+                            <?php
+                            switch($user["status"])
+                            {
+                                case "Active":
+                                    echo "<span class='text-success'>" . $user["status"] . "</span>";
+                                    break;
 
-                            case "Not Active":
-                                echo "<span class='text-danger'>" . $user["status"] . "</span>";
-                                break;
+                                case "Not Active":
+                                    echo "<span class='text-danger'>" . $user["status"] . "</span>";
+                                    break;
 
-                            default:
-                                echo "";
-                                break;
-                        }
-                        ?>
+                                default:
+                                    echo "";
+                                    break;
+                            }
+                            ?>
                         </td>
                         <td>
-                        <?php
-                        $display_date_added = new Datetime($user["date_added"], new DateTimeZone(DATETIMEZONE));
-                        echo $display_date_added->format("d M Y");
-                        ?>
+                            <?php
+                            $display_date_added = new Datetime($user["date_added"], new DateTimeZone(DATETIMEZONE));
+                            echo $display_date_added->format("Y/m/d");
+                            ?>
                         </td>
                         <td>
-                        <?php
-                        $display_last_updated = new Datetime($user["last_updated"], new DateTimeZone(DATETIMEZONE));
-                        echo $display_last_updated->format("d M Y");
-                        ?>
+                            <?php
+                            $display_last_updated = new Datetime($user["last_updated"], new DateTimeZone(DATETIMEZONE));
+                            echo $display_last_updated->format("Y/m/d");
+                            ?>
                         </td>
                         <td class="button-col">
                             <button name="view_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
@@ -157,22 +159,12 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                </tbody>
             </table>
-            <p class="search-results"><?= $offset_str . " &ndash; " . $current_shown . " of " .  $total_rows . " users shown." ?></p>
-        </div>
-
-        <!-- Pagination -->
-        <div class="row">
-            <div class="col-sm-12">
-                <?php
-                $config=$this->pagination_helper->pagination_config(site_url("admin/user/browse_user/"), $total_rows, $per_page);
-                $this->pagination->initialize($config);
-                echo $this->pagination->create_links();
-                ?>
-            </div>
         </div>
 
         <?php $this->load->view("admin/admin_footer"); ?>
     </div>
+
 </body>
 </html>

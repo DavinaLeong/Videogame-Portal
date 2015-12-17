@@ -104,14 +104,60 @@ class Authenticate extends CI_Controller
         }
     }
 
-    /**
-     * Redirects to the login page.
-     */
     public function logout()
     {
         $this->session->set_userdata("message", "You've logged out.");
         $this->User_log_model->log_message("User has logged out. | uid: " . $this->session->userdata("uid"));
         redirect("/admin/authenticate/login");
+    }
+
+    public function change_password()
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $this->load->model("User_model");
+            $this->form_validation->set_rules("old_password", "Old Password", "required");
+            $this->form_validation->set_rules("new_password", "New Password", "required|min_length[6]");
+            $this->form_validation->set_rules("confirm_password", "Confirm New Password",
+                "required|matches[new_password]|min_length[6]");
+
+            $user = $this->User_model->get_by_uid($this->session->userdata("uid"));
+
+            if($this->form_validation->run())
+            {
+                $this->load->model("User_model");
+
+                if(password_verify($this->input->post("old_password"), $user["password_hash"]))
+                {
+                    $user["password_hash"] = password_hash($this->input->post("new_password"), PASSWORD_DEFAULT);
+                    if($this->User_model->update_password($user) )
+                    {
+                        $this->session->set_userdata("message", "Password changed successfully.");
+                        $this->User_log_model->log_message("Password changed successfully.");
+                        redirect("admin/user/view_user/" . $user["uid"]);
+                    }
+                    else
+                    {
+                        $this->session->set_userdata("message", "An error has occured. Please try a different password or contact the administrator.");
+                        $this->User_log_model->log_message("ERR: An error has occured. Please try a different password or contact the administrator.");
+                    }
+                }
+                else
+                {
+                    $this->session->set_userdata("message", "Old Password is incorrect.");
+                }
+            }
+
+            $data = array(
+                "user" => $user
+            );
+            $this->load->view("/admin/authenticate/change_password_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
     }
 
     private function _handle_login_form()

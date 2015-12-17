@@ -35,19 +35,24 @@
         <div class="page-header">
             <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User's Details</h1>
 
+            <p class="lead">
+                Edit in the fields and click <span class="text-info">Submit</span> to save changes.
+            </p>
+
             <div class="btn-group" role="group" aria-label="actionButtonGroup">
                 <button name="back" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
                     <i class="fa fa-chevron-left"></i> Back
                 </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-default class=pull-right">
+                <button name="back" onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')"
+                        class="btn btn-default">
+                    <i class="fa fa-plus"></i> Add Another User
+                </button>
+
+                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-primary">
                     <i class="fa fa-eye"></i> View User
                 </button>
             </div>
-
-            <p class="lead">
-                Edit in the fields and click <span class="text-info">Submit</span> to save changes.
-            </p>
         </div>
 
         <?php if($this->session->userdata('message')):?>
@@ -118,6 +123,10 @@
                                         <option>U</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <p class="text-danger">* required fields</p>
                             </div>
 
                         </div>

@@ -42,21 +42,31 @@
         <?php $this->load->view("admin/admin_navbar"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-eye"></i> Viewing User: <span class="text-info"><?=$user["name"]?></span></h1>
+            <h1><i class="text-info fa fa-eye"></i> View User: <span class="text-info"><?=$user["name"]?></span></h1>
 
             <div class="btn-group" role="group" aria-label="actionButtonGroup">
                 <button name="back" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
                     <i class="fa fa-chevron-left"></i> Back
                 </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-default class=pull-right">
+                <button name="back" onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')"
+                        class="btn btn-default">
+                    <i class="fa fa-plus"></i> Add Another User
+                </button>
+
+                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-primary">
                     <i class="fa fa-pencil-square-o"></i> Edit User
                 </button>
             </div>
         </div>
 
+        <p>User's details:</p>
+        <div class="image-preview">
+            <img class="img-rounded" src="<?=site_url('uploads/' . $user['avatar_url'])?>" alt="<?=$user['username']?>
+            avatar" />
+        </div>
+
         <div class="table-responsive">
-            <p>User's details:</p>
             <table class="table table-bordered">
                 <tr>
                     <th>ID</th>

@@ -102,6 +102,10 @@
                         </div>
                     </div>
 
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <p class="text-danger">* required fields</p>
+                    </div>
+
                 </div>
             </div>
             <div class="row">
