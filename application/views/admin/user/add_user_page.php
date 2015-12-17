@@ -28,7 +28,7 @@
         <div class="page-header">
             <h1><i class="text-info fa fa-plus"></i> Add New User</h1>
             <p class="lead">
-                Fill in the fields and click <span class="text-info">Submit</span> to create a new user.
+                Fill in the fields and click <span class="text-info">Submit</span> to add a new user.
             </p>
         </div>
 
@@ -54,14 +54,14 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Name <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" placeholder="name" value="<?=set_value('name')?>" required/>
+                            <input type="text" class="form-control" name="name" placeholder="name" value="<?=set_value('name')?>" required data-parsley-maxlength="512"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" placeholder="username" value="<?=set_value('username')?>" required/>
+                            <input type="text" class="form-control" name="username" placeholder="username" value="<?=set_value('username')?>" required data-parsley-maxlength="512"/>
                         </div>
                     </div>
                     <div class="space col-sm-12">&nbsp;</div>

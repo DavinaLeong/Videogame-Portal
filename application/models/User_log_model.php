@@ -20,20 +20,20 @@ class User_log_model extends CI_Model
 
     public function get_all()
     {
-        $query = $this->db->get('user_log');
+        $query = $this->db->get(TABLE_USER_LOG);
         return $query->result_array();
     }
 
     public function log_message($message)
     {
-        $temp_array = array(
+        $data = array(
             'uid'=>$this->session->userdata('uid'),
             'message'=>$message
         );
 
         $now = new DateTime("now");
         $this->db->set('timestamp', $now->format('c'));
-        $this->db->insert('user_log', $temp_array);
+        $this->db->insert(TABLE_USER_LOG, $data);
         return $this->db->insert_id();
     }
 

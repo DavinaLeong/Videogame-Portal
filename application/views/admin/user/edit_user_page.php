@@ -82,14 +82,14 @@
                             <div class="form-group">
                                 <label for="name" class="col-sm-3 control-label">Name <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name" placeholder="name" value="<?=$user["name"]?>" required/>
+                                    <input type="text" class="form-control" name="name" placeholder="name" value="<?=$user["name"]?>" data-parsley-maxlength="512"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="username" placeholder="username" value="<?=$user["username"]?>" required/>
+                                    <input type="text" class="form-control" name="username" placeholder="username" value="<?=$user["username"]?>" data-parsley-maxlength="512"/>
                                 </div>
                             </div>
                             <div class="space col-sm-12">&nbsp;</div>
@@ -99,16 +99,12 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" name="status">
                                         <option
-                                            value="Active" <?= set_select('access', 'A', $user['access'] == "A" ? TRUE : FALSE) ?> >
-                                            A
+                                            value="Active" <?= set_select('status', 'Active', $user['status'] == "Active" ? TRUE : FALSE) ?> >
+                                            Active
                                         </option>
                                         <option
-                                            value="M" <?= set_select('access', 'M', $user['access'] == "M" ? TRUE : FALSE) ?> >
-                                            M
-                                        </option>
-                                        <option
-                                            value="U" <?= set_select('access', 'U', $user['access'] == "U" ? TRUE : FALSE) ?> >
-                                            U
+                                            value="M" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
+                                            Not Active
                                         </option>
                                     </select>
                                 </div>

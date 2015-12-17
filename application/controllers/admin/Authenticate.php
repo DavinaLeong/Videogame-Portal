@@ -54,12 +54,6 @@
 
 class Authenticate extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model("User_log_model");
-    }
-
     public function index()
     {
         if($this->session->userdata("id") || $this->session->userdata("access"))
@@ -121,7 +115,7 @@ class Authenticate extends CI_Controller
             $this->form_validation->set_rules("confirm_password", "Confirm New Password",
                 "required|matches[new_password]|min_length[6]");
 
-            $user = $this->User_model->get_by_uid($this->session->userdata("uid"));
+            $user = $this->User_model->get_by_id($this->session->userdata("uid"));
 
             if($this->form_validation->run())
             {

@@ -103,3 +103,11 @@ define("DB_VIDEOGAMES", "videogame_catalogue");
 define("SITE_NAME", "Video Games Catalogue");
 define("AUTHOR", "Davina Leong");
 define("RESOURCES_FOLDER", "http://localhost/videogame_portal/resources/");
+
+define("TABLE_VIDEOGAMES", "videogames");
+define("TABLE_GAME_PLATFORM", "game_platform");
+define("TABLE_GAME_GENRE", "game_genre");
+define("TABLE_SCREENSHOTS", "screenshots");
+define("TABLE_SCREENSHOT_TYPE", "screenshot");
+define("TABLE_USER", "user");
+define("TABLE_USER_LOG", "user_log");

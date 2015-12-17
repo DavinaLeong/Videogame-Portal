@@ -59,12 +59,11 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model("User_model");
-        $this->load->model("User_log_model");
     }
 
     public function index()
     {
-        redirect("admin/user/load_page/add_user");
+        redirect("admin/user/load_page/browse_user");
     }
 
     public function add_user()
@@ -129,7 +128,7 @@ class User extends CI_Controller
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
             $data = array(
-                "user" => $this->User_model->get_by_uid($uid)
+                "user" => $this->User_model->get_by_id($uid)
             );
             $this->load->view("admin/user/view_user_page", $data);
         }
@@ -145,7 +144,7 @@ class User extends CI_Controller
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
             $this->session->set_userdata("edit_uid", $uid);
-            $user = $this->User_model->get_by_uid($uid);
+            $user = $this->User_model->get_by_id($uid);
             $this->_edit_user_set_form_validation_rules();
 
             if($this->form_validation->run())
@@ -180,7 +179,7 @@ class User extends CI_Controller
     {
         $this->load->library("upload_helper");
 
-        $user = $this->User_model->get_by_uid($this->session->userdata("edit_uid"));
+        $user = $this->User_model->get_by_id($this->session->userdata("edit_uid"));
 
         // Davina: upload_helper is a custom library
         $upload_config = $this->upload_helper->upload_config_filename(strtolower($user
@@ -226,11 +225,12 @@ class User extends CI_Controller
 
     private function _add_user_set_form_validation_rules()
     {
-        $this->form_validation->set_rules("name", "Name", "trim|required");
-        $this->form_validation->set_rules("username", "Username", "trim|required|alpha_dash|is_unique[user.username]");
+        $this->form_validation->set_rules("name", "Name", "trim|required|max_length[512]");
+        $this->form_validation->set_rules("username", "Username", "trim|required|max_length[512]|alpha_dash|is_unique[user.username]");
         $this->form_validation->set_rules("password", "Password", "trim|required|min_length[8]");
         $this->form_validation->set_rules("confirm_password", "Confirm Password", "trim|required|matches[password]|min_length[8]");
-        $this->form_validation->set_rules("status", "Status", "required|in_list[Active,Not Active]");
+        $this->form_validation->set_rules("status", "Account Status", "in_list[Active,Not Active]");
+        $this->form_validation->set_rules("access", "Access Rights", "in_list[A,M,U]");
     }
 
     private function _prepare_add_user()
@@ -246,9 +246,10 @@ class User extends CI_Controller
 
     private function _edit_user_set_form_validation_rules()
     {
-        $this->form_validation->set_rules("name", "Name", "trim|required");
-        $this->form_validation->set_rules("username", "Username", "trim|required|alpha_dash|is_unique[user.username]");
-        $this->form_validation->set_rules("status", "Status", "required|in_list[Active,Not Active]");
+        $this->form_validation->set_rules("name", "Name", "trim|max_length[512]|required");
+        $this->form_validation->set_rules("username", "Username", "trim|max_length[512]|required|alpha_dash");
+        $this->form_validation->set_rules("status", "Account Status", "in_list[Active,Not Active]");
+        $this->form_validation->set_rules("access", "Access Rights", "in_list[A,M,U]");
     }
 
     private function _prepare_edit_user($user)
