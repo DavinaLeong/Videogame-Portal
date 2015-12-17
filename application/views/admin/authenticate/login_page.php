@@ -66,7 +66,7 @@
 <body>
     <div class="container">
         <form class="form-signin" action="login" method="post" data-parsley-validate>
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading"><i class="fa fa-sign-in text-info"></i> Please sign in</h2>
             <?php if($this->session->userdata('message')):?>
 
                 <div class="alert alert-info" role="alert">

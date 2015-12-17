@@ -35,8 +35,8 @@ class Upload_helper
         $config["upload_path"] = $upload_path;
         $config["allowed_types"] = $allowed_types;
         $config["max_size"] = $max_size; // in KB
-        $config["max_width"] = 50;
-        $config["max_height"] = 150;
+        $config["max_width"] = 200;
+        $config["max_height"] = 200;
         $config["remove_spaces"] = TRUE;
         $config["file_ext_tolower"] = TRUE;
         $config["overwrite"] = TRUE;

@@ -11,6 +11,16 @@
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
+
+<?php
+/**
+ * @var $users
+ * @var $per_page
+ * @var $offset
+ * @var $total_rows
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +31,7 @@
     ?>
     <title>Video Game Portal Admin</title>
 
-    <style text="type/css">
+    <style type="type/css">
     .button-col
     {
         width: 15%;
@@ -57,12 +67,12 @@
                 $offset_str = $offset;
             }
 
-            $current_showen = $offset + $per_page;
-            if($current_showen > $total_rows)
+            $current_shown = $offset + $per_page;
+            if($current_shown > $total_rows)
             {
-                $current_showen = $total_rows;
+                $current_shown = $total_rows;
             }
-            echo $offset_str . " &ndash; " . $current_showen . " of " .  $total_rows . " users shown."
+            echo $offset_str . " &ndash; " . $current_shown . " of " .  $total_rows . " users shown."
             ?>
             </p>
             <table class="table table-hover">
@@ -148,7 +158,7 @@
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <p class="search-results"><?= $offset_str . " &ndash; " . $current_showen . " of " .  $total_rows . " users shown." ?></p>
+            <p class="search-results"><?= $offset_str . " &ndash; " . $current_shown . " of " .  $total_rows . " users shown." ?></p>
         </div>
 
         <!-- Pagination -->

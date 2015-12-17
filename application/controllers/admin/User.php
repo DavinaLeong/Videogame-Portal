@@ -12,6 +12,47 @@
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ***********************************************************************************/
 
+/**
+ * @property CI_DB_driver $db
+ * @property CI_DB_forge $dbforge
+ * @property CI_Benchmark $benchmark
+ * @property CI_Calendar $calendar
+ * @property CI_Cart $cart
+ * @property CI_Config $config
+ * @property CI_Controller $controller
+ * @property CI_Email $email
+ * @property CI_Encrypt $encrypt
+ * @property CI_Exceptions $exceptions
+ * @property CI_Form_validation $form_validation
+ * @property CI_Ftp $ftp
+ * @property CI_Hooks $hooks
+ * @property CI_Image_lib $image_lib
+ * @property CI_Input $input
+ * @property CI_Loader $load
+ * @property CI_Log $log
+ * @property CI_Model $model
+ * @property CI_Output $output
+ * @property CI_Pagination $pagination
+ * @property CI_Parser $parser
+ * @property CI_Profiler $profiler
+ * @property CI_Router $router
+ * @property CI_Session $session
+ * @property CI_Table $table
+ * @property CI_Trackback $trackback
+ * @property CI_Typography $typography
+ * @property CI_Unit_test $unit_test
+ * @property CI_Upload $upload
+ * @property CI_URI $uri
+ * @property CI_User_agent $user_agent
+ * @property CI_Xmlrpc $xmlrpc
+ * @property CI_Xmlrpcs $xmlrpcs
+ * @property CI_Zip $zip
+ *
+ * @property User_log_model $User_log_model
+ * @property User_model $User_model
+ * @property Upload_helper $upload_helper
+ */
+
 class User extends CI_Controller
 {
     public function __construct()
@@ -103,6 +144,7 @@ class User extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
+            $this->session->set_userdata("edit_uid", $uid);
             $user = $this->User_model->get_by_uid($uid);
             $this->_edit_user_set_form_validation_rules();
 
@@ -138,13 +180,11 @@ class User extends CI_Controller
     {
         $this->load->library("upload_helper");
 
-        $uid = $this->session->userdata("uid");
-        $uid = $this->User_model->get_by_uid($uid);
+        $user = $this->User_model->get_by_uid($this->session->userdata("edit_uid"));
 
         // Davina: upload_helper is a custom library
         $upload_config = $this->upload_helper->upload_config_filename(strtolower($user
-            ["username"] . "_avatar"),
-            "./uploads/admin_avatar/", "gif|jpg|png");
+            ["username"] . "_avatar"), "./uploads/admin_avatar/", "gif|jpg|png");
         $this->load->library("upload", $upload_config);
 
         if ($this->upload->do_upload("avatar_url"))
@@ -156,25 +196,32 @@ class User extends CI_Controller
             if ($user["avatar_url"])
             {
                 $this->load->helper("file");
-                delete_files("./uploads/admin_avatar/" . $uid["avatar_url"]);
+                delete_files("./uploads/admin_avatar/" . $user["avatar_url"]);
             }
 
             //Update database with new image url
             $user["avatar_url"] = "admin_avatar/" . $file_upload_data["file_name"];
-            $this->Tag_model->update($tag);
+            $this->User_model->update($user);
+
+            //If the edit uid matches the logged in user's id, update the session's
+            // avatar url.
+            if($this->session->userdata("uid") == $this->session->userdata("edit_uid"))
+            {
+                $this->session->set_userdata($user["avatar_url"]);
+            }
 
             $this->session->set_userdata("message", "Avatar uploaded successfully.");
-            $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $uid);
+            $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $this->session->userdata("edit_uid"));
             $this->session->unset_userdata("file_upload_errors");
         }
         else
         {
             $this->session->set_userdata("message", "Unable to upload image.");
-            $this->User_log_model->log_message("Unable to upload image. | uid: " . $uid);
+            $this->User_log_model->log_message("Unable to upload image. | uid: " . $this->session->userdata("edit_uid"));
             $this->session->set_userdata("file_upload_errors", $this->upload->display_errors());
         }
 
-        redirect("/admin/tag/edit_user/" . $uid);
+        redirect("/admin/user/edit_user/" . $this->session->userdata("edit_uid"));
     }
 
     private function _add_user_set_form_validation_rules()

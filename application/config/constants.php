@@ -100,6 +100,6 @@ define('DATETIMEZONE',		'Asia/Singapore');
 |--------------------------------------------------------------------------
 */
 define("DB_VIDEOGAMES", "videogame_catalogue");
-define("SITE_NAME", "Video Game Catalogue");
+define("SITE_NAME", "Video Games Catalogue");
 define("AUTHOR", "Davina Leong");
 define("RESOURCES_FOLDER", "http://localhost/videogame_portal/resources/");

@@ -11,6 +11,13 @@
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
+
+<?php
+/**
+ * @var $user
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -11,6 +11,13 @@
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
+
+<?php
+/**
+ * @var $user
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +92,7 @@
                             <div class="form-group">
                                 <label for="status" class="col-sm-3 control-label">Account Status <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="access">
+                                    <select class="form-control" name="status">
                                         <option
                                             value="Active" <?= set_select('access', 'A', $user['access'] == "A" ? TRUE : FALSE) ?> >
                                             A
@@ -129,8 +136,9 @@
             <!-- Upload Image Column -->
             <div class="col-md-3">
                 <div class="well well-sm" style="background-color: transparent;">
-                    <p class="lead">Upload Avatar</p>
-                    <div class="image-preview"><i class="fa fa-picture-o"></i> Avatar Preview</div>
+                    <p><b>Upload Avatar</b></p>
+                    <div class="image-preview"><img src="<?=site_url('uploads/' . $user['avatar_url'])?>" alt="<?=$user['username']?> avatar" /></div>
+                    <p class="text-danger"><?=$this->session->userdata("file_upload_errors")?></p>
                     <button class="btn btn-primary center-div" style="margin: 0 auto;"  data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"
 ></i> Upload Avatar</button>
                 </div>
@@ -140,18 +148,18 @@
         <!-- Upload Image Modal -->
         <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <form role="form" action="<?=site_url('admin/tag/upload_image/')?>" method="post"
+        <form role="form" action="<?=site_url('admin/user/upload_image/')?>" method="post"
               enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Upload New Avatar</h4>
+                    <h4 class="modal-title" id="uploadModalLabel">Upload New Avatar</h4>
                 </div>
                 <div class="modal-body">
 
-                    <label><br/>Image cannot be more than <span class="text-danger">50px wide</span>
-                        and <span class="text-danger">150px tall</span>.</label>
+                    <label><br/>Image cannot be more than <span class="text-danger">200px wide</span>
+                        and <span class="text-danger">200px tall</span>.</label>
                     <input type="file" class="form-control" id="avatar_url" name="avatar_url"
                            placeholder="image url">
                 </div>

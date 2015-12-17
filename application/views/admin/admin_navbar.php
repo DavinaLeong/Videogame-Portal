@@ -11,7 +11,7 @@
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" xmlns="http://www.w3.org/1999/html">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -51,20 +51,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <?=$this->session->userdata("name");?>&nbsp;
               <?php if($this->session->userdata("avatar_url")): ?>&nbsp;
-                  <img class="img-rounded" src="<?=site_url('uploads/' . $this->session->userdata("avatar_url"))?>" width="32px" height="32px"/>
+                  <img class="img-rounded" src="<?=site_url('uploads/' . $this->session->userdata("avatar_url"))?>"
+                       width="24px" height="24px"/>
               <?php else: ?>
                   <i class="fa fa-user"></i>&nbsp;
               <?php endif; ?>
+              <?=$this->session->userdata("name");?>&nbsp;
               <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="<?=site_url('admin/authenticate/logout')?>"><i class="fa fa-sign-out"></i> Logout</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#"><i class="fa fa-key"></i> Change Password</a></li>
           </ul>
         </li>
       </ul>
