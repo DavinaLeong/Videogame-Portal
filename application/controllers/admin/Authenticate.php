@@ -41,6 +41,8 @@ class Authenticate extends CI_Controller
             $this->User_log_model->log_message($this->session->userdata("uid"), "has been logged out.");
             $this->session->unset_userdata("uid");
             $this->session->unset_userdata("access");
+            $this->session->unset_userdata("name");
+            $this->session->unset_userdata("avatar_url");
             $this->session->set_userdata("message", "Session has expired and you've been logged out.");
         }
 
@@ -61,6 +63,14 @@ class Authenticate extends CI_Controller
         }
     }
 
+    /**
+     * Redirects to the login page.
+     */
+    public function logout()
+    {
+        redirect("/admin/authenticate/login");
+    }
+
     private function _handle_login_form()
     {
         $this->_set_login_validation_rules();
@@ -75,6 +85,8 @@ class Authenticate extends CI_Controller
                     {
                         $this->session->set_userdata("uid", $user["uid"]);
                         $this->session->set_userdata("access", $user["access"]);
+                        $this->session->set_userdata("name", $user["name"]);
+                        $this->session->set_userdata("avatar_url", $user["avatar_url"]);
                         $this->User_log_model->log_message($user["uid"], " has logged in.");
 
                         redirect("admin/authenticate/start", "refresh");

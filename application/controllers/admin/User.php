@@ -38,8 +38,8 @@ class User extends CI_Controller
                 {
                     $this->session->set_userdata("message", "New user record added.");
                     $this->User_log_model->log_message("New user recorded added |  uid: " . $uid);
-                    //TODO: redirect to browse users
-                    redirect("admin/user/browse_user");
+                    $this->session->set_userdata("message", "Upload a personal avatar, or click \"Back\" to cancel.");
+                    redirect("admin/user/edit_user/" . $uid);
                 }
                 else
                 {
@@ -61,6 +61,8 @@ class User extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
+            $this->session->unset_userdata("file_upload_errors");
+
             $this->load->library("Pagination");
             $this->load->library("Pagination_helper");
 
@@ -106,7 +108,8 @@ class User extends CI_Controller
 
             if($this->form_validation->run())
             {
-                if($uid = $this->User_model->update($this->_prepare_edit_user($user) ))
+                if($uid = $this->User_model->update($this->_prepare_edit_user($user) ) ||
+                    $this->session->userdata("file_upload_errors") == "")
                 {
                     $this->session->set_userdata("message", "User record updated successfully.");
                     $this->User_log_model->log_message("User record updated successfully. | uid: " . $uid);
@@ -131,6 +134,49 @@ class User extends CI_Controller
         }
     }
 
+    public function upload_image()
+    {
+        $this->load->library("upload_helper");
+
+        $uid = $this->session->userdata("uid");
+        $uid = $this->User_model->get_by_uid($uid);
+
+        // Davina: upload_helper is a custom library
+        $upload_config = $this->upload_helper->upload_config_filename(strtolower($user
+            ["username"] . "_avatar"),
+            "./uploads/admin_avatar/", "gif|jpg|png");
+        $this->load->library("upload", $upload_config);
+
+        if ($this->upload->do_upload("avatar_url"))
+        {
+            //Get new uploaded file data
+            $file_upload_data = $this->upload->data();
+
+            //If a url exists, delete file of url
+            if ($user["avatar_url"])
+            {
+                $this->load->helper("file");
+                delete_files("./uploads/admin_avatar/" . $uid["avatar_url"]);
+            }
+
+            //Update database with new image url
+            $user["avatar_url"] = "admin_avatar/" . $file_upload_data["file_name"];
+            $this->Tag_model->update($tag);
+
+            $this->session->set_userdata("message", "Avatar uploaded successfully.");
+            $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $uid);
+            $this->session->unset_userdata("file_upload_errors");
+        }
+        else
+        {
+            $this->session->set_userdata("message", "Unable to upload image.");
+            $this->User_log_model->log_message("Unable to upload image. | uid: " . $uid);
+            $this->session->set_userdata("file_upload_errors", $this->upload->display_errors());
+        }
+
+        redirect("/admin/tag/edit_user/" . $uid);
+    }
+
     private function _add_user_set_form_validation_rules()
     {
         $this->form_validation->set_rules("name", "Name", "trim|required");
@@ -147,6 +193,7 @@ class User extends CI_Controller
         $user["password_hash"] = password_hash($this->input->post("password"), PASSWORD_DEFAULT);
         $user["status"] = $this->input->post("status");
         $user["access"] = $this->input->post("access");
+        $user["avatar_url"] = "admin_avatar/default_avatar.png";
         return $user;
     }
 

@@ -58,70 +58,111 @@
                 <?=validation_errors();?>
             </div>
         <?php endif;?>
-        <form class="form-horizontal" method="post" role="form" data-parsley-validate>
-            <div class="row">
-                <div class="col-md-10">
 
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">Name <span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" placeholder="name" value="<?=$user["name"]?>" required/>
+        <div class="row">
+            <!-- Details Column -->
+            <div class="col-md-7 col-md-offset-1">
+                <form class="form-horizontal" method="post" role="form" data-parsley-validate>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="name" class="col-sm-3 control-label">Name <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="name" placeholder="name" value="<?=$user["name"]?>" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="username" placeholder="username" value="<?=$user["username"]?>" required/>
+                                </div>
+                            </div>
+                            <div class="space col-sm-12">&nbsp;</div>
+
+                            <div class="form-group">
+                                <label for="status" class="col-sm-3 control-label">Account Status <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="access">
+                                        <option
+                                            value="Active" <?= set_select('access', 'A', $user['access'] == "A" ? TRUE : FALSE) ?> >
+                                            A
+                                        </option>
+                                        <option
+                                            value="M" <?= set_select('access', 'M', $user['access'] == "M" ? TRUE : FALSE) ?> >
+                                            M
+                                        </option>
+                                        <option
+                                            value="U" <?= set_select('access', 'U', $user['access'] == "U" ? TRUE : FALSE) ?> >
+                                            U
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="access" class="col-sm-3 control-label">Access Rights <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="access">
+                                        <option>A</option>
+                                        <option>M</option>
+                                        <option>U</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" placeholder="username" value="<?=$user["username"]?>" required/>
-                        </div>
-                    </div>
-                    <div class="space col-sm-12">&nbsp;</div>
-
-                    <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Account Status <span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="status">
-                                <option
-                                    value="Active" <?= set_select('status', 'Active', $user['status'] == "Active" ? TRUE : FALSE) ?> >
-                                    Active
-                                </option>
-                                <option
-                                    value="Not Active" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
-                                    Not Active
-                                </option>
-                            </select>
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
+                            <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')"><i class="fa fa-chevron-left"></i> Back</button>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="access" class="col-sm-3 control-label">Access Rights <span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="access">
-                                <option
-                                    value="Active" <?= set_select('access', 'A', $user['access'] == "A" ? TRUE : FALSE) ?> >
-                                    A
-                                </option>
-                                <option
-                                    value="M" <?= set_select('access', 'M', $user['access'] == "M" ? TRUE : FALSE) ?> >
-                                    M
-                                </option>
-                                <option
-                                    value="U" <?= set_select('access', 'U', $user['access'] == "U" ? TRUE : FALSE) ?> >
-                                    U
-                                </option>
-                            </select>
-                        </div>
-                    </div>
+                </form>
+            </div>
 
+            <!-- Upload Image Column -->
+            <div class="col-md-3">
+                <div class="well well-sm" style="background-color: transparent;">
+                    <p class="lead">Upload Avatar</p>
+                    <div class="image-preview"><i class="fa fa-picture-o"></i> Avatar Preview</div>
+                    <button class="btn btn-primary center-div" style="margin: 0 auto;"  data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"
+></i> Upload Avatar</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-9 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                    <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')"><i class="fa fa-chevron-left"></i> Back</button>
+        </div>
+
+        <!-- Upload Image Modal -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <form role="form" action="<?=site_url('admin/tag/upload_image/')?>" method="post"
+              enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Upload New Avatar</h4>
+                </div>
+                <div class="modal-body">
+
+                    <label><br/>Image cannot be more than <span class="text-danger">50px wide</span>
+                        and <span class="text-danger">150px tall</span>.</label>
+                    <input type="file" class="form-control" id="avatar_url" name="avatar_url"
+                           placeholder="image url">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
             </div>
         </form>
+    </div>
+</div>
 
         <?php $this->load->view("admin/admin_footer"); ?>
     </div>

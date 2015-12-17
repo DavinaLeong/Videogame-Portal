@@ -47,3 +47,22 @@ body
     text-align: right;
     color: #888;
 }
+
+.image-preview
+{
+    font-style: italic;
+    color: #ccc;
+    background-color: #eee;
+    width: 200px;
+    height: 200px;
+    border: thin solid #ccc;
+    vertical-align: middle;
+    margin: 1em auto;
+    text-align: center;
+}
+
+.center-div
+{
+    margin: 1em auto;
+    display: block;
+}

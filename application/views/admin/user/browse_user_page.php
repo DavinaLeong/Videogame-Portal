@@ -72,6 +72,7 @@
                     <th>Username</th>
                     <th>Access</th>
                     <th>Status</th>
+                    <th>Avatar</th>
                     <th>Date Added</th>
                     <th>Last Updated</th>
                     <th class="button-col">&nbsp;</th>
@@ -102,6 +103,13 @@
                                 break;
                         }
                         ?>
+                        </td>
+                        <td>
+                        <?php if($user["avatar_url"]): ?>
+                            <img class="img-rounded" src="<?=site_url('uploads/' . $user["avatar_url"])?>" alt="<?=$user['username']?>_avatar" width="50px" height="50px"/>
+                        <?php else: ?>
+                            <i style="color: #ccc; margin-left: 10px">No avatar</i>
+                        <?php endif; ?>
                         </td>
                         <td>
                         <?php

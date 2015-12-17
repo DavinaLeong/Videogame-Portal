@@ -50,7 +50,15 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <?=$this->session->userdata("name");?>&nbsp;
+              <?php if($this->session->userdata("avatar_url")): ?>&nbsp;
+                  <img class="img-rounded" src="<?=site_url('uploads/' . $this->session->userdata("avatar_url"))?>" width="32px" height="32px"/>
+              <?php else: ?>
+                  <i class="fa fa-user"></i>&nbsp;
+              <?php endif; ?>
+              <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
