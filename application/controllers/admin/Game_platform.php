@@ -79,7 +79,8 @@ class Game_platform extends CI_Controller
                     $this->session->set_userdata("message", "New Game Platform added.");
                     $this->User_log_model->log_message("New user recorded added |  platform_id: " . $platform_id);
                     $this->session->set_userdata("message", "Upload a Platform Logo, or click \"Back\" to cancel.");
-                    redirect("admin/game_platform/edit_game_platform/" . $platform_id);
+                    //redirect("admin/game_platform/edit_game_platform/" . $platform_id);
+                    redirect("admin/game_platform/browse_game_platform/");
                 }
                 else
                 {
@@ -135,9 +136,9 @@ class Game_platform extends CI_Controller
 
     private function _add_game_platform_validation_rules()
     {
-        $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[20]");
-        $this->form_validation->set_rules("year_into", "Year Introduced", "trim|required|is_natural");
-        $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[20]");
+        $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
+        $this->form_validation->set_rules("year_intro", "Year Introduced", "trim|required|is_natural");
+        $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[128]");
     }
 
     private function _prepare_add_game_platform()
@@ -146,13 +147,14 @@ class Game_platform extends CI_Controller
         $platform["year_intro"] = $this->input->post("year_intro");
         $platform["manufacturer"] = $this->input->post("manufacturer");
         $platform["logo_url"] = "platform_logo/default_logo.png";
+        return $platform;
     }
 
     private function _edit_game_platform_validation_rules()
     {
-        $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[20]");
+        $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("year_into", "Year Introduced", "trim|required|is_natural");
-        $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[20]");
+        $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[128]");
     }
 
     private function _prepare_edit_game_platform()

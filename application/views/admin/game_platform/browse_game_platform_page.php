@@ -48,7 +48,7 @@
             <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms&nbsp;
             <button onclick="window.location.replace('<?= site_url("admin/game_platform/add_game_platform/") ?>')" type="button"
                     class="btn btn-danger"><i class="fa
-            fa-plus"></i> Add New User
+            fa-plus"></i> Add Game Platform
             </button>
         </h1>
     </div>
@@ -90,7 +90,7 @@
                 <th>#</th>
                 <th>Platform Name</th>
                 <th>Platform Logo</th>
-                <th>Manufacturer</th>
+                <th>Platform Developer</th>
                 <th>Year Intro</th>
                 <th class="button-col">&nbsp;</th>
             </tr>

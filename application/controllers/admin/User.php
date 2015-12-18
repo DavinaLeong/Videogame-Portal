@@ -103,15 +103,9 @@ class User extends CI_Controller
         {
             $this->session->unset_userdata("file_upload_errors");
 
-            $this->load->library("Pagination");
-            $this->load->library("Pagination_helper");
-
             $per_page = 20;
             $data = array(
                 "users" => $this->User_model->get_all_limit_offset($per_page, $offset),
-                "per_page" => $per_page,
-                "offset" => $offset,
-                "total_rows" => $this->User_model->count_all()
             );
 
             $this->load->view("admin/user/browse_user_page", $data);

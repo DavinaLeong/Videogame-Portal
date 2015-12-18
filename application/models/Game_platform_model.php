@@ -62,6 +62,7 @@ class Game_platform_model extends CI_Model
 
     public function get_all()
     {
+        $this->db->order_by("year_intro", "DESC");
         $query = $this->db->get(TABLE_GAME_PLATFORM);
         return $query->result_array();
     }
@@ -74,7 +75,7 @@ class Game_platform_model extends CI_Model
 
     public function get_all_limit_offset($limit, $offset)
     {
-        $this->db->order_by("platform_id");
+        $this->db->order_by("year_intro", "DESC");
         $query = $this->db->get(TABLE_GAME_PLATFORM, $limit, $offset);
         return $query->result_array();
     }

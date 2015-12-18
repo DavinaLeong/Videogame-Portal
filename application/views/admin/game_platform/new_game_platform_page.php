@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">Platform Name <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="platform_name" placeholder="Platform Name" value="<?=set_value('Platform Name')?>" required data-parsley-maxlength="20"/>
+                        <input type="text" class="form-control" name="platform_name" placeholder="Platform Name" value="<?=set_value('Platform Name')?>" required data-parsley-maxlength="64"/>
                     </div>
                 </div>
 
@@ -76,9 +76,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="manufacturer" class="col-sm-3 control-label">Platform Manufacturer <span class="text-danger">*</span></label>
+                    <label for="manufacturer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="manufacturer" placeholder="Manufacturer" value="<?=set_value('Manufacturer')?>" data-parsley-maxlength="20"/>
+                        <input type="text" class="form-control" name="manufacturer" placeholder="Developer" value="<?=set_value('Manufacturer')?>" data-parsley-maxlength="128"/>
                     </div>
                 </div>
 
