@@ -76,15 +76,15 @@ class User extends CI_Controller
             {
                 if($uid = $this->User_model->insert($this->_prepare_add_user() ))
                 {
-                    $this->session->set_userdata("message", "New user record added.");
-                    $this->User_log_model->log_message("New user recorded added |  uid: " . $uid);
-                    $this->session->set_userdata("message", "Upload a personal avatar, or click \"Back\" to cancel.");
+                    $this->session->set_userdata("message", "New User Record added.");
+                    $this->User_log_model->log_message("New User Record added |  uid: " . $uid);
+                    $this->session->set_userdata("message", "Upload a Personal Avatar, or click \"Back\" to cancel.");
                     redirect("admin/user/edit_user/" . $uid);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "Unable to add new user record.");
-                    $this->User_log_model->log_message("Unable to add new user record.");
+                    $this->session->set_userdata("message", "Unable to add new User Record.");
+                    $this->User_log_model->log_message("Unable to add new User Record.");
                 }
             }
 

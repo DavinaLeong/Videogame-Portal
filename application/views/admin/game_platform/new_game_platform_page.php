@@ -11,6 +11,16 @@
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
+
+<?php
+/**
+ * @var $users
+ * @var $total_rows
+ * @var $offset
+ * @var $per_page
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,14 +69,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="username" class="col-sm-3 control-label">Year Introduced <span class="text-danger">*</span></label>
+                    <label for="year_intro" class="col-sm-3 control-label">Year Introduced <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input type="number" class="form-control" name="year_intro" placeholder="0" value="<?=set_value('0')?>" required data-parsley-type="digits" data-parsley-maxlength="4"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">Platform Manufacturer <span class="text-danger">*</span></label>
+                    <label for="manufacturer" class="col-sm-3 control-label">Platform Manufacturer <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="manufacturer" placeholder="Manufacturer" value="<?=set_value('Manufacturer')?>" data-parsley-maxlength="20"/>
                     </div>

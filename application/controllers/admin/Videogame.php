@@ -49,7 +49,7 @@
  * @property CI_Zip $zip
  *
  * @property User_log_model $User_log_model
- * @property User_model $User_model
+ * @property Videogame_model $Videogame_model
  * @property Upload_helper $upload_helper
  */
 

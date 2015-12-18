@@ -120,7 +120,7 @@
                             <?php if($user["avatar_url"]): ?>
                                 <img class="img-rounded" src="<?=site_url('uploads/' . $user["avatar_url"])?>" alt="<?=$user['username']?>_avatar" width="50px" height="50px"/>
                             <?php else: ?>
-                                <i style="color: #ccc; margin-left: 10px">No avatar</i>
+                                <span class="text-placeholder">No avatar</span>
                             <?php endif; ?>
                         </td>
                         <td>

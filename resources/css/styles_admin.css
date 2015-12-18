@@ -65,3 +65,11 @@ body
     margin: 1em auto;
     display: block;
 }
+
+.text-placeholder
+{
+    font-style: italic;
+    display: inline-block;
+    text-align: center;
+    color: #ccc;
+}

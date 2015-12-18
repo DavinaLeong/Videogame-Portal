@@ -49,7 +49,7 @@
  * @property CI_Zip $zip
  *
  * @property User_log_model $User_log_model
- * @property User_model $User_model
+ * @property Game_genre_model $Game_genre_model
  * @property Upload_helper $upload_helper
  */
 
@@ -58,7 +58,7 @@ class Game_genre extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->mode("Game_genre_model");
+        $this->load->model("Game_genre_model");
     }
 
     public function index()
@@ -68,22 +68,22 @@ class Game_genre extends CI_Controller
 
     public function add_game_genre()
     {
-        show_error("Function not implemented");
+        show_error("add_game_genre not implemented");
     }
 
     public function browse_game_genre()
     {
-        show_error("Function not implemented");
+        show_error("browse_game_genre not implemented");
     }
 
     public function view_game_genre()
     {
-        show_error("Function not implemented");
+        show_error("view_game_genre not implemented");
     }
 
     public function edit_game_genre()
     {
-        show_error("Function not implemented");
+        show_error("edit_game_genre not implemented");
     }
     
 } //end Game_genre controller class

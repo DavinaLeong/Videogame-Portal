@@ -74,7 +74,18 @@ class Game_platform extends CI_Controller
 
             if($this->form_validation->run())
             {
-
+                if($platform_id = $this->Game_platform_model->insert($this->_prepare_add_game_platform()))
+                {
+                    $this->session->set_userdata("message", "New Game Platform added.");
+                    $this->User_log_model->log_message("New user recorded added |  platform_id: " . $platform_id);
+                    $this->session->set_userdata("message", "Upload a Platform Logo, or click \"Back\" to cancel.");
+                    redirect("admin/game_platform/edit_game_platform/" . $platform_id);
+                }
+                else
+                {
+                    $this->session->set_userdata("message", "Unable to add new Game Platform.");
+                    $this->User_log_model->log_message("Unable to add new Game Platform.");
+                }
             }
 
             $this->load->view("admin/game_platform/new_game_platform_page");
@@ -86,9 +97,30 @@ class Game_platform extends CI_Controller
         }
     }
 
-    public function browse_game_platform()
+    public function browse_game_platform($offset=0)
     {
-        show_error("browse_game_platform not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $this->session->unset_userdata("file_upload_errors");
+
+            $this->load->library("Pagination");
+            $this->load->library("Pagination_helper");
+
+            $per_page = 20;
+            $data = array(
+                "game_platforms" => $this->Game_platform_model->get_all_limit_offset($per_page, $offset),
+                "per_page" => $per_page,
+                "offset" => $offset,
+                "total_rows" => $this->Game_platform_model->count_all()
+            );
+
+            $this->load->view("admin/game_platform/browse_game_platform_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
     }
 
     public function view_game_platform()
@@ -108,11 +140,27 @@ class Game_platform extends CI_Controller
         $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[20]");
     }
 
+    private function _prepare_add_game_platform()
+    {
+        $platform["platform_name"] = $this->input->post("platform_name");
+        $platform["year_intro"] = $this->input->post("year_intro");
+        $platform["manufacturer"] = $this->input->post("manufacturer");
+        $platform["logo_url"] = "platform_logo/default_logo.png";
+    }
+
     private function _edit_game_platform_validation_rules()
     {
         $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[20]");
         $this->form_validation->set_rules("year_into", "Year Introduced", "trim|required|is_natural");
         $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[20]");
+    }
+
+    private function _prepare_edit_game_platform()
+    {
+        $platform["platform_name"] = $this->input->post("platform_name");
+        $platform["year_intro"] = $this->input->post("year_intro");
+        $platform["manufacturer"] = $this->input->post("manufacturer");
+        $platform["logo_url"] = "platform_logo/default_logo.png";
     }
     
 } //end Game_platform controller class
