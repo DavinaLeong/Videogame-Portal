@@ -138,7 +138,7 @@ class Game_platform extends CI_Controller
     {
         $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("year_intro", "Year Introduced", "trim|required|is_natural");
-        $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[128]");
+        $this->form_validation->set_rules("manufacturer", "Developer Name", "trim|required|max_length[128]");
     }
 
     private function _prepare_add_game_platform()
@@ -154,7 +154,7 @@ class Game_platform extends CI_Controller
     {
         $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("year_into", "Year Introduced", "trim|required|is_natural");
-        $this->form_validation->set_rules("manufacturer", "Manufacturer Name", "trim|required|max_length[128]");
+        $this->form_validation->set_rules("manufacturer", "Developer Name", "trim|required|max_length[128]");
     }
 
     private function _prepare_edit_game_platform()
