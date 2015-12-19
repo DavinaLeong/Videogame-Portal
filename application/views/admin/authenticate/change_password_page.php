@@ -9,7 +9,7 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content © DAVINA Leong Shi Yun. All Rights Reserved.
+	All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
@@ -90,13 +90,15 @@
                         <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="password" value="<?=set_value('password')?>" required data-parsley-minlength="8" data-parsley-equalto="#new_password"/>
                     </div>
                 </div>
-                <div class="space col-sm-12">&nbsp;</div>
+                
+                <div class="col-sm-9 col-sm-offset-3">
+                    <p class="text-danger">* required fields</p>
+                </div>
 
             </div>
         </div>
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
-                <p class="text-danger text-right">* required fields</p>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
                 <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')"><i class="fa fa-chevron-left"></i> Back</button>
             </div>

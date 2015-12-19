@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!----------------------------------------------------------------------------------
 	- File Info -
-		File name		: edit_user_page.php
+		File name		: edit_game_platform_page.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 12 Dec 2015
 
@@ -14,7 +14,7 @@
 
 <?php
 /**
- * @var $user
+ * @var $game_platform
  */
 ?>
 
@@ -33,24 +33,24 @@
         <?php $this->load->view("admin/admin_navbar"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User's Details</h1>
+            <h1><i class="text-info fa fa-pencil-square-o"></i> Edit Game Platform</h1>
 
             <p class="lead">
                 Edit in the fields and click <span class="text-info">Submit</span> to save changes.
             </p>
 
             <div class="btn-group" role="group" aria-label="actionButtonGroup">
-                <button name="browse" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
-                    <i class="fa fa-file-text-o"></i> Browse Users
+                <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')" class="btn btn-default">
+                    <i class="fa fa-chevron-left"></i> Browse Game Platforms
                 </button>
 
-                <button name="back" onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')"
+                <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/add_game_platform/")?>')"
                         class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add Another User
+                    <i class="fa fa-plus"></i> Add Game Platform
                 </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-primary">
-                    <i class="fa fa-eye"></i> View User
+                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-primary">
+                    <i class="fa fa-eye"></i> View Game Platform
                 </button>
             </div>
         </div>
@@ -67,49 +67,38 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-3 control-label">Name <span class="text-danger">*</span></label>
+                                <label for="name" class="col-sm-3 control-label">Platform ID</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name" placeholder="name" value="<?=$user["name"]?>" data-parsley-maxlength="512"/>
+                                    <p class="form-control-static"><?=$game_platform["platform_id"]?></p>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
+                                <label for="platform_name" class="col-sm-3 control-label">Platform Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="username" placeholder="username" value="<?=$user["username"]?>" data-parsley-maxlength="512"/>
-                                </div>
-                            </div>
-                            <div class="space col-sm-12">&nbsp;</div>
-
-                            <div class="form-group">
-                                <label for="status" class="col-sm-3 control-label">Account Status <span class="text-danger">*</span></label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" name="status">
-                                        <option
-                                            value="Active" <?= set_select('status', 'Active', $user['status'] == "Active" ? TRUE : FALSE) ?> >
-                                            Active
-                                        </option>
-                                        <option
-                                            value="M" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
-                                            Not Active
-                                        </option>
-                                    </select>
+                                    <input type="text" class="form-control" name="platform_name" placeholder="Name" value="<?=$game_platform["platform_name"]?>" data-parsley-maxlength="64"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="access" class="col-sm-3 control-label">Access Rights <span class="text-danger">*</span></label>
+                                <label for="abbr" class="col-sm-3 control-label">Abbreviation</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="access">
-                                        <option>A</option>
-                                        <option>M</option>
-                                        <option>U</option>
-                                    </select>
+                                    <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" value="<?=$game_platform["abbr"]?>" data-parsley-type="alphanum" data-parsley-maxlength="64"/>
                                 </div>
                             </div>
 
-                            <div class="col-sm-9 col-sm-offset-3">
-                                <p class="text-danger">* required fields</p>
+                            <div class="form-group">
+                                <label for="year_intro" class="col-sm-3 control-label">First Release (Year)</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="year_intro" placeholder="0" value="<?=$game_platform["year_intro"]?>" data-parsley-type="digits" data-parsley-maxlength="4"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="developer" class="col-sm-3 control-label">Platform Developer</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="developer" placeholder="Developer" value="<?=$game_platform["developer"]?>" data-parsley-maxlength="128"/>
+                                </div>
                             </div>
 
                         </div>
@@ -118,7 +107,7 @@
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-4">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                            <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')"><i class="fa fa-ban"></i> Cancel</button>
+                            <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')"><i class="fa fa-ban"></i> Cancel</button>
                         </div>
                     </div>
 
@@ -128,9 +117,11 @@
             <!-- Upload Image Column -->
             <div class="col-md-3">
                 <div class="well well-sm" style="background-color: transparent;">
-                    <p><b>Upload Avatar</b></p>
-                    <div class="image-preview"><img src="<?=site_url('uploads/' . $user['avatar_url'])?>" alt="<?=$user['username']?> avatar" /></div>
-                    <p class="text-danger"><?=$this->session->userdata("file_upload_errors")?></p>
+                    <p><b>Upload Logo</b></p>
+                    <div class="image-preview"><img src="<?=site_url('uploads/' . $game_platform['logo_url'])?>" alt="<?=$game_platform['platform_name']?> avatar" /></div>
+                    <?php if($this->session->userdata("logo_upload_errors")): ?>
+                        <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
+                    <?php endif; ?>
                     <button class="btn btn-default center-div" style="margin: 0 auto;"  data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"
 ></i> Upload Avatar</button>
                 </div>
@@ -140,25 +131,32 @@
         <!-- Upload Image Modal -->
         <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <form role="form" action="<?=site_url('admin/user/upload_image/')?>" method="post"
+        <form role="form" action="<?=site_url('admin/game_platform/upload_image/')?>" method="post"
               enctype="multipart/form-data">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="uploadModalLabel">Upload New Avatar</h4>
+                    <h4 class="modal-title" id="uploadModalLabel">Upload New Logo</h4>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                     <label><br/>Image cannot be more than <span class="text-danger">200px wide</span>
                         and <span class="text-danger">200px tall</span>.</label>
-                    <input type="file" class="form-control" id="avatar_url" name="avatar_url"
+                    <input type="file" class="form-control" id="logo_url" name="logo_url"
                            placeholder="image url">
+
+                    <?php if($this->session->userdata("logo_upload_errors")): ?>
+                        <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
+                    <?php endif; ?>
                 </div>
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
                 </div>
+
             </div>
         </form>
     </div>

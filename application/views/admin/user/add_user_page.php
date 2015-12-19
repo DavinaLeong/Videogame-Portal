@@ -26,27 +26,17 @@
         <?php $this->load->view("admin/admin_navbar"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-plus"></i> Add New User</h1>
+            <h1><i class="text-info fa fa-plus"></i> Add New User <button name="browse" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
+                <i class="fa fa-file-text-o"></i> Browse Users
+            </button> </h1>
             <p class="lead">
                 Fill in the fields and click <span class="text-info">Submit</span> to add a new user.
             </p>
         </div>
 
-        <?php if($this->session->userdata('message')):?>
-            <div class="alert alert-info" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <?=$this->session->userdata('message')?>
-            </div>
-            <?php $this->session->unset_userdata('message') ?>
-        <?php endif;?>
-        <?php if(validation_errors()):?>
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <?=validation_errors();?>
-            </div>
-        <?php endif;?>
+        <?php $this->load->view("admin/template_user_message"); ?>
+        <?php $this->load->view("admin/template_form_validation"); ?>
+
         <form class="form-horizontal" method="post" role="form" data-parsley-validate>
             <div class="row">
                 <div class="col-md-10">
@@ -111,7 +101,7 @@
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                    <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')"><i class="fa fa-chevron-left"></i> Back</button>
+                    <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')"><i class="fa fa-ban"></i> Cancel</button>
                 </div>
             </div>
         </form>

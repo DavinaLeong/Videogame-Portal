@@ -97,15 +97,14 @@ class User extends CI_Controller
         }
     }
 
-    public function browse_user($offset=0)
+    public function browse_user()
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
-            $this->session->unset_userdata("file_upload_errors");
+            $this->session->unset_userdata("avatar_upload_errors");
 
-            $per_page = 20;
             $data = array(
-                "users" => $this->User_model->get_all_limit_offset($per_page, $offset),
+                "users" => $this->User_model->get_all(),
             );
 
             $this->load->view("admin/user/browse_user_page", $data);
@@ -144,15 +143,15 @@ class User extends CI_Controller
             if($this->form_validation->run())
             {
                 if($uid = $this->User_model->update($this->_prepare_edit_user($user) ) ||
-                    $this->session->userdata("file_upload_errors") == "")
+                    $this->session->userdata("avatar_upload_errors") == "")
                 {
                     $this->session->set_userdata("message", "User record updated successfully.");
                     $this->User_log_model->log_message("User record updated successfully. | uid: " . $uid);
-                    redirect("admin/user/browse_user");
+                    redirect("admin/user/view_user/" . $uid);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "An error has occured. Unable to update user record.");
+                    $this->session->set_userdata("message", "An error has occured. Unable to update User record.");
                     $this->User_log_model->log_message("Unable to update user record. | uid: " . $uid);
                 }
             }
@@ -205,13 +204,13 @@ class User extends CI_Controller
 
             $this->session->set_userdata("message", "Avatar uploaded successfully.");
             $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $this->session->userdata("edit_uid"));
-            $this->session->unset_userdata("file_upload_errors");
+            $this->session->unset_userdata("avatar_upload_errors");
         }
         else
         {
             $this->session->set_userdata("message", "Unable to upload image.");
             $this->User_log_model->log_message("Unable to upload image. | uid: " . $this->session->userdata("edit_uid"));
-            $this->session->set_userdata("file_upload_errors", $this->upload->display_errors());
+            $this->session->set_userdata("avatar_upload_errors", $this->upload->display_errors());
         }
 
         redirect("/admin/user/edit_user/" . $this->session->userdata("edit_uid"));

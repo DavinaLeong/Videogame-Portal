@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 /**
@@ -85,8 +85,9 @@ class Game_platform_model extends CI_Model
         $data = array(
             "platform_name" => $game_platform["platform_name"],
             "year_intro" => $game_platform["year_intro"],
-            "manufacturer" => $game_platform["manufacturer"],
-            "logo_url" => "platform_logo/default_logo.png"
+            "developer" => $game_platform["developer"],
+            "logo_url" => "platform_logo/default_logo.png",
+            "abbr" => $game_platform["abbr"]
         );
 
         $this->db->insert(TABLE_GAME_PLATFORM, $data);
@@ -98,21 +99,28 @@ class Game_platform_model extends CI_Model
         $data = array(
             "platform_name" => $game_platform["platform_name"],
             "year_intro" => $game_platform["year_intro"],
-            "manufacturer" => $game_platform["manufacturer"]
+            "developer" => $game_platform["developer"],
+            "abbr" => $game_platform["abbr"]
         );
 
-        $query = $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
-        return $query->affected_rows();
+        $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
+        return $this->db->affected_rows();
     }
 
-    public function update_logo_url($game_platform)
+    public function update_logo_url($game_platform=FALSE)
     {
         $data = array(
             "logo_url" => $game_platform["logo_url"],
         );
 
-        $query = $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
-        return $query->affected_rows();
+        $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
+        return $this->db->affected_rows();
     }
-    
+
+    public function delete_by_id($platform_id=FALSE)
+    {
+        $this->db->delete(TABLE_GAME_PLATFORM, array("platform_id" => $platform_id));
+        return $this->db->affected_rows();
+    }
+
 } //end Game_platform_model class

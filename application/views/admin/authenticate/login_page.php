@@ -27,6 +27,10 @@
             padding-bottom: 40px;
             background-color: #eee;
         }
+        .heading {
+            margin-left: 35%;
+            width: 40%;
+        }
         .form-signin {
             max-width: 330px;
             padding: 15px;
@@ -65,6 +69,8 @@
 </head>
 <body>
     <div class="container">
+        <h1 class="heading">Welcome to <span class="text-info"><?=SITE_NAME?></span> Admin Portal</h1>
+
         <form class="form-signin" action="login" method="post" data-parsley-validate>
             <h2 class="form-signin-heading"><i class="fa fa-sign-in text-info"></i> Please sign in</h2>
             <?php if($this->session->userdata('message')):?>

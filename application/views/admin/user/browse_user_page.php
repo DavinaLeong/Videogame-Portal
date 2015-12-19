@@ -15,9 +15,6 @@
 <?php
 /**
  * @var $users
- * @var $per_page
- * @var $offset
- * @var $total_rows
  */
 ?>
 
@@ -27,13 +24,7 @@
     <?php
     $this->load->view("templates/meta_common");
     $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
     ?>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.css"/>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
 
     <title>Video Game Portal Admin</title>
 
@@ -44,12 +35,6 @@
     }
     </style>
 
-    <script>
-        $(document).ready(function()
-        {
-            $("#users_table").dataTable();
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -64,14 +49,7 @@
             </h1>
         </div>
 
-        <?php if($this->session->userdata('message')):?>
-            <div class="alert alert-info" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <?=$this->session->userdata('message')?>
-            </div>
-            <?php $this->session->unset_userdata('message') ?>
-        <?php endif;?>
+        <?php $this->load->view("admin/template_user_message"); ?>
 
         <div class="table-responsive">
             <table class="table table-hover" id="users_table">
@@ -163,7 +141,18 @@
             </table>
         </div>
 
-        <?php $this->load->view("admin/admin_footer"); ?>
+        <?php
+        $this->load->view("admin/admin_footer");
+        $this->load->view("templates/js_common");
+        $this->load->view("templates/datatables_resources");
+        ?>
+
+        <script>
+            $(document).ready(function()
+            {
+                $("#users_table").dataTable();
+            });
+        </script>
     </div>
 
 </body>

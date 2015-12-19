@@ -24,7 +24,6 @@
     <?php
     $this->load->view("templates/meta_common");
     $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
     ?>
     <title>Video Game Portal Admin</title>
 
@@ -39,8 +38,8 @@
 </head>
 <body>
     <div class="container">
+        
         <?php $this->load->view("admin/admin_navbar"); ?>
-
         <div class="page-header">
             <h1><i class="text-info fa fa-eye"></i> View User: <span class="text-info"><?=$user["name"]?></span></h1>
 
@@ -59,6 +58,8 @@
                 </button>
             </div>
         </div>
+
+        <?php $this->load->view("admin/template_user_message"); ?>
 
         <p>User's details:</p>
         <div class="image-preview">
@@ -139,7 +140,10 @@
             </table>
         </div>
 
-        <?php $this->load->view("admin/admin_footer"); ?>
+        <?php
+        $this->load->view("admin/admin_footer");
+        $this->load->view("templates/js_common");
+        ?>
     </div>
 </body>
 </html>

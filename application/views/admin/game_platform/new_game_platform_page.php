@@ -9,7 +9,7 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content © DAVINA Leong Shi Yun. All Rights Reserved.
+	All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
 ----------------------------------------------------------------------------------->
 
 <?php
@@ -36,27 +36,17 @@
     <?php $this->load->view("admin/admin_navbar"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-plus"></i> New Game Platform</h1>
+        <h1><i class="text-info fa fa-plus"></i> New Game Platform <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')" class="btn btn-default">
+            <i class="fa fa-file-text-o"></i> Browse Game Platforms
+        </button></h1>
         <p class="lead">
             Fill in the fields and click <span class="text-info">Submit</span> to add a new Game Platform.
         </p>
     </div>
 
-    <?php if($this->session->userdata('message')):?>
-        <div class="alert alert-info" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-            </button>
-            <?=$this->session->userdata('message')?>
-        </div>
-        <?php $this->session->unset_userdata('message') ?>
-    <?php endif;?>
-    <?php if(validation_errors()):?>
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-            </button>
-            <?=validation_errors();?>
-        </div>
-    <?php endif;?>
+    <?php $this->load->view("admin/template_user_message"); ?>
+    <?php $this->load->view("admin/template_form_validation"); ?>
+
     <form class="form-horizontal" method="post" role="form" data-parsley-validate>
         <div class="row">
             <div class="col-md-10">
@@ -69,16 +59,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="year_intro" class="col-sm-3 control-label">Year Introduced <span class="text-danger">*</span></label>
+                    <label for="abbr" class="col-sm-3 control-label">Abbreviation <span class="text-danger">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" value="<?=set_value('Abbreviation')?>" required data-parsley-type="alphanum" data-parsley-maxlength="64"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="year_intro" class="col-sm-3 control-label">First Release (Year) <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input type="number" class="form-control" name="year_intro" placeholder="0" value="<?=set_value('0')?>" required data-parsley-type="digits" data-parsley-maxlength="4"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="manufacturer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
+                    <label for="developer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="manufacturer" placeholder="Developer" value="<?=set_value('Manufacturer')?>" data-parsley-maxlength="128"/>
+                        <input type="text" class="form-control" name="developer" placeholder="Developer" value="<?=set_value('Devloper')?>" data-parsley-maxlength="128"/>
                     </div>
                 </div>
 
@@ -91,7 +88,7 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')"><i class="fa fa-chevron-left"></i> Back</button>
+                <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')"><i class="fa fa-ban"></i> Cancel</button>
             </div>
         </div>
     </form>
