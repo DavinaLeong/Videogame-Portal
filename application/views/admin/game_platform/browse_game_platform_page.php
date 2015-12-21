@@ -66,7 +66,7 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_platform["platform_name"]?></td>
-                    <td><?=$game_platform["abbr"]?></td>
+                    <td><span class="badge"><?=$game_platform["abbr"]?></span></td>
                     <td>
                         <?php if($game_platform["logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
@@ -117,13 +117,12 @@
                     <p>This action <strong class="text-danger">cannot</strong> be undone.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="OnConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete
-                        Game Platform</button>
+                    <button type="button" onclick="OnConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
 
     <?php
     $this->load->view("admin/admin_footer");
@@ -137,15 +136,15 @@
             $("#platform_table").dataTable();
         });
 
+        var delete_platform_id = 0;
         function onDeleteButtonClicked(platform_id)
         {
-            $("#confirm_delete_modal").data("platform_id", platform_id).modal("show");
+            delete_platform_id = platform_id;
         }
 
         function OnConfirmDelete()
         {
-            var platform_id = $("#confirm_delete_modal").data("platform_id");
-            var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform/')?>" + platform_id;
+            var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform')?>" + "/" + delete_platform_id;
             window.location.href = delete_platform_url;
         }
     </script>

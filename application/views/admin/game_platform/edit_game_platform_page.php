@@ -40,17 +40,22 @@
             </p>
 
             <div class="btn-group" role="group" aria-label="actionButtonGroup">
-                <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')" class="btn btn-default">
-                    <i class="fa fa-chevron-left"></i> Browse Game Platforms
+                <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform")?>')" class="btn btn-default">
+                    <i class="fa fa-file-text-o"></i> Browse
                 </button>
 
-                <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/add_game_platform/")?>')"
+                <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/add_game_platform")?>')"
                         class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add Game Platform
+                    <i class="fa fa-plus"></i> Add
                 </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-primary">
-                    <i class="fa fa-eye"></i> View Game Platform
+                <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default">
+                    <i class="fa fa-pencil-square-o"></i> Edit
+                </button>
+
+                <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)"
+                        class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
+                    <i class="fa fa-trash"></i> Delete
                 </button>
             </div>
         </div>
@@ -130,40 +135,78 @@
 
         <!-- Upload Image Modal -->
         <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <form role="form" action="<?=site_url('admin/game_platform/upload_image/')?>" method="post"
-              enctype="multipart/form-data">
-            <div class="modal-content">
+            <div class="modal-dialog" role="document">
+                <form role="form" action="<?=site_url('admin/game_platform/upload_image/')?>" method="post"
+                      enctype="multipart/form-data">
+                    <div class="modal-content">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="uploadModalLabel">Upload New Logo</h4>
-                </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="uploadModalLabel">Upload New Logo</h4>
+                        </div>
 
-                <div class="modal-body">
-                    <label><br/>Image cannot be more than <span class="text-danger">200px wide</span>
-                        and <span class="text-danger">200px tall</span>.</label>
-                    <input type="file" class="form-control" id="logo_url" name="logo_url"
-                           placeholder="image url">
+                        <div class="modal-body">
+                            <label><br/>Image cannot be more than <span class="text-danger">200px wide</span>
+                                and <span class="text-danger">200px tall</span>.</label>
+                            <input type="file" class="form-control" id="logo_url" name="logo_url"
+                                   placeholder="image url">
 
-                    <?php if($this->session->userdata("logo_upload_errors")): ?>
-                        <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
-                    <?php endif; ?>
-                </div>
+                            <?php if($this->session->userdata("logo_upload_errors")): ?>
+                                <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
+                            <?php endif; ?>
+                        </div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
-                </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+                        </div>
 
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+
+        <!-- Confirm Delete Modal -->
+        <div class="modal fade" id="confirm_delete_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Delete Game Platform</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure?</p>
+                        <p>This action <strong class="text-danger">cannot</strong> be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="OnConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <?php $this->load->view("admin/admin_footer"); ?>
     </div>
 
+    <script>
+        $(document).ready(function()
+        {
+            $("#platform_table").dataTable();
+        });
+
+        var delete_platform_id = 0;
+        function onDeleteButtonClicked(platform_id)
+        {
+            delete_platform_id = platform_id;
+        }
+
+        function OnConfirmDelete()
+        {
+            var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform')?>" + "/" + delete_platform_id;
+            window.location.href = delete_platform_url;
+        }
+    </script>
 </body>
 </html>

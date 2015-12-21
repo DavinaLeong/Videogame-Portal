@@ -24,7 +24,6 @@
     <?php
     $this->load->view("templates/meta_common");
     $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
     ?>
     <title>Video Game Portal Admin</title>
 
@@ -50,17 +49,22 @@
             <h1><i class="text-info fa fa-eye"></i> View Game Platform</h1>
 
             <div class="btn-group" role="group" aria-label="actionButtonGroup">
-                <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform")?>')" class="btn btn-default">
-                    <i class="fa fa-chevron-left"></i> Back
+                <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform")?>')" class="btn btn-default">
+                    <i class="fa fa-file-text-o"></i> Browse
                 </button>
 
                 <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/add_game_platform")?>')"
                         class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add Game Platform
+                    <i class="fa fa-plus"></i> Add
                 </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-primary">
-                    <i class="fa fa-pencil-square-o"></i> Edit Game Platform
+                <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default">
+                    <i class="fa fa-pencil-square-o"></i> Edit
+                </button>
+
+                <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)"
+                        class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
+                    <i class="fa fa-trash"></i> Delete
                 </button>
             </div>
         </div>
@@ -72,7 +76,7 @@
             echo $game_platform["platform_name"];
             if($game_platform["abbr"])
             {
-                echo "&nbsp;(" . $game_platform["abbr"] . ")";
+                echo '&nbsp;<span class="badge">' . $game_platform['abbr'] . '</span>';
             }
             ?>
         </h2>
@@ -97,5 +101,41 @@
 
         <?php $this->load->view("admin/admin_footer"); ?>
     </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirm_delete_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete Game Platform</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                    <p>This action <strong class="text-danger">cannot</strong> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="OnConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <?php $this->load->view("templates/js_common"); ?>
+
+    <script>
+    var delete_platform_id = 0;
+    function onDeleteButtonClicked(platform_id)
+    {
+        delete_platform_id = platform_id;
+    }
+
+    function OnConfirmDelete()
+    {
+        var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform')?>" + "/" + delete_platform_id;
+        window.location.href = delete_platform_url;
+    }
+    </script>
 </body>
 </html>
