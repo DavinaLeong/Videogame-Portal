@@ -78,7 +78,7 @@ class Game_platform extends CI_Controller
                 {
                     $this->session->set_userdata("message", "New Game Platform added.");
                     $this->User_log_model->log_message("New user recorded added |  platform_id: " . $platform_id);
-                    $this->session->set_userdata("message", "Upload a Platform Logo, or click \"Back\" to cancel.");
+                    $this->session->set_userdata("message", "Upload a Platform Logo, or click \"<i class='fa fa-ban'></i> Cancel\" to cancel.");
                     redirect("admin/game_platform/edit_game_platform/" . $platform_id);
                 }
                 else
@@ -97,7 +97,7 @@ class Game_platform extends CI_Controller
         }
     }
 
-    public function browse_game_platform()
+    public function browse_game_platform($use_react=false)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
@@ -107,7 +107,14 @@ class Game_platform extends CI_Controller
                 "game_platforms" => $this->Game_platform_model->get_all(),
             );
 
-            $this->load->view("admin/game_platform/browse_game_platform_page", $data);
+            if($use_react)
+            {
+                $this->load->view("admin/game_platform/browse_game_platform_page_react", $data);
+            }
+            else
+            {
+                $this->load->view("admin/game_platform/browse_game_platform_page", $data);
+            }
         }
         else
         {

@@ -15,9 +15,6 @@
 <?php
 /**
  * @var $game_platforms
- * @var $per_page
- * @var $offset
- * @var $total_rows
  */
 ?>
 

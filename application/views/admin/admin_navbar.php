@@ -55,8 +55,12 @@
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/game_platform/add_game_platform')?>"><i class="fa fa-plus"></i> Add Game
                 Platform</a></li>
-            <li><a href="<?=site_url('admin/game_platform/browse_game_platform')?>"><i class="fa fa-file-text-o"></i> Browse
+            <li><a href="<?=site_url('admin/game_platform/browse_game_platform/0')?>"><i class="fa
+            fa-file-text-o"></i> Browse
                 Game Platforms</a></li>
+            <li><a href="<?=site_url('admin/game_platform/browse_game_platform/1')?>"><i class="fa
+            fa-file-text-o"></i> Browse
+                Game Platforms <span class="badge">REACT JS</span></a></li>
           </ul>
         </li>
       </ul>
