@@ -37,35 +37,17 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms&nbsp;
+            <span class="badge">REACT JS</span>
             <button onclick="window.location.replace('<?= site_url("admin/game_platform/add_game_platform/") ?>')" type="button"
                     class="btn btn-danger"><i class="fa
             fa-plus"></i> Add Game Platform
             </button>
         </h1>
-
-        <div id="react">
-            <span class="text-danger">React is not working!</span>
-        </div>
     </div>
 
     <?php $this->load->view("admin/template_user_message"); ?>
 
-    <div class="table-responsive" id="ProductTable">
-        <table class="table table-hover" id="platform_table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Platform Name</th>
-                <th>Platform Abbr</th>
-                <th>Platform Logo</th>
-                <th>Platform Developer</th>
-                <th>First Release (Year)</th>
-                <th>&nbsp;</th>
-            </tr>
-            </thead>
-
-            <div id=""></div>
-        </table>
+    <div class="table-responsive" id="GamePlatformTable">
     </div>
 
     <!-- Confirm Delete Modal -->
@@ -93,9 +75,8 @@
 
 <?php $this->load->view("templates/js_common"); ?>
 
-<!-- Other scripts -->
-<script src="<?=RESOURCES_FOLDER?>js/react.min.js"></script>
-<script src="<?=RESOURCES_FOLDER?>js/react-dom.min.js"></script>
+<script src="<?=RESOURCES_FOLDER?>js/react.js"></script>
+<script src="<?=RESOURCES_FOLDER?>js/react-dom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
 
 <script type="text/javascript">
@@ -112,55 +93,62 @@
     }
 </script>
 
-<script type="text/jsx">
+<script>
+    var delete_platform_id = 0;
+    function onDeleteButtonClicked(platform_id)
+    {
+        alert("Clicked");
+        delete_platform_id = platform_id;
+    }
+
+    function OnConfirmDelete()
+    {
+        var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform')?>" + "/" + delete_platform_id;
+        window.location.href = delete_platform_url;
+    }
+</script>
+
+<script type="text/babel">
     var TestFunction = React.createClass({
         render: function() {
             return (
-              <span className="text-success">React is working</span>
+                <span style={{color: "green"}}>React IS working</span>
             );
         }
     });
 
     var gamePlatforms = <?=json_encode($game_platforms)?>;
-    var index = 0;
-    var uploads_url = "<?=site_url('')?>";
+    var rowIndex = 0;
 
     var GamePlatformRow = React.createClass({
-        render: function() {
-            ++index;
-            var abbr = this.props.game_platform.abbr ?
-                <span className="badge">{this.props.gamePlatform.abbr}</span> :
-                <span className="text-placeholder">none</span>";
+        render: function(){
+            ++rowIndex;
 
-            var developer = this.props.gamePlatform.developer ?
-                this.props.game_platform.developer :
-                <span className="text-placeholder">none</span>;
+            var developer = !this.props.gamePlatform.developer || this.props.gamePlatform.developer == "none" ? <span className="text-placeholder">none</span> : this.props.gamePlatform.developer;
 
-            var year_intro = this.props.gamePlatform.year_intro ?
-                this.props.game_platform.year_intro :
-                <span className="text-placeholder">0</span>;
+            var year_intro = !this.props.gamePlatform.year_intro || this.props.gamePlatform.year_intro == "0" ? <span className="text-placeholder">0</span> : this.props.gamePlatform.year_intro;
 
-            var logo_url = this.props.gamePlatform.logo_url ?
-                <img className="img-rounded"
-                     src={<?=site_url("./uploads")?>this.props.gamePlatform.logo_url}
-                     alt={this.props.gamePlatform.abbr + " avatar"}
-                     width={"50px"}
-                     height={"50px"}
-                /> :
-                <span className="text-placeholder">No logo</span>;
+            var logo_img = this.props.gamePlatform.logo_url ? <img className="img-rounded" src={"<?=site_url("uploads")?>" + "/" + this.props.gamePlatform.logo_url} alt={this.props.gamePlatform.abbr} width="50px" height="50px" /> : <span className="text-placeholder">no logo</span>;
+
+            var view_action = <a href={"<?=site_url("admin/game_platform/view_game_platform")?>" + "/" + this.props.gamePlatform.platform_id} type="button" className="btn btn-default"><i className="fa fa-eye"></i> View</a>;
+
+            var edit_action = <a href={"<?=site_url("admin/game_platform/edit_game_platform")?>" + "/" + this.props.gamePlatform.platform_id} type="button" className="btn btn-default"><i className="fa fa-file-text-o"></i> Edit</a>;
+
+            //Can't delete item
+            var delete_action = <button type="button" className="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal" onclick={'onDeleteButtonClicked(' + this.props.gamePlatform.platform_id + ')'}><i className="fa fa-trash"></i> Delete</button>;
 
             return (
                 <tr>
-                    <td>{index}</td>
+                    <td>{rowIndex}</td>
                     <td>{this.props.gamePlatform.platform_name}</td>
-                    <td>{abbr}</td>
-                    <td>{logl_url}</td>
+                    <td><span className="badge">{this.props.gamePlatform.abbr}</span></td>
+                    <td>{logo_img}</td>
                     <td>{developer}</td>
                     <td>{year_intro}</td>
-                    <td className="button-col">
-
-
-
+                    <td>
+                        {view_action}
+                        {edit_action}
+                        TODO: Delete Button
                     </td>
                 </tr>
             );
@@ -170,17 +158,34 @@
     var GamePlatformTable = React.createClass({
         render: function() {
             var rows = [];
-            this.props.gamePlatforms.forEach(function(gamePlatform) {
-                rows.push(<GamePlatformRow gamePlatform={gamePlatform} key={gamePlatform.id} />);
+            this.props.gamePlatforms.forEach(function(gamePlatform){
+                rows.push(<GamePlatformRow gamePlatform={gamePlatform} key={gamePlatform.platform_id}   />);
             }.bind(this));
 
-            return (<tbody>{rows}</tbody>);
+            return (
+                <table className="table table-hover" id="GamePlatformTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Platform Name</th>
+                            <th>Platform Abbr</th>
+                            <th>Platform Logo</th>
+                            <th>Platform Developer</th>
+                            <th>First Release Year</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>{rows}</tbody>
+                </table>
+            );
         }
+
     });
 
     ReactDOM.render(
-        <TestFunction />,
-        document.getElementById('content')
+        <GamePlatformTable gamePlatforms={gamePlatforms} />,
+        document.getElementById("GamePlatformTable")
     );
 </script>
 </body>

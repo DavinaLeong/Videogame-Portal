@@ -76,24 +76,24 @@
                             <span class="text-placeholder"><?=$game_platform["developer"]?></span>
                         <?php elseif($game_platform["developer"]):
                             echo $game_platform["developer"];
-                            else:
-                        ?>
-                            <span class="text-placeholder">NA</span>
+                        else:
+                            ?>
+                            <span class="text-placeholder-left">NA</span>
                         <?php endif; ?>
                     </td>
 
                     <td>
                         <?php if($game_platform["year_intro"] == "0"): ?>
-                            <span class="text-placeholder">0</span>
+                            <span class="text-placeholder-left"><?= $game_platform["year_intro"] ?></span>
                         <?php else: ?>
-                            <?=$game_platform["year_intro"]?>
+                            <?= $game_platform["year_intro"] ?>
                         <?php endif; ?>
                     </td>
 
                     <td class="button-col">
                         <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
                         <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                        <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" type="button" class="btn btn-default confirm-delete" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                     </td>
                 </tr>
             <?php endforeach; ?>

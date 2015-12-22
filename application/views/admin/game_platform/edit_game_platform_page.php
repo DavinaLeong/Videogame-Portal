@@ -50,7 +50,7 @@
                 </button>
 
                 <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default">
-                    <i class="fa fa-pencil-square-o"></i> Edit
+                    <i class="fa fa-eye"></i> View
                 </button>
 
                 <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)"
