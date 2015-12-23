@@ -78,7 +78,7 @@ class Authenticate extends CI_Controller
             $this->session->unset_userdata("access");
             $this->session->unset_userdata("name");
             $this->session->unset_userdata("avatar_url");
-            $this->session->set_userdata("message", "Session has expired and you've been logged out.");
+            $this->session->set_userdata("message", "You've been logged out.");
         }
 
         // Handle Login form

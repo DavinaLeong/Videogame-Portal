@@ -78,7 +78,7 @@ class Game_platform extends CI_Controller
                 {
                     $this->session->set_userdata("message", "New Game Platform added.");
                     $this->User_log_model->log_message("New user recorded added |  platform_id: " . $platform_id);
-                    $this->session->set_userdata("message", "Upload a Platform Logo, or click \"<i class='fa fa-ban'></i> Cancel\" to cancel.");
+                    $this->session->set_userdata("message", "Upload a Platform Logo, or click <b class='text-phrase'><i class='fa fa-ban'></i> Cancel</b> to cancel.");
                     redirect("admin/game_platform/edit_game_platform/" . $platform_id);
                 }
                 else
@@ -195,6 +195,84 @@ class Game_platform extends CI_Controller
         {
             $this->session->set_userdata("message", "This user has invalid access rights.");
             redirect('/admin/authenticate/login/');
+        }
+    }
+
+    public function json_get_all_platforms()
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $json_response = array(
+                "gamePlatforms" => $this->Game_platform_model->get_all(),
+                "status" => "success"
+            );
+
+            $this->output->set_content_type("application/json")->set_output(json_encode($json_response));
+        }
+        else
+        {
+            $json_response = array(
+                "message" => "Invalid access rights.",
+                "status" => "error"
+            );
+
+            $this->output->set_content_type("application/json")->set_output(json_encode($json_response));
+        }
+    }
+
+    public function json_delete_by_platform_id()
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $this->form_validation->set_rules("platform_id", "Platform ID", "trim|required");
+
+            if($this->form_validation->run())
+            {
+                if($this->Game_platform_model->delete_by_id($this->input->post("platform_id")) ) {
+                    $this->session->set_userdata("message", "Game Platform deleted successfully.");
+                    $this->User_log_model->log_message("Game Platform deleted successfully. | platform_id: " .
+                        $this->input->post("platform_id"));
+
+                    $json_response = array(
+                        "message" => "Game Platform deleted successfully",
+                        "status" => "success"
+                    );
+
+                    $this->output->set_content_type("application/json")->set_output(json_encode($json_response));
+                }
+                else
+                {
+                    $this->session->set_userdata("message", "Unable to delete Game Platform.");
+                    $this->User_log_model->log_message("Unable to delete Game Platform. |
+                    platform_id: " .
+                        $this->input->post("platform_id"));
+
+                    $json_response = array(
+                        "message" => "Unable to delete Game Platform",
+                        "status" => "error"
+                    );
+
+                    $this->output->set_content_type("application/json")->set_output(json_encode($json_response));
+                }
+            }
+            else
+            {
+                $json_response = array(
+                    "message" => "<b class='text-phrase'>platform_id</b> not found",
+                    "status" => "error"
+                );
+
+                $this->output->set_content_type("application/json")->set_output(json_encode($json_response));
+            }
+        }
+        else
+        {
+            $json_response = array(
+                "message" => "Invalid access rights.",
+                "status" => "error"
+            );
+
+            $this->output->set_content_type("application/json")->set_output(json_encode($json_response));
         }
     }
 
