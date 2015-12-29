@@ -35,10 +35,8 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms&nbsp;
-            <button onclick="window.location.replace('<?= site_url("admin/game_platform/add_screenshot_type/") ?>')" type="button"
-                    class="btn btn-danger"><i class="fa
-            fa-plus"></i> Add Game Platform
-            </button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#new_screenshot_type_modal">
+                <i class="fa fa-plus"></i> Add Game Platform</button>
         </h1>
     </div>
 
@@ -59,37 +57,11 @@
             <?php foreach($screenshot_types as $index=>$screenshot_type): ?>
                 <tr>
                     <td><?= $index + 1; ?></td>
-                    <td><?=$screenshot_type["platform_name"]?></td>
-                    <td><?=$screenshot_type["abbr"]?></td>
-                    <td>
-                        <?php if($screenshot_type["logo_url"]): ?>
-                            <img class="img-rounded" src="<?=site_url('uploads/' . $screenshot_type["logo_url"])?>" alt="<?=$screenshot_type['platform_name']?>_avatar" width="50px" height="50px"/>
-                        <?php else: ?>
-                            <span class="text-placeholder">No logo</span>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <?php if($screenshot_type["developer"] == "none"): ?>
-                            <span class="text-placeholder"><?=$screenshot_type["developer"]?></span>
-                        <?php elseif($screenshot_type["developer"]):
-                            echo $screenshot_type["developer"];
-                            else:
-                        ?>
-                            <span class="text-placeholder">NA</span>
-                        <?php endif; ?>
-                    </td>
-
-                    <td>
-                        <?php if($screenshot_type["year_intro"] == "0"): ?>
-                            <span class="text-placeholder">0</span>
-                        <?php else: ?>
-                            <?=$screenshot_type["year_intro"]?>
-                        <?php endif; ?>
-                    </td>
+                    <td><?=$screenshot_type["ss_type_name"]?></td>
+                    <td><?=$screenshot_type["ss_type_description"]?></td>
 
                     <td class="button-col">
-                        <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_screenshot_type/".$screenshot_type["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_screenshot_type/".$screenshot_type["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+.$screenshot_type["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                         <button name="delete" onclick="onDeleteButtonClicked(<?=$screenshot_type['platform_id']?>)" type="button" class="btn btn-default confirm-delete" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                     </td>
                 </tr>

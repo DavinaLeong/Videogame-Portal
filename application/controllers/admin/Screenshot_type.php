@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 /**
@@ -65,24 +65,62 @@ class Screenshot_type extends CI_Controller
         redirect("/admin/screenshot_type/browse_screenshot_type");
     }
 
-    public function add_screenshot_type()
-    {
-        show_error("add_screenshot_type not implemented");
-    }
-
     public function browse_screenshot_type()
     {
-        show_error("browse_screenshot_type not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $data = array(
+                "screenshot_types" => $this->Screenshot_type_model->get_all()
+            );
+
+            $this->load->view("admin/screenshot_type/browse_screenshot_type_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
     }
 
-    public function view_screenshot_type()
+    public function new_screenshot_type()
     {
-        show_error("view_screenshot_type not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $this->_new_screenshot_type_validation_rules();
+
+            if($this->form_validation->run())
+            {
+                if($ss_type_id = $this->Screenshot_type_model->insert($this->_prepare_new_screenshot_type()) )
+                {
+                    $this->User_log_model->log_message("New Screenshot Type created successfully. | ss_type_id: " . $ss_type_id);
+                    $this->session->set_userdata("message" , "New Screenshot Type created successfully.");
+                    redirect("/admin/screenshot_type/browse_screenshot_type");
+                }
+                else
+                {
+                    $this->User_log_model->log_message("Unable to create new Screenshot Type.");
+                    $this->session->set_userdata("message" , "Unable to create new Screenshot Type.");
+                }
+            }
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
     }
 
-    public function edit_screenshot_type()
+    private function _new_screenshot_type_validation_rules()
     {
-        show_error("edit_screenshot_type not implemented");
+        $this->form_validation->set_rules("ss_type_name", "Screenshot Type Name", "trim|required|max_length[32]");
+        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[128]");
+    }
+
+    private function _prepare_new_screenshot_type()
+    {
+        $screenshot_type["ss_type_name"] = $this->input->post("ss_type_name");
+        $screenshot_type["ss_type_description"] = $this->input->post("ss_type_description");
+        return $screenshot_type;
     }
 
 } //end Screenshot_type controller class

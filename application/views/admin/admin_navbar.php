@@ -85,7 +85,7 @@
             <li><a href="<?=site_url('admin/screenshot/browse_screenshot')?>"><i class="fa fa-file-text-o"></i> Browse
                 Screenshot</a></li>
             <li class="divider" role="separator"></li>
-            <li><a href="<?=site_url('admin/screenshot_type/add_screenshot_type')?>"><i class="fa fa-plus"></i> Add
+            <li><a data-toggle="modal" data-target="#new_screenshot_type_modal" style="cursor: pointer;"><i class="fa fa-plus"></i> Add
                 Screenshot Type</a></li>
             <li><a href="<?=site_url('admin/screenshot_type/browse_screenshot_type')?>"><i class="fa fa-file-text-o"></i>
                 Browse Screenshot Type</a></li>
@@ -116,3 +116,44 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<!-- New Screenshot Type Modal -->
+<div class="modal fade" id="new_screenshot_type_modal">
+  <div class="modal-dialog">
+
+    <form method="post" action="<?=site_url('admin/screenshot_type/new_screenshot_type')?>" data-parsley-validate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">New Screenshot Type</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <?php $this->load->view("admin/template_user_message"); ?>
+          <?php $this->load->view("admin/template_form_validation"); ?>
+
+          <div class="form-group">
+            <label for="ss_type_name">Name <span class="text-danger">*</span></label>
+            <input name="ss_type_name" class="form-control" type="text" placeholder="Name" data-parsley-maxlength="32" data-parsley-required/>
+          </div>
+
+          <div class="form-group">
+            <label for="ss_type_description">Description</label>
+            <input name="ss_type_description" class="form-control" type="text" placeholder="Short description of Screenshot Type" data-parsley-maxlength="128" />
+            <span class="help-block">Limited to 128 characters.</span>
+          </div>
+
+          <p class="text-danger text-right">* required fields</p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary"><i
+                class="fa fa-check"></i> Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </form>
+
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
