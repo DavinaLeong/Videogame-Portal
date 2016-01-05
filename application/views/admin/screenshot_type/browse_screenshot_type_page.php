@@ -43,7 +43,7 @@
     <?php $this->load->view("admin/template_user_message"); ?>
 
     <div class="table-responsive">
-        <table class="table table-hover" id="platform_table">
+        <table class="table table-hover" id="ss_type_table">
             <thead>
             <tr>
                 <th>#</th>
@@ -58,11 +58,22 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$screenshot_type["ss_type_name"]?></td>
-                    <td><?=$screenshot_type["ss_type_description"]?></td>
+                    <td>
+                        <?php
+                        if($screenshot_type["ss_type_description"])
+                        {
+                            echo $screenshot_type["ss_type_description"];
+                        }
+                        else
+                        {
+                            echo '<span class="text-placeholder">No description</span>';
+                        }
+                        ?>
+                    </td>
 
                     <td class="button-col">
-.$screenshot_type["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                        <button name="delete" onclick="onDeleteButtonClicked(<?=$screenshot_type['platform_id']?>)" type="button" class="btn btn-default confirm-delete" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/screenshot_type/edit_screenshot_type") . "/" . $screenshot_type["ss_type_id"]?>')" type="button" class="btn btn-default" data-toggle="modal" data-target="#edit_modal"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        <button name="delete" onclick="onDeleteButtonClicked(<?=$screenshot_type['ss_type_id']?>)" type="button" class="btn btn-default confirm-delete" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -76,15 +87,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Delete Game Platform</h4>
+                    <h4 class="modal-title">Delete Screenshot Type</h4>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure?</p>
                     <p>This action <strong class="text-danger">cannot</strong> be undone.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="OnConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete
-                        Game Platform</button>
+                    <button type="button" onclick="onConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -100,19 +110,18 @@
     <script>
         $(document).ready(function()
         {
-            $("#platform_table").dataTable();
+            $("#ss_type_table").dataTable();
         });
 
-        function onDeleteButtonClicked(platform_id)
+        var ss_type_id = 0;
+        function onDeleteButtonClicked(delete_ss_type_id)
         {
-            $("#confirm_delete_modal").data("platform_id", platform_id).modal("show");
+            ss_type_id = delete_ss_type_id;
         }
 
-        function OnConfirmDelete()
+        function onConfirmDelete()
         {
-            var platform_id = $("#confirm_delete_modal").data("platform_id");
-            var delete_platform_url = "<?=site_url('admin/game_platform/delete_screenshot_type/')?>" + platform_id;
-            window.location.href = delete_platform_url;
+            window.location.href = "<?=site_url('admin/screenshot_type/delete_screenshot_type')?>/" + ss_type_id;
         }
     </script>
 </div>

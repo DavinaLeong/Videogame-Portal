@@ -83,12 +83,12 @@
             <li><a href="<?=site_url('admin/screenshot/add_screenshot')?>"><i class="fa fa-plus"></i> Add
                 Screenshot</a></li>
             <li><a href="<?=site_url('admin/screenshot/browse_screenshot')?>"><i class="fa fa-file-text-o"></i> Browse
-                Screenshot</a></li>
+                Screenshots</a></li>
             <li class="divider" role="separator"></li>
             <li><a data-toggle="modal" data-target="#new_screenshot_type_modal" style="cursor: pointer;"><i class="fa fa-plus"></i> Add
                 Screenshot Type</a></li>
             <li><a href="<?=site_url('admin/screenshot_type/browse_screenshot_type')?>"><i class="fa fa-file-text-o"></i>
-                Browse Screenshot Type</a></li>
+                Browse Screenshot Types</a></li>
           </ul>
         </li>
       </ul>
@@ -125,17 +125,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">New Screenshot Type</h4>
+          <h4 class="modal-title">Add New Screenshot Type</h4>
         </div>
 
         <div class="modal-body">
 
-          <?php $this->load->view("admin/template_user_message"); ?>
-          <?php $this->load->view("admin/template_form_validation"); ?>
-
           <div class="form-group">
             <label for="ss_type_name">Name <span class="text-danger">*</span></label>
-            <input name="ss_type_name" class="form-control" type="text" placeholder="Name" data-parsley-maxlength="32" data-parsley-required/>
+            <input name="ss_type_name" class="form-control" type="text" placeholder="Name" data-parsley-maxlength="32" data-parsley-required />
           </div>
 
           <div class="form-group">

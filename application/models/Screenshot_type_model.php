@@ -78,6 +78,7 @@ class Screenshot_type_model extends CI_Model
     {
         $data = array(
             "ss_type_name" => $screenshot_type["ss_type_name"],
+            "ss_type_description" => $screenshot_type["ss_type_description"],
         );
 
         $this->db->insert(TABLE_SCREENSHOT_TYPE, $data);
@@ -88,10 +89,18 @@ class Screenshot_type_model extends CI_Model
     {
         $data = array(
             "ss_type_name" => $screenshot_type["ss_type_name"],
+            "ss_type_description" => $screenshot_type["ss_type_description"],
         );
 
-        $query = $this->db->update(TABLE_SCREENSHOT_TYPE, $data, array("ss_type_id" => $screenshot_type["ss_type_id"]));
-        return $query->affected_rows();
+        $this->db->update(TABLE_SCREENSHOT_TYPE, $data, array("ss_type_id" => $screenshot_type["ss_type_id"]));
+        return $this->db->affected_rows();
+    }
+
+    public function delete_by_id($ss_type_id=FALSE)
+    {
+        var_dump($ss_type_id);
+        $this->db->delete(TABLE_SCREENSHOT_TYPE, array("ss_type_id" => $ss_type_id));
+        return $this->db->affected_rows();
     }
 
 } //end Screenshot_type_model class

@@ -76,15 +76,15 @@ class Game_platform extends CI_Controller
             {
                 if($platform_id = $this->Game_platform_model->insert($this->_prepare_add_game_platform()))
                 {
-                    $this->session->set_userdata("message", "New Game Platform added.");
-                    $this->User_log_model->log_message("New user recorded added |  platform_id: " . $platform_id);
-                    $this->session->set_userdata("message", "Upload a Platform Logo, or click <b class='text-phrase'><i class='fa fa-ban'></i> Cancel</b> to cancel.");
+                    $this->session->set_userdata("message", "New Game Platform <mark>added</mark>.");
+                    $this->User_log_model->log_message("New user recorded ADDED |  platform_id: " . $platform_id);
+                    $this->session->set_userdata("message", "Upload a Platform Logo, or click <mark><i class='fa fa-ban'></i> Cancel</mark> to cancel.");
                     redirect("admin/game_platform/edit_game_platform/" . $platform_id);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "Unable to add new Game Platform.");
-                    $this->User_log_model->log_message("Unable to add new Game Platform.");
+                    $this->session->set_userdata("message", "<mark>Unable</mark> to add new Game Platform.");
+                    $this->User_log_model->log_message("Unable to ADD new Game Platform.");
                 }
             }
 
@@ -129,14 +129,14 @@ class Game_platform extends CI_Controller
         {
             if($this->Game_platform_model->delete_by_id($platform_id))
             {
-                $this->session->set_userdata("message", "Game Platform deleted successfully.");
-                $this->User_log_model->log_message("Game Platform deleted successfully. | platform_id: " . $platform_id);
+                $this->session->set_userdata("message", "Game Platform <mark>deleted</mark> successfully.");
+                $this->User_log_model->log_message("Game Platform DELETED successfully. | platform_id: " . $platform_id);
                 redirect("admin/game_platform/browse_game_platform");
             }
             else
             {
-                $this->session->set_userdata("message", "Unable to delete Game Platform record.");
-                $this->User_log_model->log_message("Unable to delete Game Platform record. | platform_id: " . $platform_id);
+                $this->session->set_userdata("message", "<mark>Unable</mark> to delete Game Platform record.");
+                $this->User_log_model->log_message("Unable to DELETE Game Platform record. | platform_id: " . $platform_id);
             }
         }
         else
@@ -175,14 +175,14 @@ class Game_platform extends CI_Controller
                 if($this->Game_platform_model->update($this->_prepare_edit_game_platform($game_platform) ) ||
                     $this->session->userdata("logo_upload_errors") == "")
                 {
-                    $this->session->set_userdata("message", "Game Platform record updated successfully.");
-                    $this->User_log_model->log_message("Game Platform record updated successfully. | platform_id: " . $platform_id);
+                    $this->session->set_userdata("message", "Game Platform record <mark>updated</mark> successfully.");
+                    $this->User_log_model->log_message("Game Platform record UPDATED successfully. | platform_id: " . $platform_id);
                     redirect("admin/game_platform/view_game_platform/" . $platform_id);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "An error has occured. Unable to update Game Platform record.");
-                    $this->User_log_model->log_message("Unable to update Game Platform record. | platform_id: " . $platform_id);
+                    $this->session->set_userdata("message", "An error has occured. <mark>Unable</mark> to update Game Platform record.");
+                    $this->User_log_model->log_message("Unable to UPDATE Game Platform record. | platform_id: " . $platform_id);
                 }
             }
 
