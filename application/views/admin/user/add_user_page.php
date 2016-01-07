@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
 	- File Info -
 		File name		: add_user_page.php
 		Author(s)		: DAVINA Leong Shi Yun
@@ -10,7 +10,8 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+**********************************************************************************/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 </head>
 <body>
     <div class="container">
-        <?php $this->load->view("admin/admin_navbar"); ?>
+        <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
         <div class="page-header">
             <h1><i class="text-info fa fa-plus"></i> Add New User <button name="browse" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
@@ -34,8 +35,8 @@
             </p>
         </div>
 
-        <?php $this->load->view("admin/template_user_message"); ?>
-        <?php $this->load->view("admin/template_form_validation"); ?>
+        <?php $this->load->view("admin/_templates/user_message_view"); ?>
+        <?php $this->load->view("admin/_templates/form_validation_view"); ?>
 
         <form class="form-horizontal" method="post" role="form" data-parsley-validate>
             <div class="row">
@@ -106,7 +107,7 @@
             </div>
         </form>
 
-        <?php $this->load->view("admin/admin_footer"); ?>
+        <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
     </div>
 
 </body>

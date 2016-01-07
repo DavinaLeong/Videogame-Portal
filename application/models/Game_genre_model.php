@@ -62,6 +62,7 @@ class Game_genre_model extends CI_Model
 
     public function get_all()
     {
+        $this->db->order_by("genre_name");
         $query = $this->db->get(TABLE_GAME_GENRE);
         return $query->result_array();
     }
@@ -74,7 +75,7 @@ class Game_genre_model extends CI_Model
 
     public function get_all_limit_offset($limit, $offset)
     {
-        $this->db->order_by("genre_id");
+        $this->db->order_by("genre_name");
         $query = $this->db->get(TABLE_GAME_GENRE, $limit, $offset);
         return $query->result_array();
     }
@@ -83,6 +84,7 @@ class Game_genre_model extends CI_Model
     {
         $data = array(
             "genre_name" => $game_genre["genre_name"],
+            "genre_abbr" => $game_genre["genre_abbr"],
         );
 
         $this->db->insert(TABLE_GAME_GENRE, $data);
@@ -93,10 +95,17 @@ class Game_genre_model extends CI_Model
     {
         $data = array(
             "genre_name" => $game_genre["genre_name"],
+            "genre_abbr" => $game_genre["genre_abbr"],
         );
 
-        $query = $this->db->update(TABLE_GAME_GENRE, $data, array("genre_id" => $game_genre["genre_id"]));
-        return $query->affected_rows();
+        $this->db->update(TABLE_GAME_GENRE, $data, array("genre_id" => $game_genre["genre_id"]));
+        return $this->db->affected_rows();
+    }
+
+    public function delete_by_id($genre_id=FALSE)
+    {
+        $this->db->delete(TABLE_GAME_GENRE, array("genre_id" => $genre_id));
+        return $this->db->affected_rows();
     }
     
 } //end Game_genre_model class

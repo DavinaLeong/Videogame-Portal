@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
 	- File Info -
 		File name		: browse_user_page.php
 		Author(s)		: DAVINA Leong Shi Yun
@@ -9,8 +9,9 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content © DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+	All content (c) DAVINA Leong Shi Yun. All Rights Reserved.
+**********************************************************************************/
+?>
 
 <?php
 /**
@@ -38,7 +39,7 @@
 </head>
 <body>
     <div class="container">
-        <?php $this->load->view("admin/admin_navbar"); ?>
+        <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
         <div class="page-header">
             <h1>
@@ -49,7 +50,7 @@
             </h1>
         </div>
 
-        <?php $this->load->view("admin/template_user_message"); ?>
+        <?php $this->load->view("admin/_templates/user_message_view"); ?>
 
         <div class="table-responsive">
             <table class="table table-hover" id="users_table">
@@ -142,7 +143,7 @@
         </div>
 
         <?php
-        $this->load->view("admin/admin_footer");
+        $this->load->view("admin/_templates/admin_footer_view");
         $this->load->view("templates/js_common");
         $this->load->view("templates/datatables_resources");
         ?>

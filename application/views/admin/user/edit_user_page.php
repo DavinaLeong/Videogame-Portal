@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
 	- File Info -
 		File name		: edit_user_page.php
 		Author(s)		: DAVINA Leong Shi Yun
@@ -10,7 +10,8 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 	All content © DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+**********************************************************************************/
+?>
 
 <?php
 /**
@@ -30,7 +31,7 @@
 </head>
 <body>
     <div class="container">
-        <?php $this->load->view("admin/admin_navbar"); ?>
+        <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
         <div class="page-header">
             <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User's Details</h1>
@@ -41,22 +42,22 @@
 
             <div class="btn-group" role="group" aria-label="actionButtonGroup">
                 <button name="browse" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
-                    <i class="fa fa-file-text-o"></i> Browse Users
+                    <i class="fa fa-file-text-o"></i> Browse
                 </button>
 
                 <button name="back" onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')"
                         class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add Another User
+                    <i class="fa fa-plus"></i> Add
                 </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-primary">
-                    <i class="fa fa-eye"></i> View User
+                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-default">
+                    <i class="fa fa-eye"></i> View
                 </button>
             </div>
         </div>
 
-        <?php $this->load->view("admin/template_user_message"); ?>
-        <?php $this->load->view("admin/template_form_validation"); ?>
+        <?php $this->load->view("admin/_templates/user_message_view"); ?>
+        <?php $this->load->view("admin/_templates/form_validation_view"); ?>
 
         <div class="row">
             <!-- Details Column -->
@@ -164,7 +165,7 @@
     </div>
 </div>
 
-        <?php $this->load->view("admin/admin_footer"); ?>
+        <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
     </div>
 
 </body>

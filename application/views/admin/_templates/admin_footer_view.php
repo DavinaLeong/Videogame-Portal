@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: meta_common.php
+		File name		: admin_footer_view.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 12 Dec 2015
 
@@ -13,7 +13,8 @@
 **********************************************************************************/
 ?>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Davina Leong">
+<div id="footer">
+    <hr/>
+	<?php date_default_timezone_set(DATETIMEZONE); ?>
+    <?=SITE_NAME?> &copy; <?=AUTHOR?>, <?=date("Y")?>
+</div>

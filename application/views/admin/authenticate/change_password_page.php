@@ -1,6 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
-	- File Info -
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
+    - File Info -
 		File name		: change_password_page.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 12 Dec 2015
@@ -9,8 +9,16 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content � DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+	All content (c) DAVINA Leong Shi Yun. All Rights Reserved.
+**********************************************************************************/
+?>
+
+<?php
+/**
+ * @var $user
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +31,7 @@
 </head>
 <body>
 <div class="container">
-    <?php $this->load->view("admin/admin_navbar"); ?>
+    <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
         <h1><i class="text-info fa fa-key"></i> Change <span class="text-info"><?=$user["name"]?>'s</span>
@@ -33,21 +41,9 @@
         </p>
     </div>
 
-    <?php if($this->session->userdata('message')):?>
-        <div class="alert alert-info" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-            </button>
-            <?=$this->session->userdata('message')?>
-        </div>
-        <?php $this->session->unset_userdata('message') ?>
-    <?php endif;?>
-    <?php if(validation_errors()):?>
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-            </button>
-            <?=validation_errors();?>
-        </div>
-    <?php endif;?>
+    <?php $this->load->view("admin/_templates/user_message_view"); ?>
+    <?php $this->load->view("admin/_templates/form_validation_view"); ?>
+
     <form class="form-horizontal" method="post" role="form" data-parsley-validate>
         <div class="row">
             <div class="col-md-10">
@@ -105,7 +101,7 @@
         </div>
     </form>
 
-    <?php $this->load->view("admin/admin_footer"); ?>
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
 
 </body>

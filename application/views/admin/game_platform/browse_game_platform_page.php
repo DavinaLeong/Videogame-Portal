@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
 	- File Info -
 		File name		: browse_user_page.php
 		Author(s)		: DAVINA Leong Shi Yun
@@ -9,12 +9,14 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content � DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+	All content (c) DAVINA Leong Shi Yun. All Rights Reserved.
+**********************************************************************************/
+?>
 
 <?php
 /**
  * @var $game_platforms
+ * @var $total_entries
  */
 ?>
 
@@ -30,11 +32,11 @@
 </head>
 <body>
 <div class="container">
-    <?php $this->load->view("admin/admin_navbar"); ?>
+    <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
         <h1>
-            <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms&nbsp;
+            <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms <span class="badge"><?=$total_entries?></span>&nbsp;
             <button onclick="window.location.replace('<?= site_url("admin/game_platform/add_game_platform/") ?>')" type="button"
                     class="btn btn-danger"><i class="fa
             fa-plus"></i> Add Game Platform
@@ -42,7 +44,7 @@
         </h1>
     </div>
 
-    <?php $this->load->view("admin/template_user_message"); ?>
+    <?php $this->load->view("admin/_templates/user_message_view"); ?>
 
     <div class="table-responsive">
         <table class="table table-hover" id="platform_table">
@@ -63,7 +65,7 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_platform["platform_name"]?></td>
-                    <td><span class="badge"><?=$game_platform["abbr"]?></span></td>
+                    <td><span class="label label-success"><?=$game_platform["abbr"]?></span></td>
                     <td>
                         <?php if($game_platform["logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
@@ -122,7 +124,7 @@
     </div>
 
     <?php
-    $this->load->view("admin/admin_footer");
+    $this->load->view("admin/_templates/admin_footer_view");
     $this->load->view("templates/js_common");
     $this->load->view("templates/datatables_resources");
     ?>

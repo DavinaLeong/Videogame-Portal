@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
 	- File Info -
 		File name		: new_game_platform_page.php
 		Author(s)		: DAVINA Leong Shi Yun
@@ -9,15 +9,13 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content � DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+	All content (c) DAVINA Leong Shi Yun. All Rights Reserved.
+**********************************************************************************/
+?>
 
 <?php
 /**
- * @var $users
- * @var $total_rows
- * @var $offset
- * @var $per_page
+ * @var $total_entries
  */
 ?>
 
@@ -33,7 +31,7 @@
 </head>
 <body>
 <div class="container">
-    <?php $this->load->view("admin/admin_navbar"); ?>
+    <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
         <h1><i class="text-info fa fa-plus"></i> New Game Platform <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')" class="btn btn-default">
@@ -44,8 +42,8 @@
         </p>
     </div>
 
-    <?php $this->load->view("admin/template_user_message"); ?>
-    <?php $this->load->view("admin/template_form_validation"); ?>
+    <?php $this->load->view("admin/_templates/user_message_view"); ?>
+    <?php $this->load->view("admin/_templates/form_validation_view"); ?>
 
     <form class="form-horizontal" method="post" role="form" data-parsley-validate>
         <div class="row">
@@ -54,28 +52,31 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">Platform Name <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="platform_name" placeholder="Platform Name" value="<?=set_value('Platform Name')?>" required data-parsley-maxlength="64"/>
+                        <input type="text" class="form-control" name="platform_name" placeholder="Platform Name <?=$total_entries?>" data-parsley-required data-parsley-maxlength="64"/>
+                        <span class="help-block">Limited to 64 characters.</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="abbr" class="col-sm-3 control-label">Abbreviation <span class="text-danger">*</span></label>
+                    <label for="abbr" class="col-sm-3 control-label">Abbr. <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" value="<?=set_value('Abbreviation')?>" required data-parsley-type="alphanum" data-parsley-maxlength="64"/>
+                        <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="16"/>
+                        <span class="help-block">Limited to 16 characters.</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="year_intro" class="col-sm-3 control-label">First Release (Year) <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="number" class="form-control" name="year_intro" placeholder="0" value="<?=set_value('0')?>" required data-parsley-type="digits" data-parsley-maxlength="4"/>
+                        <input type="number" class="form-control" name="year_intro" placeholder="0" data-parsley-required data-parsley-type="digits" data-parsley-maxlength="4"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="developer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="developer" placeholder="Developer" value="<?=set_value('Devloper')?>" data-parsley-maxlength="128"/>
+                        <input type="text" class="form-control" name="developer" placeholder="Developer" data-parsley-required data-parsley-maxlength="128"/>
+                        <span class="help-block">Limited to 128 characters.</span>
                     </div>
                 </div>
 
@@ -93,7 +94,7 @@
         </div>
     </form>
 
-    <?php $this->load->view("admin/admin_footer"); ?>
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
 
 </body>

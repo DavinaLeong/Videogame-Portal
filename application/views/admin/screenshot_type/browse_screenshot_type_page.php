@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!----------------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/**********************************************************************************
 	- File Info -
 		File name		: browse_screenshot_type_page.php
 		Author(s)		: DAVINA Leong Shi Yun
@@ -9,12 +9,14 @@
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
-	All content � DAVINA Leong Shi Yun. All Rights Reserved.
------------------------------------------------------------------------------------>
+	All content (c) DAVINA Leong Shi Yun. All Rights Reserved.
+**********************************************************************************/
+?>
 
 <?php
 /**
  * @var $screenshot_types
+ * @var $total_entries
  */
 ?>
 
@@ -30,17 +32,17 @@
 </head>
 <body>
 <div class="container">
-    <?php $this->load->view("admin/admin_navbar"); ?>
+    <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
         <h1>
-            <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms&nbsp;
+            <i class="text-info fa fa-file-text-o"></i> Browse Screenshot Types <span class="badge"><?=$total_entries?></span>&nbsp;
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#new_screenshot_type_modal">
-                <i class="fa fa-plus"></i> Add Game Platform</button>
+                <i class="fa fa-plus"></i> New Screenshot Type</button>
         </h1>
     </div>
 
-    <?php $this->load->view("admin/template_user_message"); ?>
+    <?php $this->load->view("admin/_templates/user_message_view"); ?>
 
     <div class="table-responsive">
         <table class="table table-hover" id="ss_type_table">
@@ -81,6 +83,45 @@
         </table>
     </div>
 
+    <!-- New Screenshot Type Modal -->
+    <div class="modal fade" id="new_screenshot_type_modal">
+        <div class="modal-dialog">
+
+            <form method="post" action="<?=site_url('admin/screenshot_type/new_screenshot_type')?>" data-parsley-validate>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add New Screenshot Type</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="ss_type_name">Name <span class="text-danger">*</span></label>
+                            <input name="ss_type_name" class="form-control" type="text" placeholder="Name" data-parsley-maxlength="32" data-parsley-required />
+                            <span class="help-block">Limited to 32 characters.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ss_type_description">Description</label>
+                            <input name="ss_type_description" class="form-control" type="text" placeholder="Short description of Screenshot Type" data-parsley-maxlength="128" />
+                            <span class="help-block">Limited to 128 characters.</span>
+                        </div>
+
+                        <p class="text-danger text-right">* required fields</p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"><i
+                                class="fa fa-check"></i> Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </form>
+
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <!-- Confirm Delete Modal -->
     <div class="modal fade" id="confirm_delete_modal">
         <div class="modal-dialog">
@@ -102,7 +143,7 @@
     </div><!-- /.modal -->
 
     <?php
-    $this->load->view("admin/admin_footer");
+    $this->load->view("admin/_templates/admin_footer_view");
     $this->load->view("templates/js_common");
     $this->load->view("templates/datatables_resources");
     ?>

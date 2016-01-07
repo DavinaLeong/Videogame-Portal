@@ -91,3 +91,8 @@ body
     color: #ccc;
     font-size: 12pt;
 }
+
+.label
+{
+    text-transform: uppercase;
+}

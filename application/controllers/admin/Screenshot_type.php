@@ -70,7 +70,8 @@ class Screenshot_type extends CI_Controller
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
             $data = array(
-                "screenshot_types" => $this->Screenshot_type_model->get_all()
+                "screenshot_types" => $this->Screenshot_type_model->get_all(),
+                "total_entries" => $this->Screenshot_type_model->count_all()
             );
 
             $this->load->view("admin/screenshot_type/browse_screenshot_type_page", $data);
@@ -94,7 +95,6 @@ class Screenshot_type extends CI_Controller
                 {
                     $this->User_log_model->log_message("New Screenshot Type CREATED successfully. | ss_type_id: " . $ss_type_id);
                     $this->session->set_userdata("message" , "New Screenshot Type <mark>created</mark> successfully.");
-                    redirect("/admin/screenshot_type/browse_screenshot_type");
                 }
                 else
                 {
@@ -102,6 +102,8 @@ class Screenshot_type extends CI_Controller
                     $this->session->set_userdata("message" , "Unable to CREATE new Screenshot Type.");
                 }
             }
+
+            redirect("/admin/screenshot_type/browse_screenshot_type");
         }
         else
         {
