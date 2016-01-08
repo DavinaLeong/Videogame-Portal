@@ -89,7 +89,7 @@
                             <div class="form-group">
                                 <label for="abbr" class="col-sm-3 control-label">Abbreviation</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" value="<?=$game_platform["abbr"]?>" data-parsley-type="alphanum" data-parsley-maxlength="64"/>
+                                    <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" value="<?=$game_platform["platform_abbr"]?>" data-parsley-type="alphanum" data-parsley-maxlength="64"/>
                                 </div>
                             </div>
 
@@ -103,7 +103,7 @@
                             <div class="form-group">
                                 <label for="developer" class="col-sm-3 control-label">Platform Developer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="developer" placeholder="Developer" value="<?=$game_platform["developer"]?>" data-parsley-maxlength="128"/>
+                                    <input type="text" class="form-control" name="developer" placeholder="Developer" value="<?=$game_platform["platform_developer"]?>" data-parsley-maxlength="128"/>
                                 </div>
                             </div>
 
@@ -124,7 +124,7 @@
             <div class="col-md-3">
                 <div class="well well-sm" style="background-color: transparent;">
                     <p><b>Upload Logo</b></p>
-                    <div class="image-preview"><img src="<?=site_url('uploads/' . $game_platform['logo_url'])?>" alt="<?=$game_platform['platform_name']?> avatar" /></div>
+                    <div class="image-preview"><img src="<?=site_url('uploads/' . $game_platform['platform_logo_url'])?>" alt="<?=$game_platform['platform_name']?> avatar" /></div>
                     <?php if($this->session->userdata("logo_upload_errors")): ?>
                         <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
                     <?php endif; ?>

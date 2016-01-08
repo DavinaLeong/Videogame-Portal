@@ -100,4 +100,14 @@ class Videogame_model extends CI_Model
         return $query->affected_rows();
     }
 
+    public function get_all_genre_platform()
+    {
+        $sql = "SELECT * FROM videogames
+LEFT JOIN game_genre ON game_genre.genre_id = videogames.genre_id
+LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id;";
+
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 } //end Videogame_model class

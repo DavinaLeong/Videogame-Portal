@@ -70,23 +70,15 @@
             </div>
         </div>
 
-        <?php $this->load->view("admin/template_user_message"); ?>
+        <?php $this->load->view("admin/_templates/user_message_view"); ?>
 
-        <h2>
-            <?php
-            echo $game_platform["platform_name"];
-            if($game_platform["abbr"])
-            {
-                echo '&nbsp;<span class="badge">' . $game_platform['abbr'] . '</span>';
-            }
-            ?>
-        </h2>
+        <h2><?=$game_platform["platform_name"];?></h2>
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="row">
                     <div class="image-preview">
-                        <?php if($game_platform["logo_url"]): ?>
-                            <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar"/>
+                        <?php if($game_platform["platform_logo_url"]): ?>
+                            <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["platform_logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar"/>
                         <?php else: ?>
                             <span class="text-placeholder">No logo</span>
                         <?php endif; ?>
@@ -100,12 +92,16 @@
                             <td><span class="text-placeholder-left"><?= $game_platform["platform_id"] ?></span></td>
                         </tr>
                         <tr>
+                            <th>Platform Abbr:</th>
+                            <td><span class="label label-success"><?= $game_platform["platform_abbr"] ?></span></td>
+                        </tr>
+                        <tr>
                             <th>Platform Developer:</th>
                             <td>
-                                <?php if($game_platform["developer"] == "none"): ?>
-                                    <span class="text-placeholder-left"><?=$game_platform["developer"]?></span>
-                                <?php elseif($game_platform["developer"]):
-                                    echo $game_platform["developer"];
+                                <?php if($game_platform["platform_developer"] == "none"): ?>
+                                    <span class="text-placeholder-left"><?=$game_platform["platform_developer"]?></span>
+                                <?php elseif($game_platform["platform_developer"]):
+                                    echo $game_platform["platform_developer"];
                                 else:
                                     ?>
                                     <span class="text-placeholder">NA</span>

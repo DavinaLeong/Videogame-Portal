@@ -29,6 +29,12 @@
     ?>
 
     <title>Video Game Portal Admin</title>
+
+    <style type="text/css">
+        .button-col {
+            width: 30%;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -37,7 +43,7 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms <span class="badge"><?=$total_entries?></span>&nbsp;
-            <button onclick="window.location.replace('<?= site_url("admin/game_platform/add_game_platform/") ?>')" type="button"
+            <button onclick="window.location.replace('<?= site_url("admin/game_platform/new_game_platform/") ?>')" type="button"
                     class="btn btn-danger"><i class="fa
             fa-plus"></i> Add Game Platform
             </button>
@@ -56,7 +62,7 @@
                 <th>Platform Logo</th>
                 <th>Platform Developer</th>
                 <th>First Release (Year)</th>
-                <th>&nbsp;</th>
+                <th class="button-col">&nbsp;</th>
             </tr>
             </thead>
 
@@ -65,19 +71,19 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_platform["platform_name"]?></td>
-                    <td><span class="label label-success"><?=$game_platform["abbr"]?></span></td>
+                    <td><span class="label label-success" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
                     <td>
-                        <?php if($game_platform["logo_url"]): ?>
-                            <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
+                        <?php if($game_platform["platform_logo_url"]): ?>
+                            <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["platform_logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
                         <?php else: ?>
                             <span class="text-placeholder">No logo</span>
                         <?php endif; ?>
                     </td>
                     <td>
-                        <?php if($game_platform["developer"] == "none"): ?>
-                            <span class="text-placeholder"><?=$game_platform["developer"]?></span>
-                        <?php elseif($game_platform["developer"]):
-                            echo $game_platform["developer"];
+                        <?php if($game_platform["platform_developer"] == "none"): ?>
+                            <span class="text-placeholder"><?=$game_platform["platform_developer"]?></span>
+                        <?php elseif($game_platform["platform_developer"]):
+                            echo $game_platform["platform_developer"];
                         else:
                             ?>
                             <span class="text-placeholder-left">NA</span>

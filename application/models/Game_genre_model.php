@@ -85,6 +85,7 @@ class Game_genre_model extends CI_Model
         $data = array(
             "genre_name" => $game_genre["genre_name"],
             "genre_abbr" => $game_genre["genre_abbr"],
+            "genre_label_col" => $game_genre["genre_label_col"]
         );
 
         $this->db->insert(TABLE_GAME_GENRE, $data);
@@ -96,6 +97,7 @@ class Game_genre_model extends CI_Model
         $data = array(
             "genre_name" => $game_genre["genre_name"],
             "genre_abbr" => $game_genre["genre_abbr"],
+            "genre_label_col" => $game_genre["genre_label_col"]
         );
 
         $this->db->update(TABLE_GAME_GENRE, $data, array("genre_id" => $game_genre["genre_id"]));

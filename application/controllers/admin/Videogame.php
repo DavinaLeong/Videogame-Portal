@@ -73,7 +73,20 @@ class Videogame extends CI_Controller
 
     public function browse_videogame()
     {
-        show_error("browse_videogame not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $data = array(
+                "videogames" => $this->Videogame_model->get_all_genre_platform(),
+                "total_entries" => count($this->Videogame_model->get_all_genre_platform())
+            );
+
+            $this->load->view("admin/videogame/browse_videogame_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
     }
 
     public function view_videogame()

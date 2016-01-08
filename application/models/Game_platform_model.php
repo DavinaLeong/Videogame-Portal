@@ -85,9 +85,10 @@ class Game_platform_model extends CI_Model
         $data = array(
             "platform_name" => $game_platform["platform_name"],
             "year_intro" => $game_platform["year_intro"],
-            "developer" => $game_platform["developer"],
-            "logo_url" => "platform_logo/default_logo.png",
-            "abbr" => $game_platform["abbr"]
+            "platform_developer" => $game_platform["platform_developer"],
+            "platform_logo_url" => $game_platform["platform_logo_url"],
+            "platform_abbr" => $game_platform["platform_abbr"],
+            "platform_logo_col" => $game_platform["platform_logo_col"]
         );
 
         $this->db->insert(TABLE_GAME_PLATFORM, $data);
@@ -99,8 +100,10 @@ class Game_platform_model extends CI_Model
         $data = array(
             "platform_name" => $game_platform["platform_name"],
             "year_intro" => $game_platform["year_intro"],
-            "developer" => $game_platform["developer"],
-            "abbr" => $game_platform["abbr"]
+            "platform_developer" => $game_platform["platform_developer"],
+            "platform_logo_url" => $game_platform["platform_logo_url"],
+            "platform_abbr" => $game_platform["platform_abbr"],
+            "platform_logo_col" => $game_platform["platform_logo_col"]
         );
 
         $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
@@ -110,7 +113,7 @@ class Game_platform_model extends CI_Model
     public function update_logo_url($game_platform=FALSE)
     {
         $data = array(
-            "logo_url" => $game_platform["logo_url"],
+            "platform_logo_url" => $game_platform["platform_logo_url"],
         );
 
         $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
