@@ -62,7 +62,7 @@ class Game_platform_model extends CI_Model
 
     public function get_all()
     {
-        $this->db->order_by("year_intro", "DESC");
+        $this->db->order_by("platform_name");
         $query = $this->db->get(TABLE_GAME_PLATFORM);
         return $query->result_array();
     }
@@ -88,7 +88,7 @@ class Game_platform_model extends CI_Model
             "platform_developer" => $game_platform["platform_developer"],
             "platform_logo_url" => $game_platform["platform_logo_url"],
             "platform_abbr" => $game_platform["platform_abbr"],
-            "platform_logo_col" => $game_platform["platform_logo_col"]
+            "platform_label_col" => $game_platform["platform_label_col"]
         );
 
         $this->db->insert(TABLE_GAME_PLATFORM, $data);
@@ -103,7 +103,7 @@ class Game_platform_model extends CI_Model
             "platform_developer" => $game_platform["platform_developer"],
             "platform_logo_url" => $game_platform["platform_logo_url"],
             "platform_abbr" => $game_platform["platform_abbr"],
-            "platform_logo_col" => $game_platform["platform_logo_col"]
+            "platform_label_col" => $game_platform["platform_label_col"]
         );
 
         $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));

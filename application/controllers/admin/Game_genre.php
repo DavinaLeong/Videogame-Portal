@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 /**
@@ -178,6 +178,7 @@ class Game_genre extends CI_Controller
     {
         $game_genre["genre_name"] = $this->input->post("genre_name");
         $game_genre["genre_abbr"] = $this->input->post("genre_abbr");
+        $game_genre["genre_label_col"] = "5BC0DE";
         return $game_genre;
     }
 
@@ -199,5 +200,5 @@ class Game_genre extends CI_Controller
         $this->form_validation->set_rules("genre_name", "Game Genre Name", "trim|required|max_length[32]");
         $this->form_validation->set_rules("genre_abbr", "Game Genre Abbr", "trim|required|max_length[32]");
     }
-    
+
 } //end Game_genre controller class

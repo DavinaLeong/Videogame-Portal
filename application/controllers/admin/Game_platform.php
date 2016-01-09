@@ -207,7 +207,7 @@ class Game_platform extends CI_Controller
             ["abbr"] . "_logo"), "./uploads/platform_logo/", "gif|jpg|png");
         $this->load->library("upload", $upload_config);
 
-        if ($this->upload->do_upload("logo_url"))
+        if ($this->upload->do_upload("platform_logo_url"))
         {
             //Get new uploaded file data
             $file_upload_data = $this->upload->data();
@@ -216,11 +216,11 @@ class Game_platform extends CI_Controller
             if ($platform["logo_url"])
             {
                 $this->load->helper("file");
-                delete_files("./uploads/platform_logo/" . $platform["logo_url"]);
+                delete_files("./uploads/platform_logo/" . $platform["platform_logo_url"]);
             }
 
             //Update database with new image url
-            $platform["logo_url"] = "platform_logo/" . $file_upload_data["file_name"];
+            $platform["platform_logo_url"] = "platform_logo/" . $file_upload_data["file_name"];
             $this->Game_platform_model->update_logo_url($platform);
 
             $this->session->set_userdata("message", "Logo uploaded successfully.");
@@ -239,19 +239,20 @@ class Game_platform extends CI_Controller
 
     private function _add_game_platform_validation_rules()
     {
-        $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
+        $this->form_validation->set_rules("platform_name", "Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("year_intro", "Year Introduced", "trim|required|is_natural");
-        $this->form_validation->set_rules("developer", "Developer", "trim|max_length[128]");
-        $this->form_validation->set_rules("abbr", "Abbreviation", "trim|required|alpha_numeric|max_length[16]");
+        $this->form_validation->set_rules("platform_developer", "Developer", "trim|max_length[128]");
+        $this->form_validation->set_rules("platform_abbr", "Abbreviation", "trim|required|alpha_numeric|max_length[16]");
     }
 
     private function _prepare_add_game_platform()
     {
         $game_platform["platform_name"] = $this->input->post("platform_name");
         $game_platform["year_intro"] = $this->input->post("year_intro");
-        $game_platform["developer"] = $this->input->post("developer");
-        $game_platform["abbr"] = $this->input->post("abbr");
-        $game_platform["logo_url"] = "platform_logo/default_logo.png";
+        $game_platform["platform_developer"] = $this->input->post("platform_developer");
+        $game_platform["platform_abbr"] = $this->input->post("platform_abbr");
+        $game_platform["platform_logo_url"] = "platform_logo/default_logo.png";
+        $game_platform["platform_logo_col"] = "5CB85C";
         return $game_platform;
     }
 
@@ -259,16 +260,16 @@ class Game_platform extends CI_Controller
     {
         $this->form_validation->set_rules("platform_name", "Platform Name", "trim|max_length[64]");
         $this->form_validation->set_rules("year_into", "Year Introduced", "trim|is_natural");
-        $this->form_validation->set_rules("developer", "Developer", "trim|max_length[128]");
-        $this->form_validation->set_rules("abbr", "Abbreviation", "trim|alpha_numeric|max_length[16]");
+        $this->form_validation->set_rules("platform_developer", "Developer", "trim|max_length[128]");
+        $this->form_validation->set_rules("platform_abbr", "Abbreviation", "trim|alpha_numeric|max_length[16]");
     }
 
     private function _prepare_edit_game_platform($game_platform)
     {
         $game_platform["platform_name"] = $this->input->post("platform_name");
         $game_platform["year_intro"] = $this->input->post("year_intro");
-        $game_platform["developer"] = $this->input->post("developer");
-        $game_platform["abbr"] = $this->input->post("abbr");
+        $game_platform["platform_developer"] = $this->input->post("platform_developer");
+        $game_platform["platform_abbr"] = $this->input->post("platform_abbr");
         return $game_platform;
     }
 

@@ -50,7 +50,7 @@
             <div class="col-md-10">
 
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">Platform Name <span class="text-danger">*</span></label>
+                    <label for="platform_name" class="col-sm-3 control-label">Platform Name <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="platform_name" placeholder="Platform Name <?=$total_entries?>" data-parsley-required data-parsley-maxlength="64"/>
                         <span class="help-block">Limited to 64 characters.</span>
@@ -58,9 +58,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="abbr" class="col-sm-3 control-label">Abbr. <span class="text-danger">*</span></label>
+                    <label for="platform_abbr" class="col-sm-3 control-label">Abbr. <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="16"/>
+                        <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="16"/>
                         <span class="help-block">Limited to 16 characters.</span>
                     </div>
                 </div>
@@ -73,9 +73,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="developer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
+                    <label for="platform_developer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="developer" placeholder="Developer" data-parsley-required data-parsley-maxlength="128"/>
+                        <input type="text" class="form-control" name="platform_developer" placeholder="Developer" data-parsley-required data-parsley-maxlength="128"/>
                         <span class="help-block">Limited to 128 characters.</span>
                     </div>
                 </div>

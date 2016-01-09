@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 /**
@@ -66,9 +66,25 @@ class Videogame extends CI_Controller
         redirect("/admin/videogame/browse_videogame");
     }
 
-    public function add_videogame()
+    public function new_videogame()
     {
-        show_error("add_videogame not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $this->load->model("Game_genre_model");
+            $this->load->model("Game_platform_model");
+
+            $data = array(
+                "game_genres" => $this->Game_genre_model->get_all(),
+                "game_platforms" => $this->Game_platform_model->get_all()
+            );
+
+            $this->load->view("admin/videogame/new_videogame_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
     }
 
     public function browse_videogame()
@@ -91,12 +107,17 @@ class Videogame extends CI_Controller
 
     public function view_videogame()
     {
-        show_error("view_videogame not implemented");
+        show_error("<b>view_videogame</b> not implemented");
     }
 
     public function edit_videogame()
     {
-        show_error("edit_videogame not implemented");
+        show_error("<b>edit_videogame</b> not implemented");
+    }
+
+    public function delete_videogame()
+    {
+        show_error("<b>delete_videogame</b> not implemented");
     }
 
 } //end Videogame controller class

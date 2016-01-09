@@ -13,12 +13,33 @@
 ***********************************************************************************/
 class Common_functions
 {
-    public function log_message($uid, $message="")
+    public function _error_not_implemented($func_name)
     {
-        $this->load->model("User_model");
-        $this->load->model("User_log_model");
-
-        $user = $this->User_model->get_by_uid($uid);
-        $this->User_log_model->log_message("User | " . $user["uid"] . " | " .  $user["username"] . " " . $message);
+        show_error("<b>" . $func_name . "</b> not implementd.");
     }
+
+    public function _error_not_implemented_dialogue($func_name, $error = "Error Name")
+    {
+        echo "<div style='margin: 10px; padding: 10px; border: thin solid #600; background-color: #fee; border-radius: 5px; font-family: consolas, \"Courier New\", monotype'>" .
+                "\t<h4 style='color: darkRed;'>" . $error . ":</h4>" .
+                "\t<p><strong style='color: darkRed;'>" . $func_name . "</strong> not implemented.</p>" .
+            "</div>";
+    }
+
+    public function _do_var_dump($var, $var_name = "Variable Name")
+    {
+        echo "<div style='margin: 10px; padding: 10px; border: thin solid #ccc; background-color: #eee; border-radius: 5px; font-family: consolas, \"Courier New\", monotype'>" .
+                "<h4>var_dump - " . $var_name . ":</h4>";
+        var_dump($var);
+        echo "</div>";
+    }
+
+    public function _do_var_export($var, $var_name = "Variable Name", $start_tag = "<p>", $end_tag = "</p>")
+    {
+        echo "<div style='margin: 10px; padding: 10px; border: thin solid #ccc; background-color: #eee; border-radius: 5px;'>" .
+                "<h4>var_export - " . $var_name . ":</h4>" . $start_tag;
+        var_export($var);
+        echo $end_tag . "</div>";
+    }
+
 } //end Common_functions class

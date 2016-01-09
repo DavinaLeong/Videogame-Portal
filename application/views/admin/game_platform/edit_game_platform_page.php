@@ -73,7 +73,7 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-3 control-label">Platform ID</label>
+                                <label for="platform_id" class="col-sm-3 control-label">Platform ID</label>
                                 <div class="col-sm-9">
                                     <p class="form-control-static"><?=$game_platform["platform_id"]?></p>
                                 </div>
@@ -87,9 +87,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="abbr" class="col-sm-3 control-label">Abbreviation</label>
+                                <label for="platform_abbr" class="col-sm-3 control-label">Abbreviation</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="abbr" placeholder="Abbreviation" value="<?=$game_platform["platform_abbr"]?>" data-parsley-type="alphanum" data-parsley-maxlength="64"/>
+                                    <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" value="<?=$game_platform["platform_abbr"]?>" data-parsley-type="alphanum" data-parsley-maxlength="64"/>
                                 </div>
                             </div>
 
@@ -101,9 +101,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="developer" class="col-sm-3 control-label">Platform Developer</label>
+                                <label for="platform_developer" class="col-sm-3 control-label">Platform Developer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="developer" placeholder="Developer" value="<?=$game_platform["platform_developer"]?>" data-parsley-maxlength="128"/>
+                                    <input type="text" class="form-control" name="platform_developer" placeholder="Developer" value="<?=$game_platform["platform_developer"]?>" data-parsley-maxlength="128"/>
                                 </div>
                             </div>
 
@@ -148,9 +148,9 @@
                         </div>
 
                         <div class="modal-body">
-                            <label><br/>Image cannot be more than <span class="text-danger">200px wide</span>
+                            <label >Image cannot be more than <span class="text-danger">200px wide</span>
                                 and <span class="text-danger">200px tall</span>.</label>
-                            <input type="file" class="form-control" id="logo_url" name="logo_url"
+                            <input type="file" class="form-control" id="platform_logo_url" name="platform_logo_url"
                                    placeholder="image url">
 
                             <?php if($this->session->userdata("logo_upload_errors")): ?>
