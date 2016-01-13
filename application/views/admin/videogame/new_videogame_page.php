@@ -15,8 +15,8 @@
 
 <?php
 /**
- * @var game_genres
- * @var game_platforms
+ * @var $game_genres
+ * @var $game_platforms
  */
 ?>
 
@@ -92,8 +92,15 @@
                     <div class="form-group">
                         <label for="date_purchased" class="col-sm-3 control-label">Date Purchased <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" id="date_purchased" class="form-control" name="date_purchased" placeholder="dd-mm-yyyy" required data-parsley-maxlength="64"/>
+                            <?php date_default_timezone_set(DATETIMEZONE); ?>
+                            <input type="text" id="date_purchased" class="form-control" name="date_purchased" value="<?=date("d-m-Y");?>" placeholder="dd-mm-yyyy" required data-parsley-maxlength="64"/>
                         </div>
+                    </div>
+
+                    <div class="col-sm-9 checkbox">
+                        <label>
+                            <input type="checkbox" name="from_steam[]"> Steam Purchase
+                        </label>
                     </div>
 
                     <div class="col-sm-9 col-sm-offset-3">

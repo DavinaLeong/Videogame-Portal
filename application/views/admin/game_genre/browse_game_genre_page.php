@@ -71,7 +71,7 @@
                     <?php if (strtolower($game_genre["genre_abbr"]) == "none"): ?>
                         <span class="text-placeholder"><?=$game_genre["genre_abbr"]?></span>
                     <?php elseif ($game_genre["genre_abbr"]): ?>
-                        <span class="badge" style="background: #<?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
+                        <span class="label" style="background: #<?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
                     <?php else: ?>
                         <span class="text-placeholder">no abbr</span>
                     <?php endif; ?>

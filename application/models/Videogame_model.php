@@ -80,7 +80,8 @@ class Videogame_model extends CI_Model
             "vg_name" => $videogame["vg_name"],
             "genre_id" => $videogame["genre_id"],
             "platform_id" => $videogame["platform_id"],
-            "ss_id" => $videogame["ss_id"]
+            "date_purchased" => $videogame["date_purchased"],
+            "from_steam" => $videogame["from_steam"]
         );
 
         $this->db->insert(TABLE_VIDEOGAMES, $data);
@@ -93,7 +94,8 @@ class Videogame_model extends CI_Model
             "vg_name" => $videogame["vg_name"],
             "genre_id" => $videogame["genre_id"],
             "platform_id" => $videogame["platform_id"],
-            "ss_id" => $videogame["ss_id"]
+            "date_purchased" => $videogame["date_purchased"],
+            "from_steam" => $videogame["from_steam"]
         );
 
         $query = $this->db->update(TABLE_VIDEOGAMES, $data, array("vg_id" => $videogame["vg_id"]));
@@ -104,10 +106,21 @@ class Videogame_model extends CI_Model
     {
         $sql = "SELECT * FROM videogames
 LEFT JOIN game_genre ON game_genre.genre_id = videogames.genre_id
-LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id;";
+LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id";
 
         $query = $this->db->query($sql);
         return $query->result_array();
+    }
+
+    public function get_by_id_genre_platform($vg_id=FALSE)
+    {
+        $sql = "SELECT * FROM videogames
+LEFT JOIN game_genre ON game_genre.genre_id = videogames.genre_id
+LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id
+WHERE videogames.vg_id = ?";
+
+        $query = $this->db->query($sql, array((int) $vg_id));
+        return $query->row_array();
     }
 
 } //end Videogame_model class

@@ -93,7 +93,7 @@
                         </tr>
                         <tr>
                             <th>Platform Abbr:</th>
-                            <td><span class="label label-success"><?= $game_platform["platform_abbr"] ?></span></td>
+                            <td><span class="badge" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
                         </tr>
                         <tr>
                             <th>Platform Developer:</th>

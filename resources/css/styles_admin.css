@@ -92,6 +92,18 @@ body
     font-size: 12pt;
 }
 
+.box-placeholder
+{
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    color: #00f;
+    border: thin dashed #00f;
+    height: 100px;
+    margin: 10px auto;
+    font-style: italic;
+}
+
 .label
 {
     text-transform: uppercase;

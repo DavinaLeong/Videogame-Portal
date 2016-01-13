@@ -55,7 +55,6 @@
                 <th>Platform</th>
                 <th>Genre</th>
                 <th>Logo</th>
-                <th>Developer</th>
                 <th>Date Purchased</th>
                 <th>&nbsp;</th>
             </tr>
@@ -66,8 +65,8 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$videogame["vg_name"]?></td>
-                    <td><span class="label" style="background: #<?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span></td>
-                    <td><span class="badge" style="background: #<?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
+                    <td><span class="badge" style="background: #<?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span></td>
+                    <td><span class="label" style="background: #<?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
                     <td>
                         <?php if($videogame["platform_logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $videogame["platform_logo_url"])?>" alt="<?=$videogame['platform_abbr']?>_logo" width="50px" height="50px"/>
@@ -75,28 +74,17 @@
                             <span class="text-placeholder">No logo</span>
                         <?php endif; ?>
                     </td>
-                    <td>
-                        <?php if($videogame["platform_developer"] == "none"): ?>
-                            <span class="text-placeholder"><?=$videogame["platform_developer"]?></span>
-                        <?php elseif($videogame["platform_developer"]):
-                            echo $videogame["platform_developer"];
-                        else:
-                            ?>
-                            <span class="text-placeholder-left">NA</span>
-                        <?php endif; ?>
-                    </td>
 
                     <td>
-                        <?php if($videogame["year_intro"] == "0"): ?>
-                            <span class="text-placeholder-left"><?= $videogame["year_intro"] ?></span>
-                        <?php else: ?>
-                            <?= $videogame["year_intro"] ?>
-                        <?php endif; ?>
+                    <?php
+                    $date_purchased = new DateTime($videogame["date_purchased"], new DateTimeZone(DATETIMEZONE));
+                    echo $date_purchased->format("d M Y");
+                    ?>
                     </td>
 
                     <td class="button-col">
-                        <button name="view" onclick="window.location.replace('<?=site_url("admin/game_videogame/view_game_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_videogame/edit_game_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        <button name="view" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/edit_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                         <button name="delete" onclick="onDeleteButtonClicked(<?=$videogame['vg_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                     </td>
                 </tr>

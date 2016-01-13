@@ -71,7 +71,7 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_platform["platform_name"]?></td>
-                    <td><span class="label label-success" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
+                    <td><span class="badge" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
                     <td>
                         <?php if($game_platform["platform_logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["platform_logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
