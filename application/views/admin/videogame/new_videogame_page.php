@@ -97,9 +97,9 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-9 checkbox">
+                    <div class="col-sm-9 col-sm-offset-3 checkbox">
                         <label>
-                            <input type="checkbox" name="from_steam[]"> Steam Purchase
+                            <input type="checkbox" name="from_steam"> Steam Purchase
                         </label>
                     </div>
 

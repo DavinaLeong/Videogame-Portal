@@ -73,7 +73,7 @@ class Authenticate extends CI_Controller
         // Check if there is an existing session
         if($this->session->userdata("uid") || $this->session->userdata("access"))
         {
-            $this->User_log_model->log_message("User has been logged out. | uid: " . $this->session->userdata("uid"));
+            $this->User_log_model->log_message("User has been LOGGED OUT. | uid: " . $this->session->userdata("uid"));
             $this->session->unset_userdata("uid");
             $this->session->unset_userdata("access");
             $this->session->unset_userdata("name");
@@ -101,7 +101,7 @@ class Authenticate extends CI_Controller
     public function logout()
     {
         $this->session->set_userdata("message", "You've logged out.");
-        $this->User_log_model->log_message("User has logged out. | uid: " . $this->session->userdata("uid"));
+        $this->User_log_model->log_message("User has LOOGED OUT. | uid: " . $this->session->userdata("uid"));
         redirect("/admin/authenticate/login");
     }
 
@@ -133,7 +133,7 @@ class Authenticate extends CI_Controller
                     else
                     {
                         $this->session->set_userdata("message", "An error has occured. Please try a different password or contact the administrator.");
-                        $this->User_log_model->log_message("ERR: An error has occured. Please try a different password or contact the administrator.");
+                        $this->User_log_model->log_message("ERR: Unable to UPDATE user's passeord.");
                     }
                 }
                 else

@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 /**
@@ -106,7 +106,8 @@ class Videogame_model extends CI_Model
     {
         $sql = "SELECT * FROM videogames
 LEFT JOIN game_genre ON game_genre.genre_id = videogames.genre_id
-LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id";
+LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id
+ORDER BY videogames.vg_name";
 
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -121,6 +122,12 @@ WHERE videogames.vg_id = ?";
 
         $query = $this->db->query($sql, array((int) $vg_id));
         return $query->row_array();
+    }
+
+    public function delete_by_id($vg_id=FALSE)
+    {
+        $this->db->delete(TABLE_VIDEOGAMES, array("vg_id" => $vg_id));
+        return $this->db->affected_rows();
     }
 
 } //end Videogame_model class

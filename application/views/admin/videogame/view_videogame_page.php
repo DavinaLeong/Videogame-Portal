@@ -124,7 +124,16 @@
                             <tr>
                                 <th>Bought from Steam:</th>
                                 <td>
-                                    Yes / No
+                                    <?php
+                                    if($videogame["from_steam"])
+                                    {
+                                        echo "Yes";
+                                    }
+                                    else
+                                    {
+                                        echo "No";
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         </table>

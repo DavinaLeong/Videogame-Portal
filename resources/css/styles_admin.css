@@ -99,7 +99,7 @@ body
     vertical-align: middle;
     color: #00f;
     border: thin dashed #00f;
-    height: 100px;
+    height: 480px;
     margin: 10px auto;
     font-style: italic;
 }
@@ -107,4 +107,9 @@ body
 .label
 {
     text-transform: uppercase;
+}
+
+.divider-space
+{
+    height: 30px;
 }

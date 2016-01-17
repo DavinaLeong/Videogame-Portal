@@ -37,7 +37,7 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Videogames <span class="badge"><?=$total_entries?></span>&nbsp;
-            <button onclick="window.location.replace('<?= site_url("admin/game_videogame/new_game_videogame/") ?>')" type="button"
+            <button onclick="window.location.replace('<?= site_url("admin/videogame/new_videogame/") ?>')" type="button"
                     class="btn btn-danger"><i class="fa
             fa-plus"></i> Add Game videogame
             </button>
@@ -56,6 +56,7 @@
                 <th>Genre</th>
                 <th>Logo</th>
                 <th>Date Purchased</th>
+                <th>Steam Purchase</th>
                 <th>&nbsp;</th>
             </tr>
             </thead>
@@ -74,14 +75,25 @@
                             <span class="text-placeholder">No logo</span>
                         <?php endif; ?>
                     </td>
-
                     <td>
                     <?php
                     $date_purchased = new DateTime($videogame["date_purchased"], new DateTimeZone(DATETIMEZONE));
                     echo $date_purchased->format("d M Y");
                     ?>
                     </td>
-
+                    <td>
+                        <?php
+                        if($videogame["from_steam"] )
+                        {
+                            echo "Yes";
+                        }
+                        else
+                        {
+                            echo "No";
+                        }
+                        ?>
+                    </td>
+                    
                     <td class="button-col">
                         <button name="view" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
                         <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/edit_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
@@ -133,7 +145,7 @@
 
         function OnConfirmDelete()
         {
-            var delete_videogame_url = "<?=site_url('admin/game_videogame/delete_game_videogame')?>" + "/" + delete_videogame_id;
+            var delete_videogame_url = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_videogame_id;
             window.location.href = delete_videogame_url;
         }
     </script>
