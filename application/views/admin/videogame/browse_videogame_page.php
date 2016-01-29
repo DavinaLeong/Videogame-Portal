@@ -52,12 +52,13 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>Abbr</th>
                 <th>Platform</th>
                 <th>Genre</th>
                 <th>Logo</th>
                 <th>Date Purchased</th>
                 <th>Steam Purchase</th>
-                <th>&nbsp;</th>
+                <th style="width: 25%">&nbsp;</th>
             </tr>
             </thead>
 
@@ -66,6 +67,11 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$videogame["vg_name"]?></td>
+                    <td>
+                    <?php if($videogame["vg_abbr"]): ?>
+                        <span class="vg-abbr"><?=$videogame["vg_abbr"]?></span>
+                    <?php endif; ?>
+                    </td>
                     <td><span class="badge" style="background: #<?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span></td>
                     <td><span class="label" style="background: #<?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
                     <td>
@@ -77,8 +83,15 @@
                     </td>
                     <td>
                     <?php
-                    $date_purchased = new DateTime($videogame["date_purchased"], new DateTimeZone(DATETIMEZONE));
-                    echo $date_purchased->format("d M Y");
+                    if($videogame["date_purchased"])
+                    {
+                        $date_purchased = new DateTime($videogame["date_purchased"], new DateTimeZone(DATETIMEZONE));
+                        echo $date_purchased->format("d M Y");
+                    }
+                    else
+                    {
+                        echo "<span class='text-placeholder'>?</span>";
+                    }
                     ?>
                     </td>
                     <td>
@@ -94,7 +107,7 @@
                         ?>
                     </td>
                     
-                    <td class="button-col">
+                    <td class="button-col" style="width: 25%">
                         <button name="view" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
                         <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/edit_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                         <button name="delete" onclick="onDeleteButtonClicked(<?=$videogame['vg_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>

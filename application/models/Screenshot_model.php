@@ -82,6 +82,9 @@ class Screenshot_model extends CI_Model
             "vg_id" => $screenshot["vg_id"],
         );
 
+        $now = new DateTime("now");
+        $this->db->set('date_added', $now->format('c'));
+        $this->db->set('last_updated', $now->format('c'));
         $this->db->insert(TABLE_SCREENSHOTS, $data);
         return $this->db->insert_id();
     }
@@ -94,6 +97,8 @@ class Screenshot_model extends CI_Model
             "vg_id" => $screenshot["vg_id"],
         );
 
+        $now = new DateTime("now");
+        $this->db->set('last_updated', $now->format('c'));
         $query = $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
         return $query->affected_rows();
     }

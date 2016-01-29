@@ -113,3 +113,19 @@ body
 {
     height: 30px;
 }
+
+.vg-abbr
+{
+    color: #fff;
+    background-color: #bbb;
+    padding: 2px 4px;
+    border-radius: 6px;
+    font-weight: bold;
+    test-align: center;
+    display: inline-block;
+}
+
+.text-danger
+{
+    color: #c00;
+}

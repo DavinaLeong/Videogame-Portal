@@ -84,6 +84,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="vg_abbr" class="col-sm-3 control-label">Abbr <span class="text-danger"></span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="vg_abbr" placeholder="Abbr" value="<?=$videogame["vg_abbr"]?>" data-parsley-maxlength="32"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="genre_id" class="col-sm-3 control-label">Genre <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="genre_id" value="<?=$videogame['genre_id']?>">
@@ -106,10 +113,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="date_purchased" class="col-sm-3 control-label">Date Purchased <span class="text-danger">*</span></label>
+                        <label for="date_purchased" class="col-sm-3 control-label">Date Purchased</label>
                         <div class="col-sm-9">
                             <?php $date_purchased = new DateTime($videogame["date_purchased"], new DateTimeZone(DATETIMEZONE)); ?>
-                            <input type="text" id="date_purchased" class="form-control" name="date_purchased" value="<?=$date_purchased->format('d-m-Y');?>" placeholder="dd-mm-yyyy" required data-parsley-maxlength="64"/>
+                            <input type="text" id="date_purchased" class="form-control" name="date_purchased" placeholder="dd-mm-yyyy" value="<?=$videogame["date_purchased"]?>" data-parsley-maxlength="64"/>
                         </div>
                     </div>
 

@@ -81,6 +81,9 @@ class Screenshot_type_model extends CI_Model
             "ss_type_description" => $screenshot_type["ss_type_description"],
         );
 
+        $now = new DateTime("now");
+        $this->db->set('date_added', $now->format('c'));
+        $this->db->set('last_updated', $now->format('c'));
         $this->db->insert(TABLE_SCREENSHOT_TYPE, $data);
         return $this->db->insert_id();
     }
@@ -92,6 +95,8 @@ class Screenshot_type_model extends CI_Model
             "ss_type_description" => $screenshot_type["ss_type_description"],
         );
 
+        $now = new DateTime("now");
+        $this->db->set('last_updated', $now->format('c'));
         $this->db->update(TABLE_SCREENSHOT_TYPE, $data, array("ss_type_id" => $screenshot_type["ss_type_id"]));
         return $this->db->affected_rows();
     }

@@ -105,6 +105,10 @@
                                 <td><span class="text-placeholder-left"><?= $videogame["vg_id"] ?></span></td>
                             </tr>
                             <tr>
+                                <th>Abbr:</th>
+                                <td><span class="text-placeholder-left"><?= $videogame["vg_abbr"] ?></span></td>
+                            </tr>
+                            <tr>
                                 <th>Platform:</th>
                                 <td><span class="badge" style="background-color: #<?=$videogame["platform_label_col"]?>;"><?= $videogame["platform_abbr"] ?></span></td>
                             </tr>

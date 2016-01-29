@@ -111,20 +111,26 @@ class Videogame extends CI_Controller
     {
         $this->load->library("common_functions");
         $this->form_validation->set_rules("vg_name", "Name", "trim|required|max_length[64]");
+        $this->form_validation->set_rules("vg_abbr", "Abbr", "trim|max_length[32]");
         $this->form_validation->set_rules("genre_id", "Genre", "trim|required");
         $this->form_validation->set_rules("platform_id", "Platform", "trim|required");
-        $this->form_validation->set_rules("date_purchased", "Date Purchased", "trim|required|callback_valid_date_check");
+        $this->form_validation->set_rules("date_purchased", "Date Purchased", "trim|callback_valid_date_check");
     }
 
     private function _prepare_new_videogame()
     {
         $videogame["vg_name"] = $this->input->post("vg_name");
+        $videogame["vg_abbr"] = strtoupper($this->input->post("vg_abbr"));
         $videogame["genre_id"] = $this->input->post("genre_id");
         $videogame["platform_id"] = $this->input->post("platform_id");
+        $videogame["date_purchased"] = NULL;
 
-        $this->load->library("datetime_helper");
-        $date = new DateTime($this->datetime_helper->format_date_str($this->input->post("date_purchased")), new DateTimeZone(DATETIMEZONE));
-        $videogame["date_purchased"] = $date->format("Y-m-d");
+        if($this->input->post("date_purchased"))
+        {
+            $this->load->library("datetime_helper");
+            $date = new DateTime($this->datetime_helper->format_date_str($this->input->post("date_purchased")), new DateTimeZone(DATETIMEZONE));
+            $videogame["date_purchased"] = $date->format("Y-m-d");
+        }
 
         if($this->input->post(["from_steam"]))
         {
@@ -176,7 +182,7 @@ class Videogame extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
-            $this->_new_videogame_validation_rules();
+            $this->_edit_videogame_validation_rules();
             $videogame = $this->Videogame_model->get_by_id_genre_platform($vg_id);
 
             if($this->form_validation->run())
@@ -216,20 +222,26 @@ class Videogame extends CI_Controller
     {
         $this->load->library("common_functions");
         $this->form_validation->set_rules("vg_name", "Name", "trim|required|max_length[64]");
+        $this->form_validation->set_rules("vg_abbr", "Abbr", "trim|max_length[32]");
         $this->form_validation->set_rules("genre_id", "Genre", "trim|required");
         $this->form_validation->set_rules("platform_id", "Platform", "trim|required");
-        $this->form_validation->set_rules("date_purchased", "Date Purchased", "trim|required|callback_valid_date_check");
+        $this->form_validation->set_rules("date_purchased", "Date Purchased", "trim|callback_valid_date_check");
     }
 
     private function _prepare_edit_videogame($videogame)
     {
-        $$videogamevg["vg_name"] = $this->input->post("vg_name");
+        $videogame["vg_name"] = $this->input->post("vg_name");
+        $videogame["vg_abbr"] = strtoupper($this->input->post("vg_abbr"));
         $videogame["genre_id"] = $this->input->post("genre_id");
         $videogame["platform_id"] = $this->input->post("platform_id");
+        $videogame["date_purchased"] = NULL;
 
-        $this->load->library("datetime_helper");
-        $date = new DateTime($this->datetime_helper->format_date_str($this->input->post("date_purchased")), new DateTimeZone(DATETIMEZONE));
-        $videogame["date_purchased"] = $date->format("Y-m-d");
+        if($this->input->post("date_purchased"))
+        {
+            $this->load->library("datetime_helper");
+            $date = new DateTime($this->datetime_helper->format_date_str($this->input->post("date_purchased")), new DateTimeZone(DATETIMEZONE));
+            $videogame["date_purchased"] = $date->format("Y-m-d");
+        }
 
         if($this->input->post(["from_steam"]))
         {
@@ -270,19 +282,27 @@ class Videogame extends CI_Controller
     public function valid_date_check($str)
     {
         $this->load->library("datetime_helper");
-        if (preg_match("/\d{2}-\d{2}-\d{4}/", $str))
+        if($str)
         {
-            if ($datetime = new DateTime($this->datetime_helper->format_date_str($str), new DateTimeZone(DATETIMEZONE)))
+            if (preg_match("/\d{2}-\d{2}-\d{4}/", $str))
             {
-                //show_error($datetime->format("d-m-Y"));
-                if ($datetime->format("d-m-Y") !== $str)
+                if ($datetime = new DateTime($this->datetime_helper->format_date_str($str), new DateTimeZone(DATETIMEZONE)))
                 {
-                    $this->form_validation->set_message("valid_date_check", "Invalid date.");
-                    return FALSE;
+                    //show_error($datetime->format("d-m-Y"));
+                    if ($datetime->format("d-m-Y") !== $str)
+                    {
+                        $this->form_validation->set_message("valid_date_check", "Invalid date.");
+                        return FALSE;
+                    }
+                    else
+                    {
+                        return TRUE;
+                    }
                 }
                 else
                 {
-                    return TRUE;
+                    $this->form_validation->set_message("valid_date_check", "Invalid date.");
+                    return FALSE;
                 }
             }
             else
@@ -293,8 +313,7 @@ class Videogame extends CI_Controller
         }
         else
         {
-            $this->form_validation->set_message("valid_date_check", "Invalid date.");
-            return FALSE;
+            return TRUE;
         }
     }
 

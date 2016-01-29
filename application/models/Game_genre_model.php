@@ -88,6 +88,9 @@ class Game_genre_model extends CI_Model
             "genre_label_col" => $game_genre["genre_label_col"]
         );
 
+        $now = new DateTime("now");
+        $this->db->set('date_added', $now->format('c'));
+        $this->db->set('last_updated', $now->format('c'));
         $this->db->insert(TABLE_GAME_GENRE, $data);
         return $this->db->insert_id();
     }
@@ -100,6 +103,8 @@ class Game_genre_model extends CI_Model
             "genre_label_col" => $game_genre["genre_label_col"]
         );
 
+        $now = new DateTime("now");
+        $this->db->set('last_updated', $now->format('c'));
         $this->db->update(TABLE_GAME_GENRE, $data, array("genre_id" => $game_genre["genre_id"]));
         return $this->db->affected_rows();
     }
