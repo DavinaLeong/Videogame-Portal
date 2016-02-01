@@ -34,7 +34,7 @@
         <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User's Details</h1>
+            <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User</h1>
 
             <p class="lead">
                 Edit in the fields and click <span class="text-info">Submit</span> to save changes.
@@ -91,7 +91,7 @@
                                             Active
                                         </option>
                                         <option
-                                            value="M" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
+                                            value="Not Active" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
                                             Not Active
                                         </option>
                                     </select>

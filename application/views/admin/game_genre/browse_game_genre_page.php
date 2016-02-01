@@ -16,7 +16,6 @@
 <?php
 /**
  * @var $game_genres
- * @var $total_entries
  */
 ?>
 
@@ -58,6 +57,8 @@
                 <th>#</th>
                 <th>Genre Abbr</th>
                 <th>Genre Name</th>
+                <th>Date Added</th>
+                <th>Last Updated</th>
                 <th class="button-col"></th>
             </tr>
             </thead>
@@ -68,13 +69,27 @@
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_genre["genre_name"]?></td>
                     <td>
-                    <?php if (strtolower($game_genre["genre_abbr"]) == "none"): ?>
-                        <span class="text-placeholder"><?=$game_genre["genre_abbr"]?></span>
-                    <?php elseif ($game_genre["genre_abbr"]): ?>
-                        <span class="label" style="background: #<?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
-                    <?php else: ?>
-                        <span class="text-placeholder">no abbr</span>
-                    <?php endif; ?>
+                        <?php if (strtolower($game_genre["genre_abbr"]) == "none"): ?>
+                            <span class="text-placeholder"><?=$game_genre["genre_abbr"]?></span>
+                        <?php elseif ($game_genre["genre_abbr"]): ?>
+                            <span class="label" style="background: #<?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
+                        <?php else: ?>
+                            <span class="text-placeholder">no abbr</span>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php $date_added = new DateTime($game_genre["date_added"], new DateTimeZone(DATETIMEZONE)); ?>
+                        <span class="text-muted">
+                            <?=$date_added->format("Y-m-d");?><br/>
+                            <?=$date_added->format("H:i:s");?>
+                        </span>
+                    </td>
+                    <td>
+                        <?php $last_updated = new DateTime($game_genre["last_updated"], new DateTimeZone(DATETIMEZONE)); ?>
+                        <span class="text-muted">
+                            <?=$last_updated->format("Y-m-d");?><br/>
+                            <?=$last_updated->format("H:i:s");?>
+                        </span>
                     </td>
                     <td class="button-col">
                         <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_genre/edit_game_genre/".$game_genre["genre_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
@@ -126,8 +141,7 @@
 
         function OnConfirmDelete()
         {
-            var delete_genre_url = "<?=site_url('admin/game_genre/delete_game_genre')?>" + "/" + delete_game_genre_id;
-            window.location.href = delete_genre_url;
+            window.location.href = "<?=site_url('admin/game_genre/delete_game_genre')?>" + "/" + delete_game_genre_id;;
         }
     </script>
 </div>

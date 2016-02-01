@@ -27,7 +27,7 @@
         <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
         <div class="page-header">
-            <h1><i class="text-info fa fa-plus"></i> Add New User <button name="browse" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
+            <h1><i class="text-info fa fa-plus"></i> Add User <button name="browse" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
                 <i class="fa fa-file-text-o"></i> Browse Users
             </button> </h1>
             <p class="lead">

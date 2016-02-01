@@ -118,6 +118,14 @@
                                 <?php endif; ?>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Date Added:</th>
+                            <td><span class="text-muted"><?=$game_platform["date_added"]?></span></td>
+                        </tr>
+                        <tr>
+                            <th>Last Updated:</th>
+                            <td><span class="text-muted"><?=$game_platform["last_updated"]?></span></td>
+                        </tr>
                     </table>
                 </div>
 

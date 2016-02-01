@@ -93,9 +93,19 @@
                     <div class="form-group">
                         <label for="genre_id" class="col-sm-3 control-label">Genre <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="genre_id" value="<?=$videogame['genre_id']?>">
-                                <?php foreach($game_genres as $game_genre): ?>
-                                <option value="<?=$game_genre['genre_id']?>"><?=$game_genre['genre_name']?></option>
+                            <select class="form-control" name="genre_id">
+                                <?php
+                                foreach($game_genres as $game_genre):
+                                    if($videogame["genre_id"] === $game_genre["genre_id"])
+                                    {
+                                        $selected_genre = TRUE;
+                                    }
+                                    else
+                                    {
+                                        $selected_genre = FALSE;
+                                    }
+                                    ?>
+                                <option value="<?=$game_genre['genre_id']?>" <?=set_select("genre_id", $game_genre["genre_id"], $selected_genre);?>><?=$game_genre['genre_name']?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -104,20 +114,40 @@
                     <div class="form-group">
                         <label for="platform_id" class="col-sm-3 control-label">Platform <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="platform_id" value="<?=$videogame['platform_id']?>">
-                                <?php foreach($game_platforms as $game_platform): ?>
-                                <option value="<?=$game_platform['platform_id']?>"><?=$game_platform['platform_name']?></option>
+                            <select class="form-control" name="platform_id">
+                                <?php
+                                foreach($game_platforms as $game_platform):
+                                    if($videogame["platform_id"] === $game_platform["platform_id"])
+                                    {
+                                        $selected_platform = TRUE;
+                                    }
+                                    else
+                                    {
+                                        $selected_platform = FALSE;
+                                    }
+                                    ?>
+                                <option value="<?=$game_platform['platform_id']?>" <?=set_select("platform_id", $game_platform["platform_id"], $selected_platform);?>><?=$game_platform['platform_name']?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="date_purchased" class="col-sm-3 control-label">Date Purchased</label>
+                        <label class="col-sm-3 control-label">Date Purchased</label>
                         <div class="col-sm-9">
                             <?php $date_purchased = new DateTime($videogame["date_purchased"], new DateTimeZone(DATETIMEZONE)); ?>
-                            <input type="text" id="date_purchased" class="form-control" name="date_purchased" placeholder="dd-mm-yyyy" value="<?=$videogame["date_purchased"]?>" data-parsley-maxlength="64"/>
+                            <input type="text" id="date_purchased" class="form-control" name="date_purchased" placeholder="dd-mm-yyyy" value="<?=$date_purchased->format('d-m-Y')?>" data-parsley-maxlength="64"/>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_added" class="col-sm-3 control-label">Date Added</label>
+                        <p class="col-sm-9 form-control-static text-muted"><?=$videogame["vg_date_added"]?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Last Updated</label>
+                        <p class="col-sm-9 form-control-static text-muted"><?=$videogame["vg_last_updated"]?></p>
                     </div>
 
                     <div class="col-sm-9 col-sm-offset-3 checkbox">

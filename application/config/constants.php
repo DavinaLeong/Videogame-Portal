@@ -102,6 +102,7 @@ define('DATETIMEZONE',		'Asia/Singapore');
 define("DB_VIDEOGAMES", "videogame_catalogue");
 define("SITE_NAME", "Video Games Catalogue");
 define("AUTHOR", "Davina Leong");
+define("UPLOADS_FOLDER", "http://localhost/videogame_portal/uploads/");
 define("RESOURCES_FOLDER", "http://localhost/videogame_portal/resources/");
 
 define("TABLE_VIDEOGAMES", "videogames");

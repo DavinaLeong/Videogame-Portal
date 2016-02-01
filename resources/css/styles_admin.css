@@ -114,7 +114,7 @@ body
     height: 30px;
 }
 
-.vg-abbr
+.vg-abbr-block
 {
     color: #fff;
     background-color: #bbb;
@@ -125,7 +125,22 @@ body
     display: inline-block;
 }
 
+.vg-abbr
+{
+    color: #fff;
+    background-color: #bbb;
+    padding: 2px 4px;
+    border-radius: 6px;
+    font-weight: bold;
+    test-align: center;
+}
+
 .text-danger
 {
     color: #c00;
+}
+
+.text-muted
+{
+    color: #999;
 }

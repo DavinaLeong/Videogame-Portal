@@ -69,7 +69,7 @@ class Common_functions
     public function _do_var_dump($var, $var_name = "Variable Name")
     {
         echo "<div style='margin: 10px; padding: 10px; border: thin solid #ccc; background-color: #eee; border-radius: 5px; font-family: consolas, \"Courier New\", monotype'>" .
-                "<h4>var_dump - " . $var_name . ":</h4>";
+                "<h4>var_dump - (<strong style='color: #009;'>" . $var_name . "</strong>):</h4>";
         var_dump($var);
         echo "</div>";
     }
@@ -77,7 +77,7 @@ class Common_functions
     public function _do_var_export($var, $var_name = "Variable Name", $start_tag = "<p>", $end_tag = "</p>")
     {
         echo "<div style='margin: 10px; padding: 10px; border: thin solid #ccc; background-color: #eee; border-radius: 5px;'>" .
-                "<h4>var_export - " . $var_name . ":</h4>" . $start_tag;
+                "<h4>var_export - (<strong style='color: #009;". $var_name . "</strong>):</h4>" . $start_tag;
         var_export($var);
         echo $end_tag . "</div>";
     }

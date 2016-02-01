@@ -28,10 +28,10 @@
 
         <div class="page-header">
             <h1><i class="text-info fa fa-gamepad"></i> Welcome to <span class="text-primary"><?=SITE_NAME?></span></h1>
-            <p class="lead">
-                Click on any of the links listed in the navbar above.
-            </p>
         </div>
+        <p class="lead">
+            Click on any of the links listed in the navbar above.
+        </p>
 
         <?php $this->load->view("admin/_templates/user_message_view"); ?>
 

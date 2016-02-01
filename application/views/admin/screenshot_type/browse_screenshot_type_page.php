@@ -104,7 +104,7 @@
 
                         <div class="form-group">
                             <label for="ss_type_description">Description</label>
-                            <input name="ss_type_description" class="form-control" type="text" placeholder="Short description of Screenshot Type" data-parsley-maxlength="128" />
+                            <textarea name="ss_type_description" id="ss_type_description" class="form-control" rows="3" data-parsley-maxlength="128"></textarea>
                             <span class="help-block">Limited to 128 characters.</span>
                         </div>
 

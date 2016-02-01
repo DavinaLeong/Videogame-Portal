@@ -107,6 +107,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="date_added" class="col-sm-3 control-label">Date Added</label>
+                                <p class="col-sm-9 form-control-static text-muted"><?=$game_platform["date_added"]?></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Last Updated</label>
+                                <p class="col-sm-9 form-control-static text-muted"><?=$game_platform["last_updated"]?></p>
+                            </div>
+
                         </div>
                     </div>
 

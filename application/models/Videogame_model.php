@@ -12,42 +12,6 @@
     All content � DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
-/**
- * @property CI_DB_driver $db
- * @property CI_DB_forge $dbforge
- * @property CI_Benchmark $benchmark
- * @property CI_Calendar $calendar
- * @property CI_Cart $cart
- * @property CI_Config $config
- * @property CI_Controller $controller
- * @property CI_Email $email
- * @property CI_Encrypt $encrypt
- * @property CI_Exceptions $exceptions
- * @property CI_Form_validation $form_validation
- * @property CI_Ftp $ftp
- * @property CI_Hooks $hooks
- * @property CI_Image_lib $image_lib
- * @property CI_Input $input
- * @property CI_Loader $load
- * @property CI_Log $log
- * @property CI_Model $model
- * @property CI_Output $output
- * @property CI_Pagination $pagination
- * @property CI_Parser $parser
- * @property CI_Profiler $profiler
- * @property CI_Router $router
- * @property CI_Session $session
- * @property CI_Table $table
- * @property CI_Trackback $trackback
- * @property CI_Typography $typography
- * @property CI_Unit_test $unit_test
- * @property CI_Upload $upload
- * @property CI_URI $uri
- * @property CI_User_agent $user_agent
- * @property CI_Xmlrpc $xmlrpc
- * @property CI_Xmlrpcs $xmlrpcs
- * @property CI_Zip $zip
- */
 class Videogame_model extends CI_Model
 {
     public function count_all()
@@ -57,21 +21,22 @@ class Videogame_model extends CI_Model
 
     public function get_all()
     {
+        $this->db->order_by("vg_name");
         $query = $this->db->get(TABLE_VIDEOGAMES);
         return $query->result_array();
     }
 
     public function get_by_id($vg_id=FALSE)
     {
-        $query = $this->db->get_where(TABLE_VIDEOGAMES, array('vg_id' => $vg_id));
-        return $query->row_array();
+        $this->db->get_where(TABLE_VIDEOGAMES, array('vg_id' => $vg_id));
+        return $this->db->row_array();
     }
 
     public function get_all_limit_offset($limit, $offset)
     {
-        $this->db->order_by("vg_id");
-        $query = $this->db->get(TABLE_VIDEOGAMES, $limit, $offset);
-        return $query->result_array();
+        $this->db->order_by("vg_name");
+        $this->db->get(TABLE_VIDEOGAMES, $limit, $offset);
+        return $this->db->result_array();
     }
 
     public function insert($videogame)
@@ -111,7 +76,7 @@ class Videogame_model extends CI_Model
 
     public function get_all_genre_platform()
     {
-        $sql = "SELECT * FROM videogames
+        $sql = "SELECT *, videogames.genre_id AS `vg_genre_id`, videogames.platform_id AS `vg_platform_id`, videogames.date_added AS `vg_date_added`, videogames.last_updated AS `vg_last_updated` FROM videogames
 LEFT JOIN game_genre ON game_genre.genre_id = videogames.genre_id
 LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id
 ORDER BY videogames.vg_name";
@@ -122,7 +87,7 @@ ORDER BY videogames.vg_name";
 
     public function get_by_id_genre_platform($vg_id=FALSE)
     {
-        $sql = "SELECT * FROM videogames
+        $sql = "SELECT *, videogames.genre_id AS `vg_genre_id`, videogames.platform_id AS `vg_platform_id`, videogames.date_added AS `vg_date_added`, videogames.last_updated AS `vg_last_updated` FROM videogames
 LEFT JOIN game_genre ON game_genre.genre_id = videogames.genre_id
 LEFT JOIN game_platform ON game_platform.platform_id = videogames.platform_id
 WHERE videogames.vg_id = ?";
@@ -135,6 +100,18 @@ WHERE videogames.vg_id = ?";
     {
         $this->db->delete(TABLE_VIDEOGAMES, array("vg_id" => $vg_id));
         return $this->db->affected_rows();
+    }
+
+    public function get_all_ids()
+    {
+        $sql = "SELECT vg_id FROM videogames";
+        $query = $this->db->query($sql);
+        $result = array();
+        foreach($query->result_array() as $videogame)
+        {
+            $result[] = $videogame["vg_id"];
+        }
+        return $result;
     }
 
 } //end Videogame_model class

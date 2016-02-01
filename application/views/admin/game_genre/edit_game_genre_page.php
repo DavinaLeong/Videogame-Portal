@@ -78,6 +78,16 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="date_added" class="col-sm-3 control-label">Date Added</label>
+                    <p class="col-sm-9 form-control-static text-muted"><?=$game_genre["date_added"]?></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Last Updated</label>
+                    <p class="col-sm-9 form-control-static text-muted"><?=$game_genre["last_updated"]?></p>
+                </div>
+
                 <div class="col-sm-9 col-sm-offset-3">
                     <p class="text-danger">* required fields</p>
                 </div>

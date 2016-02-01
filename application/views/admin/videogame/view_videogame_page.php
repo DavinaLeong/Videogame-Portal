@@ -106,7 +106,11 @@
                             </tr>
                             <tr>
                                 <th>Abbr:</th>
-                                <td><span class="text-placeholder-left"><?= $videogame["vg_abbr"] ?></span></td>
+                                <td>
+                                    <?php if($videogame["vg_abbr"]): ?>
+                                        <span class="vg-abbr"><?=$videogame["vg_abbr"]?></span>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Platform:</th>
@@ -126,16 +130,24 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th>Date Added:</th>
+                                <td><span class="text-muted"><?=$videogame["vg_date_added"]?></span></td>
+                            </tr>
+                            <tr>
+                                <th>Last Updated:</th>
+                                <td><span class="text-muted"><?=$videogame["vg_last_updated"]?></span></td>
+                            </tr>
+                            <tr>
                                 <th>Bought from Steam:</th>
                                 <td>
                                     <?php
                                     if($videogame["from_steam"])
                                     {
-                                        echo "Yes";
+                                        echo '<span class="text-success">Yes</span>';
                                     }
                                     else
                                     {
-                                        echo "No";
+                                        echo '<span class="text-danger">No</span>';
                                     }
                                     ?>
                                 </td>
@@ -181,8 +193,7 @@
 
     function OnConfirmDelete()
     {
-        var delete_platform_url = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_platform_id;
-        window.location.href = delete_platform_url;
+        window.location.href = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_platform_id;
     }
 </script>
 </body>

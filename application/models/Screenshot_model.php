@@ -12,42 +12,6 @@ Mobile	: (+65) 9369 3752 [Singapore]
 All content © DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
-/**
- * @property CI_DB_driver $db
- * @property CI_DB_forge $dbforge
- * @property CI_Benchmark $benchmark
- * @property CI_Calendar $calendar
- * @property CI_Cart $cart
- * @property CI_Config $config
- * @property CI_Controller $controller
- * @property CI_Email $email
- * @property CI_Encrypt $encrypt
- * @property CI_Exceptions $exceptions
- * @property CI_Form_validation $form_validation
- * @property CI_Ftp $ftp
- * @property CI_Hooks $hooks
- * @property CI_Image_lib $image_lib
- * @property CI_Input $input
- * @property CI_Loader $load
- * @property CI_Log $log
- * @property CI_Model $model
- * @property CI_Output $output
- * @property CI_Pagination $pagination
- * @property CI_Parser $parser
- * @property CI_Profiler $profiler
- * @property CI_Router $router
- * @property CI_Session $session
- * @property CI_Table $table
- * @property CI_Trackback $trackback
- * @property CI_Typography $typography
- * @property CI_Unit_test $unit_test
- * @property CI_Upload $upload
- * @property CI_URI $uri
- * @property CI_User_agent $user_agent
- * @property CI_Xmlrpc $xmlrpc
- * @property CI_Xmlrpcs $xmlrpcs
- * @property CI_Zip $zip
- */
 class Screenshot_model extends CI_Model
 {
     public function count_all()
@@ -78,8 +42,14 @@ class Screenshot_model extends CI_Model
     {
         $data = array(
             "ss_name" => $screenshot["ss_name"],
+            "ss_url" => $screenshot["ss_url"],
+            "ss_thumb_url" => $screenshot["ss_thumb_url"],
+            "ss_description" => $screenshot["ss_description"],
             "ss_type_id" => $screenshot["ss_type_id"],
             "vg_id" => $screenshot["vg_id"],
+            "ss_width" => $screenshot["ss_width"],
+            "ss_height" => $screenshot["ss_height"],
+            "ss_img_type" => $screenshot["ss_img_type"],
         );
 
         $now = new DateTime("now");
@@ -93,6 +63,7 @@ class Screenshot_model extends CI_Model
     {
         $data = array(
             "ss_name" => $screenshot["ss_name"],
+            "ss_description" => $screenshot["ss_description"],
             "ss_type_id" => $screenshot["ss_type_id"],
             "vg_id" => $screenshot["vg_id"],
         );
@@ -101,6 +72,19 @@ class Screenshot_model extends CI_Model
         $this->db->set('last_updated', $now->format('c'));
         $query = $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
         return $query->affected_rows();
+    }
+
+    public function get_all_videogames_screenshotTypes()
+    {
+        $sql = "SELECT screenshots.*,
+videogames.vg_name, videogames.vg_abbr,
+screenshot_type.ss_type_name
+FROM screenshots
+LEFT JOIN videogames ON screenshots.vg_id = videogames.vg_id
+LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
+ORDER BY screenshots.ss_name;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
     }
 
 } //end Screenshot_model class

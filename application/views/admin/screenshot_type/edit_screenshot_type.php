@@ -71,10 +71,9 @@
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
-
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="ss_type_description" placeholder="username"
-                                   value="<?= $screenshot_type["ss_type_description"] ?>" data-parsley-maxlength="512"/>
+                            <textarea name="ss_type_description" id="ss_type_description" class="form-control" rows="3" data-parsley-maxlength="128"><?= $screenshot_type["ss_type_description"] ?></textarea>
+                            <span class="help-block">Limited to 128 characters.</span>
                         </div>
                     </div>
 

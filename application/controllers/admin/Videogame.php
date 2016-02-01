@@ -12,51 +12,6 @@
     All content � DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
-/**
- * @property CI_DB_driver $db
- * @property CI_DB_forge $dbforge
- * @property CI_Benchmark $benchmark
- * @property CI_Calendar $calendar
- * @property CI_Cart $cart
- * @property CI_Config $config
- * @property CI_Controller $controller
- * @property CI_Email $email
- * @property CI_Encrypt $encrypt
- * @property CI_Exceptions $exceptions
- * @property CI_Form_validation $form_validation
- * @property CI_Ftp $ftp
- * @property CI_Hooks $hooks
- * @property CI_Image_lib $image_lib
- * @property CI_Input $input
- * @property CI_Loader $load
- * @property CI_Log $log
- * @property CI_Model $model
- * @property CI_Output $output
- * @property CI_Pagination $pagination
- * @property CI_Parser $parser
- * @property CI_Profiler $profiler
- * @property CI_Router $router
- * @property CI_Session $session
- * @property CI_Table $table
- * @property CI_Trackback $trackback
- * @property CI_Typography $typography
- * @property CI_Unit_test $unit_test
- * @property CI_Upload $upload
- * @property CI_URI $uri
- * @property CI_User_agent $user_agent
- * @property CI_Xmlrpc $xmlrpc
- * @property CI_Xmlrpcs $xmlrpcs
- * @property CI_Zip $zip
- *
- * @property User_log_model $User_log_model
- * @property Videogame_model $Videogame_model
- * @property Upload_helper $upload_helper
- * @property Game_genre_model $Game_genre_model
- * @property Game_platform_model $Game_platform_model
- *
- * @property Datetime_helper $datetime_helper
- */
-
 class Videogame extends CI_Controller
 {
     public function __construct()
@@ -112,8 +67,8 @@ class Videogame extends CI_Controller
         $this->load->library("common_functions");
         $this->form_validation->set_rules("vg_name", "Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("vg_abbr", "Abbr", "trim|max_length[32]");
-        $this->form_validation->set_rules("genre_id", "Genre", "trim|required");
-        $this->form_validation->set_rules("platform_id", "Platform", "trim|required");
+        $this->form_validation->set_rules("genre_id", "Genre", "trim");
+        $this->form_validation->set_rules("platform_id", "Platform", "trim");
         $this->form_validation->set_rules("date_purchased", "Date Purchased", "trim|callback_valid_date_check");
     }
 
@@ -196,7 +151,7 @@ class Videogame extends CI_Controller
                 else
                 {
                     $this->session->set_userdata("message", "<mark>Unable</mark> to update Videogame record.");
-                    $this->User_log_model->log_message("Unable to UPDATED Videogame record. | vg_id: " . $vg_id);
+                    $this->User_log_model->log_message("Unable to UPDATE Videogame record. | vg_id: " . $vg_id);
                 }
             }
 
@@ -223,8 +178,8 @@ class Videogame extends CI_Controller
         $this->load->library("common_functions");
         $this->form_validation->set_rules("vg_name", "Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("vg_abbr", "Abbr", "trim|max_length[32]");
-        $this->form_validation->set_rules("genre_id", "Genre", "trim|required");
-        $this->form_validation->set_rules("platform_id", "Platform", "trim|required");
+        $this->form_validation->set_rules("genre_id", "Genre", "trim");
+        $this->form_validation->set_rules("platform_id", "Platform", "trim");
         $this->form_validation->set_rules("date_purchased", "Date Purchased", "trim|callback_valid_date_check");
     }
 

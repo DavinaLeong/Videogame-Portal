@@ -12,53 +12,14 @@
     All content © DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
-/**
- * @property CI_DB_driver $db
- * @property CI_DB_forge $dbforge
- * @property CI_Benchmark $benchmark
- * @property CI_Calendar $calendar
- * @property CI_Cart $cart
- * @property CI_Config $config
- * @property CI_Controller $controller
- * @property CI_Email $email
- * @property CI_Encrypt $encrypt
- * @property CI_Exceptions $exceptions
- * @property CI_Form_validation $form_validation
- * @property CI_Ftp $ftp
- * @property CI_Hooks $hooks
- * @property CI_Image_lib $image_lib
- * @property CI_Input $input
- * @property CI_Loader $load
- * @property CI_Log $log
- * @property CI_Model $model
- * @property CI_Output $output
- * @property CI_Pagination $pagination
- * @property CI_Parser $parser
- * @property CI_Profiler $profiler
- * @property CI_Router $router
- * @property CI_Session $session
- * @property CI_Table $table
- * @property CI_Trackback $trackback
- * @property CI_Typography $typography
- * @property CI_Unit_test $unit_test
- * @property CI_Upload $upload
- * @property CI_URI $uri
- * @property CI_User_agent $user_agent
- * @property CI_Xmlrpc $xmlrpc
- * @property CI_Xmlrpcs $xmlrpcs
- * @property CI_Zip $zip
- *
- * @property User_log_model $User_log_model
- * @property Screenshot_model $Screenshot_model
- * @property Upload_helper $upload_helper
- */
-
 class Screenshot extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         $this->load->model("Screenshot_model");
+        $this->load->model("Screenshot_type_model");
+        $this->load->model("Videogame_model");
     }
 
     public function index()
@@ -66,24 +27,148 @@ class Screenshot extends CI_Controller
         redirect("/admin/screenshot/browse_screenshot");
     }
 
-    public function add_screenshot()
+    public function new_screenshot()
     {
-        show_error("add_screenshot not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            if($ss_id = $this->Screenshot_model->insert($this->_prepare_add_screenshot()))
+            {
+                $this->session->set_userdata("message", "New Screenshot recored <mark>created</mark>.");
+                $this->User_log_model->log_message("New Screenshot recored CREATED. | ss_id: " . $ss_id);
+                redirect("admin/screenshot/edit_screenshot/" . $ss_id);
+            }
+            else
+            {
+                $this->session->set_userdata("message", "<mark>Unable</mark> to create new Screenshot record.");
+                $this->User_log_model->log_message("Unable to CREATE new Screenshot record.");
+                redirect("admin/screenshot/browse_screenshot");
+            }
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
+    }
+
+    private function _prepare_add_screenshot()
+    {
+        $screenshot = array();
+        $screenshot["ss_name"] = "";
+        $screenshot["vg_id"] = 1;
+        $screenshot["ss_url"] = "screenshots/default_screenshot.png";
+        $screenshot["ss_description"] = "";
+        $screenshot["ss_type_id"] = 1;
+        $screenshot["ss_width"] = 854;
+        $screenshot["ss_height"] = 480;
+        $screenshot["ss_img_type"] = "image/png";
+        $screenshot["ss_thumb_width"] = 150;
+        $screenshot["ss_thumb_height"] = 84;
+        $screenshot["ss_thumb_img_type"] = "image/png";
+        return $screenshot;
     }
 
     public function browse_screenshot()
     {
-        show_error("browse_screenshot not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $data = array(
+                "screenshots" => $this->Screenshot_model->get_all_videogames_screenshotTypes()
+            );
+
+            $this->load->view("admin/screenshot/browse_screenshot_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
     }
 
     public function view_screenshot()
     {
-        show_error("view_screenshot not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            show_error("view_screenshot not implemented");
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
     }
 
-    public function edit_screenshot()
+    public function edit_screenshot($ss_id)
     {
-        show_error("edit_screenshot not implemented");
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $screenshot = $this->Screenshot_model->get_by_id($ss_id);
+            $this->_set_validation_rules_edit_screenshot();
+
+            // TODO: update db
+
+            $data = array(
+                "screenshot" => $screenshot,
+                "screenshot_types" => $this->Screenshot_type_model->get_all(),
+                "videogames" => $this->Videogame_model->get_all()
+            );
+
+            $this->load->view("admin/screenshot/screenshot_type", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
+    }
+
+    public function upload_screenshot()
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            show_error("upload_screenshot not implemented");
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
+    }
+
+    private function _set_validation_rules_edit_screenshot()
+    {
+        $vg_ids = $this->Videogame_model->get_all_ids();
+        $ss_type_ids = $this->Screenshot_type_model->get_all_ids();
+
+        $str_vg_ids = implode(",", $vg_ids);
+        $str_ss_type_ids = implode(",", $ss_type_ids);
+
+        $this->form_validation->set_rules("ss_name", "Name", "trim|required|max_length[128]");
+        $this->form_validation->set_rules("ss_description", "Description", "trim|max_length[256]");
+        $this->form_validation->set_rules("vg_id", "Videogame", "in_list[". $str_vg_ids . "]");
+        $this->form_validation->set_rules("ss_type_id", "Type", "in_list[" . $str_ss_type_ids . "]");
+    }
+
+    private function _prepare_edit_screenshot($screenshot)
+    {
+        $screenshot["ss_name"] = $this->input->post("ss_name");
+        $screenshot["vg_id"] = $this->input->post("vg_id");
+        $screenshot["ss_description"] = $this->input->post("ss_description");
+        $screenshot["ss_type_id"] = $this->input->post("ss_type_id");
+        return $screenshot;
+    }
+
+    public function delete_screenshot()
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            show_error("delete_screenshot not implemented");
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
     }
 
 } //end Screenshot controller class
