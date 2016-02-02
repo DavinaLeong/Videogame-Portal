@@ -54,7 +54,7 @@ class Screenshot extends CI_Controller
     private function _prepare_add_screenshot()
     {
         $screenshot = array();
-        $screenshot["ss_name"] = "";
+        $screenshot["ss_name"] = "Screenshot Name";
         $screenshot["vg_id"] = 1;
         $screenshot["ss_url"] = "screenshots/default_screenshot.png";
         $screenshot["ss_description"] = "";
@@ -62,6 +62,7 @@ class Screenshot extends CI_Controller
         $screenshot["ss_width"] = 854;
         $screenshot["ss_height"] = 480;
         $screenshot["ss_img_type"] = "image/png";
+        $screenshot["ss_thumb_url"] = "screenshots/default_thumbnail.png";
         $screenshot["ss_thumb_width"] = 150;
         $screenshot["ss_thumb_height"] = 84;
         $screenshot["ss_thumb_img_type"] = "image/png";
@@ -126,7 +127,41 @@ class Screenshot extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
-            show_error("upload_screenshot not implemented");
+            $this->load->library("upload_helper");
+
+            $screenshot = $this->User_model->get_by_id($this->session->userdata("edit_uid"));
+
+            // Davina: upload_helper is a custom library
+            $upload_config = $this->upload_helper->upload_config_filename(strtolower($screenshot
+                ["username"] . "_avatar"), "./uploads/admin_avatar/", "gif|jpg|png");
+            $this->load->library("upload", $upload_config);
+
+            if ($this->upload->do_upload("avatar_url"))
+            {
+                //Get new uploaded file data
+                $file_upload_data = $this->upload->data();
+
+                //If a url exists, delete file of url
+                if ($screenshot["avatar_url"])
+                {
+                    $this->load->helper("file");
+                    delete_files("./uploads/admin_avatar/" . $screenshot["avatar_url"]);
+                }
+
+                //Update database with new image url
+                $screenshot["avatar_url"] = "admin_avatar/" . $file_upload_data["file_name"];
+                $this->User_model->update($screenshot);
+
+                //If the edit uid matches the logged in user's id, update the session's
+                // avatar url.
+                if($this->session->userdata("uid") == $this->session->userdata("edit_uid"))
+                {
+                    $this->session->set_userdata($screenshot["avatar_url"]);
+                }
+
+                $this->session->set_userdata("message", "Avatar uploaded successfully.");
+                $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $this->session->userdata("edit_uid"));
+                $this->session->unset_userdata("avatar_upload_errors");
         }
         else
         {
