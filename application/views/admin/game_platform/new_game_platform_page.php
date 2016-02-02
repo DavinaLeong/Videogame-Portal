@@ -26,8 +26,19 @@
     $this->load->view("templates/meta_common");
     $this->load->view("templates/css_common");
     $this->load->view("templates/js_common");
+    $this->load->view("admin/_templates/datepicker_view");
     ?>
+
     <title>Video Game Portal Admin</title>
+
+    <script>
+        $(document).ready(function()
+        {
+            $("#date_purchased").datepicker({
+                format: "dd-mm-yyyy"
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -60,7 +71,7 @@
                 <div class="form-group">
                     <label for="platform_abbr" class="col-sm-3 control-label">Abbr. <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="16"/>
+                        <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" value="" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="16"/>
                         <span class="help-block">Limited to 16 characters.</span>
                     </div>
                 </div>

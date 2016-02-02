@@ -112,3 +112,8 @@ define("TABLE_SCREENSHOTS", "screenshots");
 define("TABLE_SCREENSHOT_TYPE", "screenshot_type");
 define("TABLE_USER", "user");
 define("TABLE_USER_LOG", "user_log");
+
+define("DISPLAY_SCREENSHOT_WIDTH", 854);
+define("DISPLAY_SCREENSHOT_HEIGHT", 480);
+define("DISPLAY_THUMBNAIL_WIDTH", 150);
+define("DISPLAY_THUMBNAIL_HEIGHT", 84);

@@ -113,7 +113,7 @@ class Screenshot extends CI_Controller
                 "videogames" => $this->Videogame_model->get_all()
             );
 
-            $this->load->view("admin/screenshot/screenshot_type", $data);
+            $this->load->view("admin/screenshot/edit_screenshot_page", $data);
         }
         else
         {
