@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 class Screenshot extends CI_Controller
@@ -103,6 +103,7 @@ class Screenshot extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
+            $this->session->set_userdata("ss_id", $ss_id);
             $screenshot = $this->Screenshot_model->get_by_id($ss_id);
             $this->_set_validation_rules_edit_screenshot();
 
@@ -129,11 +130,11 @@ class Screenshot extends CI_Controller
         {
             $this->load->library("upload_helper");
 
-            $screenshot = $this->User_model->get_by_id($this->session->userdata("edit_uid"));
+            $screenshot = $this->Screenshot_model->get_by_id($this->session->userdata("ss_id"));
 
             // Davina: upload_helper is a custom library
             $upload_config = $this->upload_helper->upload_config_filename(strtolower($screenshot
-                ["username"] . "_avatar"), "./uploads/admin_avatar/", "gif|jpg|png");
+                ["username"] . "_avatar"), "./uploads/screenshots/", "gif|jpg|png");
             $this->load->library("upload", $upload_config);
 
             if ($this->upload->do_upload("avatar_url"))
@@ -162,6 +163,7 @@ class Screenshot extends CI_Controller
                 $this->session->set_userdata("message", "Avatar uploaded successfully.");
                 $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $this->session->userdata("edit_uid"));
                 $this->session->unset_userdata("avatar_upload_errors");
+            }
         }
         else
         {

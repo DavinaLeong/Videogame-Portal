@@ -163,7 +163,7 @@ class Game_platform extends CI_Controller
 
         // Davina: upload_helper is a custom library
         $upload_config = $this->upload_helper->upload_config_filename(strtolower($platform
-            ["abbr"] . "_logo"), "./uploads/platform_logo/", "gif|jpg|png");
+            ["abbr"] . "_logo"), "./uploads/platform_logo/", "gif|jpg|jpeg|png|bmp");
         $this->load->library("upload", $upload_config);
 
         if ($this->upload->do_upload("platform_logo_url"))

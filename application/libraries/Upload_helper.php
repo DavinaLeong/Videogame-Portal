@@ -43,4 +43,24 @@ class Upload_helper
 
         return $config;
     }
+
+    public function upload_config_images(
+        $file_name="", $upload_path="",
+        $max_width=2048, $max_height=2048,
+        $remove_spaces = TRUE, $overwrite = FALSE,
+        $min_width = 50, $min_height = 50
+    )
+    {
+        $config["file_name"] = $file_name;
+        $config["upload_path"] = $upload_path;
+        $config["max_width"] = $max_width;
+        $config["max_height"] = $max_height;
+        $config["remove_spaces"] = $remove_spaces;
+        $config["overwrite"] = $overwrite;
+        $config["min_width"] = $min_width;
+        $config["min_width"] = $min_height;
+
+        return $config
+    }
+
 }//end class upload_helper

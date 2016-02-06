@@ -135,7 +135,7 @@ class User extends CI_Controller
 
         // Davina: upload_helper is a custom library
         $upload_config = $this->upload_helper->upload_config_filename(strtolower($user
-            ["username"] . "_avatar"), "./uploads/admin_avatar/", "gif|jpg|png");
+            ["username"] . "_avatar"), "./uploads/admin_avatar/", "gif|jpg|jpeg|png|bmp");
         $this->load->library("upload", $upload_config);
 
         if ($this->upload->do_upload("avatar_url"))
