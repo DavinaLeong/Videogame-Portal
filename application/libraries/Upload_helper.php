@@ -47,7 +47,7 @@ class Upload_helper
     public function upload_config_images(
         $file_name="", $upload_path="",
         $max_width=2048, $max_height=2048,
-        $remove_spaces = TRUE, $overwrite = FALSE,
+        $overwrite = TRUE, $remove_spaces = TRUE,
         $min_width = 50, $min_height = 50
     )
     {
@@ -59,6 +59,7 @@ class Upload_helper
         $config["overwrite"] = $overwrite;
         $config["min_width"] = $min_width;
         $config["min_width"] = $min_height;
+        $config["allowed_types"] = "gif|jpg|jpeg|png|bmp";
 
         return $config
     }

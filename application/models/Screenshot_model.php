@@ -9,7 +9,7 @@ Date Created	: 12 Dec 2015
 Email	: leong.shi.yun@gmail.com
 Mobile	: (+65) 9369 3752 [Singapore]
 
-All content © DAVINA Leong Shi Yun. All Rights Reserved.
+All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 class Screenshot_model extends CI_Model
@@ -82,9 +82,30 @@ screenshot_type.ss_type_name
 FROM screenshots
 LEFT JOIN videogames ON screenshots.vg_id = videogames.vg_id
 LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
-ORDER BY screenshots.ss_name;";
+ORDER BY screenshots.ss_name";
         $query = $this->db->query($sql);
         return $query->result_array();
+    }
+
+    public function get_by_id_videogames_screenshotTypes($ss_id=FALSE)
+    {
+        if($ss_id)
+        {
+            $sql = "SELECT screenshots.*,
+    videogames.vg_name, videogames.vg_abbr,
+    screenshot_type.ss_type_name
+    FROM screenshots
+    LEFT JOIN videogames ON screenshots.vg_id = videogames.vg_id
+    LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
+    ORDER BY screenshots.ss_name
+    WHERE screenshots.ss_id = ?";
+            $query = $this->db->query($sql, array((int) $ss_id));
+            return $query->result_array();
+        }
+        else
+        {
+            return 0;
+        }
     }
 
 } //end Screenshot_model class

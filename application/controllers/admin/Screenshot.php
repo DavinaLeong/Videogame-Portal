@@ -107,7 +107,20 @@ class Screenshot extends CI_Controller
             $screenshot = $this->Screenshot_model->get_by_id($ss_id);
             $this->_set_validation_rules_edit_screenshot();
 
-            // TODO: update db
+            if($this->form_validation->run())
+            {
+                if($this->Screenshot_model($this->_prepare_edit_screenshot($screenshot)))
+                {
+                    $this->session->set_userdata("message", "Screenshot record <mark>updated</mark> successfully.");
+                    $this->User_log_model->log_mesage("Screenshot record UPDATED successfully.");
+                    redirect("admin/videogame/view_videogame/" . $screenshot["vg_id"]);
+                }
+                else
+                {
+                    $this->session->set_userdata("message", "<mark>Unable</mark> to update Screenshot record.");
+                    $this->User_log_model->log_message("Unable to UPDATE Screenshot record.");
+                }
+            }
 
             $data = array(
                 "screenshot" => $screenshot,
@@ -124,17 +137,40 @@ class Screenshot extends CI_Controller
         }
     }
 
+    private function _set_validation_rules_edit_screenshot()
+    {
+        $vg_ids = $this->Videogame_model->get_all_ids();
+        $ss_type_ids = $this->Screenshot_type_model->get_all_ids();
+
+        $str_vg_ids = implode(",", $vg_ids);
+        $str_ss_type_ids = implode(",", $ss_type_ids);
+
+        $this->form_validation->set_rules("ss_name", "Name", "trim|required|max_length[128]");
+        $this->form_validation->set_rules("ss_description", "Description", "trim|max_length[256]");
+        $this->form_validation->set_rules("vg_id", "Videogame", "in_list[". $str_vg_ids . "]");
+        $this->form_validation->set_rules("ss_type_id", "Type", "in_list[" . $str_ss_type_ids . "]");
+    }
+
+    private function _prepare_edit_screenshot($screenshot)
+    {
+        $screenshot["ss_name"] = $this->input->post("ss_name");
+        $screenshot["vg_id"] = $this->input->post("vg_id");
+        $screenshot["ss_description"] = $this->input->post("ss_description");
+        $screenshot["ss_type_id"] = $this->input->post("ss_type_id");
+        return $screenshot;
+    }
+
     public function upload_screenshot()
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
             $this->load->library("upload_helper");
 
-            $screenshot = $this->Screenshot_model->get_by_id($this->session->userdata("ss_id"));
+            $screenshot = $this->Screenshot_model->get_all_videogames_screenshotTypes($this->session->userdata("ss_id"));
 
-            // Davina: upload_helper is a custom library
-            $upload_config = $this->upload_helper->upload_config_filename(strtolower($screenshot
-                ["username"] . "_avatar"), "./uploads/screenshots/", "gif|jpg|png");
+            // File name:
+            // <vg_name>_<ss_id>_<first 3 words of title, underscored>
+            $upload_config = $this->upload_config_images(); //$this->upload_helper->upload_config_filename(strtolower($screenshot                 ["username"] . "_avatar"), "./uploads/screenshots/", "gif|jpg|png");
             $this->load->library("upload", $upload_config);
 
             if ($this->upload->do_upload("avatar_url"))
@@ -170,29 +206,6 @@ class Screenshot extends CI_Controller
             $this->session->set_userdata("message", "This user has invalid access rights.");
             redirect("/admin/authenticate/login/");
         }
-    }
-
-    private function _set_validation_rules_edit_screenshot()
-    {
-        $vg_ids = $this->Videogame_model->get_all_ids();
-        $ss_type_ids = $this->Screenshot_type_model->get_all_ids();
-
-        $str_vg_ids = implode(",", $vg_ids);
-        $str_ss_type_ids = implode(",", $ss_type_ids);
-
-        $this->form_validation->set_rules("ss_name", "Name", "trim|required|max_length[128]");
-        $this->form_validation->set_rules("ss_description", "Description", "trim|max_length[256]");
-        $this->form_validation->set_rules("vg_id", "Videogame", "in_list[". $str_vg_ids . "]");
-        $this->form_validation->set_rules("ss_type_id", "Type", "in_list[" . $str_ss_type_ids . "]");
-    }
-
-    private function _prepare_edit_screenshot($screenshot)
-    {
-        $screenshot["ss_name"] = $this->input->post("ss_name");
-        $screenshot["vg_id"] = $this->input->post("vg_id");
-        $screenshot["ss_description"] = $this->input->post("ss_description");
-        $screenshot["ss_type_id"] = $this->input->post("ss_type_id");
-        return $screenshot;
     }
 
     public function delete_screenshot()

@@ -133,7 +133,6 @@ class User extends CI_Controller
 
         $user = $this->User_model->get_by_id($this->session->userdata("edit_uid"));
 
-        // Davina: upload_helper is a custom library
         $upload_config = $this->upload_helper->upload_config_filename(strtolower($user
             ["username"] . "_avatar"), "./uploads/admin_avatar/", "gif|jpg|jpeg|png|bmp");
         $this->load->library("upload", $upload_config);
