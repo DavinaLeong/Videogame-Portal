@@ -14,9 +14,11 @@
 ?>
 	<?php if(validation_errors()):?>
 		<div class="alert alert-danger" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-			</button>
-			<i class="fa fa-exclamation-triangle"></i>&nbsp;
-			<?=validation_errors();?>
+			<div class="row">
+				<div class="col-sm-1" style="width: 2%;"><<i class="fa fa-exclamation-triangle"></i></div>
+				<div class="col-sm-10"><?=validation_errors();?></div>
+				<div class="col-sm-1 pull-right"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button></div>
+			</div>
 		</div>
 	<?php endif;?>

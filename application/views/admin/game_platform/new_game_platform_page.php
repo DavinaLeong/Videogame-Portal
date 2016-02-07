@@ -84,9 +84,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="platform_developer" class="col-sm-3 control-label">Platform Developer <span class="text-danger">*</span></label>
+                    <label for="platform_developer" class="col-sm-3 control-label">Platform Developer</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="platform_developer" placeholder="Developer" data-parsley-required data-parsley-maxlength="128"/>
+                        <input type="text" class="form-control" name="platform_developer" placeholder="Developer" data-parsley-maxlength="128"/>
                         <span class="help-block">Limited to 128 characters.</span>
                     </div>
                 </div>

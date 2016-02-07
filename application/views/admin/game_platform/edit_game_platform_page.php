@@ -80,16 +80,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="platform_name" class="col-sm-3 control-label">Platform Name</label>
+                                <label for="platform_name" class="col-sm-3 control-label">Platform Name <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="platform_name" placeholder="Name" value="<?=$game_platform["platform_name"]?>" data-parsley-maxlength="64"/>
+                                    <input type="text" class="form-control" name="platform_name" placeholder="Name" value="<?=$game_platform["platform_name"]?>" data-parsley-required data-parsley-maxlength="64"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="platform_abbr" class="col-sm-3 control-label">Abbreviation</label>
+                                <label for="platform_abbr" class="col-sm-3 control-label">Abbreviation <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" value="<?=$game_platform["platform_abbr"]?>" data-parsley-type="alphanum" data-parsley-maxlength="64"/>
+                                    <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" value="<?=$game_platform["platform_abbr"]?>" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="64"/>
                                 </div>
                             </div>
 

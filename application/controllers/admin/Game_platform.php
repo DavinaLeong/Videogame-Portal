@@ -35,7 +35,8 @@ class Game_platform extends CI_Controller
             {
                 if($platform_id = $this->Game_platform_model->insert($this->_prepare_add_game_platform()))
                 {
-                    $this->User_log_model->_set_common_message("create", "Game Platform", "platform_id", $platform_id);
+                    $this->session->set_userdata("message", 'New Game Platform record <mark>created</mark> successfully.<br>Either upload a platform logo or click <mark><i class="fa fa-ban"></i> Cancel</mark> to finish.');
+                    $this->User_log_model->log_message("Game Platform reeord CREATED successfully. | platform_id: " . $platform_id);
                     redirect("admin/game_platform/edit_game_platform/" . $platform_id);
                 }
                 else
@@ -84,12 +85,13 @@ class Game_platform extends CI_Controller
             if($this->Game_platform_model->delete_by_id($platform_id))
             {
                 $this->User_log_model->_set_common_message("delete_by_id", "Game Platform", "platform_id", $platform_id);
-                redirect("admin/game_platform/browse_game_platform");
             }
             else
             {
                 $this->User_log_model->_set_common_message("delete failed", "Game Platform", "platform_id", $platform_id);
             }
+
+            redirect("admin/game_platform/browse_game_platform");
         }
         else
         {
@@ -203,7 +205,7 @@ class Game_platform extends CI_Controller
         $game_platform["platform_developer"] = $this->input->post("platform_developer");
         $game_platform["platform_abbr"] = $this->input->post("platform_abbr");
         $game_platform["platform_logo_url"] = "platform_logo/default_logo.png";
-        $game_platform["platform_logo_col"] = "5CB85C";
+        $game_platform["platform_label_col"] = "5CB85C";
         return $game_platform;
     }
 
