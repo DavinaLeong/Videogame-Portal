@@ -73,7 +73,7 @@ class Screenshot_type extends CI_Controller
     private function _new_screenshot_type_validation_rules()
     {
         $this->form_validation->set_rules("ss_type_name", "Screenshot Type Name", "trim|required|max_length[32]");
-        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[128]");
+        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[512]");
     }
 
     private function _prepare_new_screenshot_type()
@@ -140,7 +140,7 @@ class Screenshot_type extends CI_Controller
     private function _edit_screenshot_type_validation_rules()
     {
         $this->form_validation->set_rules("ss_type_name", "Screenshot Type Name", "trim|required|max_length[32]");
-        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[128]");
+        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[512]");
     }
 
     private function _prepare_edit_screenshot_type($screenshot_type)

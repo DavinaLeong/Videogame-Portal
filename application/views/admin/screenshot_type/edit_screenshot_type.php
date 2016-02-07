@@ -70,10 +70,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="username" class="col-sm-3 control-label">Username <span class="text-danger">*</span></label>
+                        <label for="ss_type_description" class="col-sm-3 control-label">Description <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <textarea name="ss_type_description" id="ss_type_description" class="form-control" rows="3" data-parsley-maxlength="128"><?= $screenshot_type["ss_type_description"] ?></textarea>
-                            <span class="help-block">Limited to 128 characters.</span>
+                            <textarea name="ss_type_description" id="ss_type_description" class="form-control" rows="3" data-parsley-maxlength="512"><?= $screenshot_type["ss_type_description"] ?></textarea>
+                            <span class="help-block">Limited to 512 characters.</span>
                         </div>
                     </div>
 

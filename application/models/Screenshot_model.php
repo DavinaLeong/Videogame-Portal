@@ -43,13 +43,12 @@ class Screenshot_model extends CI_Model
         $data = array(
             "ss_name" => $screenshot["ss_name"],
             "ss_url" => $screenshot["ss_url"],
-            "ss_thumb_url" => $screenshot["ss_thumb_url"],
+            "ss_width" => $screenshot["ss_width"],
+            "ss_height" => $screenshot["ss_height"],
             "ss_description" => $screenshot["ss_description"],
             "ss_type_id" => $screenshot["ss_type_id"],
             "vg_id" => $screenshot["vg_id"],
-            "ss_width" => $screenshot["ss_width"],
-            "ss_height" => $screenshot["ss_height"],
-            "ss_img_type" => $screenshot["ss_img_type"],
+            "ss_img_type" => $screenshot["ss_img_type"]
         );
 
         $now = new DateTime("now");
@@ -63,15 +62,35 @@ class Screenshot_model extends CI_Model
     {
         $data = array(
             "ss_name" => $screenshot["ss_name"],
+            "ss_url" => $screenshot["ss_url"],
+            "ss_width" => $screenshot["ss_width"],
+            "ss_height" => $screenshot["ss_height"],
             "ss_description" => $screenshot["ss_description"],
             "ss_type_id" => $screenshot["ss_type_id"],
             "vg_id" => $screenshot["vg_id"],
+            "ss_img_type" => $screenshot["ss_img_type"]
         );
 
         $now = new DateTime("now");
         $this->db->set('last_updated', $now->format('c'));
-        $query = $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
-        return $query->affected_rows();
+        $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
+        return $this->db->affected_rows();
+    }
+
+    public function update_screenshot_image($screenshot)
+    {
+        $data = array(
+            "ss_url" => $screenshot["ss_url"],
+            "ss_width" => $screenshot["ss_width"],
+            "ss_height" => $screenshot["ss_height"],
+            "ss_img_type" => $screenshot["ss_img_type"],
+            "ss_thumb_url" => $screenshot["ss_thumb_url"]
+        );
+
+        $now = new DateTime("now");
+        $this->db->set('last_updated', $now->format('c'));
+        $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
+        return $this->db->affected_rows();
     }
 
     public function get_all_videogames_screenshotTypes()
@@ -97,8 +116,8 @@ ORDER BY screenshots.ss_name";
     FROM screenshots
     LEFT JOIN videogames ON screenshots.vg_id = videogames.vg_id
     LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
-    ORDER BY screenshots.ss_name
-    WHERE screenshots.ss_id = ?";
+    WHERE screenshots.ss_id = ?
+    ORDER BY screenshots.ss_name";
             $query = $this->db->query($sql, array((int) $ss_id));
             return $query->result_array();
         }

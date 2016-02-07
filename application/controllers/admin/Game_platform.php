@@ -176,8 +176,8 @@ class Game_platform extends CI_Controller
             $platform["platform_logo_url"] = "platform_logo/" . $file_upload_data["file_name"];
             $this->Game_platform_model->update_logo_url($platform);
 
-            $this->session->set_userdata("message", "Logo uploaded successfully.");
-            $this->User_log_model->log_message("Logo uploaded sucessfully. | platform_id: " . $this->session->userdata("platform_id"));
+            $this->session->set_userdata("message", "Logo <mark>uploaded</mark> successfully.");
+            $this->User_log_model->log_message("Logo UPLOADED sucessfully. | platform_id: " . $this->session->userdata("platform_id"));
             $this->session->unset_userdata("logo_upload_errors");
         }
         else

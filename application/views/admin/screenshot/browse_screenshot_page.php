@@ -59,13 +59,15 @@
                     <th style="width: 15%;">&nbsp;</th>
                 </tr>
                 </thead>
-
+<!--
+width="<?=$screenshot['ss_thumb_width']?>px"  height="<?=$screenshot['ss_thumb_height']?>px"
+-->
                 <tbody>
                 <?php foreach($screenshots as $index=>$screenshot): ?>
                     <tr>
                         <td><?= $index + 1; ?></td>
                         <td><?=$screenshot["ss_name"]?></td>
-                        <td class="text-center" style="width: 20%;"><img src="<?=UPLOADS_FOLDER.$screenshot['ss_thumb_url']?>" alt="<?=$screenshot['ss_name']?> thumbnail - <?=$screenshot['vg_name']?>" width="<?=$screenshot['ss_thumb_width']?>px"  height="<?=$screenshot['ss_thumb_height']?>px"/></td>
+                        <td class="text-center" style="width: 20%;"><img src="<?=UPLOADS_FOLDER.$screenshot['ss_thumb_url']?>" alt="<?=$screenshot['ss_name']?> thumbnail - <?=$screenshot['vg_name']?>" width="150px"/></td>
                         <td><?=$screenshot["vg_name"]?></td>
                         <td><?=$screenshot["ss_type_name"]?></td>
                         <td>

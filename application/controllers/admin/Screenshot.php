@@ -56,14 +56,11 @@ class Screenshot extends CI_Controller
         $screenshot["vg_id"] = 1;
         $screenshot["ss_url"] = "screenshots/default_screenshot.png";
         $screenshot["ss_description"] = "";
-        $screenshot["ss_type_id"] = 1;
+        $screenshot["ss_type_id"] = 2;
         $screenshot["ss_width"] = 854;
         $screenshot["ss_height"] = 480;
         $screenshot["ss_img_type"] = "image/png";
-        $screenshot["ss_thumb_url"] = "screenshots/default_thumbnail.png";
-        $screenshot["ss_thumb_width"] = 150;
-        $screenshot["ss_thumb_height"] = 84;
-        $screenshot["ss_thumb_img_type"] = "image/png";
+        $screenshot["ss_thumb_url"] = "screenshots/thumbnails/default_thumbnail.png";
         return $screenshot;
     }
 
@@ -84,19 +81,6 @@ class Screenshot extends CI_Controller
         }
     }
 
-    public function view_screenshot()
-    {
-        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
-        {
-            show_error("view_screenshot not implemented");
-        }
-        else
-        {
-            $this->session->set_userdata("message", "This user has invalid access rights.");
-            redirect("/admin/authenticate/login/");
-        }
-    }
-
     public function edit_screenshot($ss_id)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
@@ -107,10 +91,11 @@ class Screenshot extends CI_Controller
 
             if($this->form_validation->run())
             {
-                if($this->Screenshot_model($this->_prepare_edit_screenshot($screenshot)))
+                if($this->Screenshot_model->update($this->_prepare_edit_screenshot($screenshot)))
                 {
                     $this->User_log_model->_set_common_message("update", "Screenshot", "ssid", $ss_id);
-                    redirect("admin/videogame/view_videogame/" . $screenshot["vg_id"]);
+                    //redirect("admin/videogame/view_videogame/" . $screenshot["vg_id"]);
+                    redirect("admin/screenshot/browse_screenshot");
                 }
                 else
                 {
@@ -141,8 +126,8 @@ class Screenshot extends CI_Controller
         $str_vg_ids = implode(",", $vg_ids);
         $str_ss_type_ids = implode(",", $ss_type_ids);
 
-        $this->form_validation->set_rules("ss_name", "Name", "trim|required|max_length[128]");
-        $this->form_validation->set_rules("ss_description", "Description", "trim|max_length[256]");
+        $this->form_validation->set_rules("ss_name", "Name", "trim|required|max_length[512]");
+        $this->form_validation->set_rules("ss_description", "Description", "trim|max_length[512]");
         $this->form_validation->set_rules("vg_id", "Videogame", "in_list[". $str_vg_ids . "]");
         $this->form_validation->set_rules("ss_type_id", "Type", "in_list[" . $str_ss_type_ids . "]");
     }
@@ -162,41 +147,69 @@ class Screenshot extends CI_Controller
         {
             $this->load->library("upload_helper");
 
-            $screenshot = $this->Screenshot_model->get_all_videogames_screenshotTypes($this->session->userdata("ss_id"));
+            $screenshot = $this->Screenshot_model->get_by_id($this->session->userdata("ss_id"));
+            $screenshot_type = $this->Screenshot_type_model->get_by_id($screenshot["ss_type_id"]);
 
             // File name:
-            // <vg_name>_<ss_id>_<first 3 words of title, underscored>
-            $upload_config = $this->upload_config_images();
-            //$this->upload_helper->upload_config_filename(strtolower($screenshot["username"] . "_avatar"), "./uploads/screenshots/", "gif|jpg|png");
+            // vg<vg_id>_ss<ss_id>_<ss_type_name>
+            $upload_config = $this->upload_helper->upload_config_images(
+            "vg".$screenshot["vg_id"]."_ss".$screenshot["ss_id"]."_".implode("", explode(" ", strtolower($screenshot_type["ss_type_name"]))),
+            "./uploads/screenshots/",
+            1024, 1024);
             $this->load->library("upload", $upload_config);
 
-            if ($this->upload->do_upload("avatar_url"))
+            if ($this->upload->do_upload("ss_url"))
             {
                 //Get new uploaded file data
                 $file_upload_data = $this->upload->data();
 
                 //If a url exists, delete file of url
-                if ($screenshot["avatar_url"])
+                if ($screenshot["ss_url"])
                 {
                     $this->load->helper("file");
-                    delete_files("./uploads/admin_avatar/" . $screenshot["avatar_url"]);
+                    delete_files("./uploads/screenshots/" . $screenshot["ss_url"]);
                 }
 
                 //Update database with new image url
-                $screenshot["avatar_url"] = "admin_avatar/" . $file_upload_data["file_name"];
-                $this->User_model->update($screenshot);
+                $screenshot["ss_url"] = "screenshots/" . $file_upload_data["file_name"];
+                $screenshot["ss_width"] = $file_upload_data["image_width"];
+                $screenshot["ss_height"] = $file_upload_data["image_height"];
+                $screenshot["ss_img_type"] = $file_upload_data["file_type"];
 
-                //If the edit uid matches the logged in user's id, update the session's
-                // avatar url.
-                if($this->session->userdata("uid") == $this->session->userdata("edit_uid"))
+                //Generate thumbnail
+                // TODO: Resolve error
+                $config["image_library"] = "gd2";
+                $config["source_image"] = $screenshot["ss_url"];
+                $config["create_thumb"] = TRUE;
+                $config["maintain_ratio"] = TRUE;
+                $config["width"] = 150;
+                $config["height"] = 150;
+                $config["new_image"] = "screenshots/thumbnails/" . $file_upload_data["file_name"];
+
+                $this->load->library("image_lib", $config);
+                if(!$this->image_lib->resize())
                 {
-                    $this->session->set_userdata($screenshot["avatar_url"]);
+                    show_error(
+                        $config["source_image"] . "<br>" .
+                        $config["new_image"] . "<br>" .
+                        $this->image_lib->display_errors()
+                    );
                 }
 
-                $this->session->set_userdata("message", "Avatar uploaded successfully.");
-                $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $this->session->userdata("edit_uid"));
+                $this->Screenshot_model->update_screenshot_image($screenshot);
+
+                $this->session->set_userdata("message", "Screenshot <mark>uploaded</mark> successfully.");
+                $this->User_log_model->log_message("Screenshot UPLOADED sucessfully. | ss_id: " . $this->session->userdata("ss_id"));
                 $this->session->unset_userdata("avatar_upload_errors");
             }
+            else
+            {
+                $this->session->set_userdata("message", "<mark>Unable</mark> to upload screenshot.");
+                $this->User_log_model->log_message("Unable to UPLOAD screenshot. | ss_id: " . $this->session->userdata("ss_id"));
+                $this->session->set_userdata("ss_upload_errors", $this->upload->display_errors());
+            }
+
+            redirect("/admin/screenshot/edit_screenshot/" . $this->session->userdata("ss_id"));
         }
         else
         {

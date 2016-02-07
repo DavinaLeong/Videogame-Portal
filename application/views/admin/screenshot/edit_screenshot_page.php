@@ -51,13 +51,24 @@
             <div class="col-md-10">
                 <div class="well well-sm" style="background-color: transparent">
                     <p><b>Upload Screenshot</b></p>
+                    <?php
+                    $str_display_width_height = "";
+                    if($screenshot["ss_width"] > DISPLAY_SCREENSHOT_WIDTH)
+                    {
+                        $str_display_width_height .= 'width="' . DISPLAY_SCREENSHOT_WIDTH . 'px"';
+                    }
 
+                    if($screenshot["ss_height"] > DISPLAY_SCREENSHOT_HEIGHT)
+                    {
+                        $str_display_width_height .= 'height="' . DISPLAY_SCREENSHOT_HEIGHT . 'px"';
+                    }
+                    ?>
                     <div class="text-center">
                         <img src="<?=UPLOADS_FOLDER.$screenshot['ss_url']?>"
-                             alt="<?=$screenshot['ss_name']?>"/>
+                             alt="<?=$screenshot['ss_name']?>" <?=$str_display_width_height?>/>
                     </div>
                     <p class="text-danger"><?= $this->session->userdata("file_upload_errors") ?></p>
-                    <button class="btn btn-default center-div" style="margin: 0 auto;" data-toggle="modal"
+                    <button class="btn btn-info center-div" style="margin: 0 auto;" data-toggle="modal"
                             data-target="#uploadModal"><i class="fa fa-upload"></i> Upload Screenshot
                     </button>
                 </div>
@@ -71,18 +82,6 @@
                     <div class="form-group">
                         <label for="ss_name" class="col-md-3 control-label">Name <span class="text-danger">*</span></label>
                         <div class="col-md-9">
-                            <?php
-                            $str_display_width_height = "";
-                            if($screenshot["ss_width"] > DISPLAY_SCREENSHOT_WIDTH)
-                            {
-                                $str_display_width_height .= 'width="' . DISPLAY_SCREENSHOT_WIDTH . 'px"';
-                            }
-
-                            if($screenshot["ss_height"] > DISPLAY_SCREENSHOT_HEIGHT)
-                            {
-                                $str_display_width_height .= 'height="' . DISPLAY_SCREENSHOT_HEIGHT . 'px"';
-                            }
-                            ?>
                             <input type="text" class="form-control" name="ss_name" <?=$str_display_width_height?> placeholder="Name" value="<?=$screenshot['ss_name']?>" required data-parsley-maxlength="512"/>
                         </div>
                     </div>
@@ -112,7 +111,7 @@
                         <label for="username" class="col-md-3 control-label">Description</label>
                         <div class="col-md-9">
                             <textarea name="ss_description" id="ss_description" class="form-control" rows="3" data-parsley-maxlength="256"><?=$screenshot["ss_description"]?></textarea>
-                            <span class="help-block">Limited to 256 characters.</span>
+                            <span class="help-block">Limited to 512 characters.</span>
                         </div>
                     </div>
 
@@ -164,7 +163,7 @@
                             <h4 class="modal-title" id="uploadModalLabel">Upload New Screenshot</h4>
                         </div>
                         <div class="modal-body">
-                            <input type="file" class="form-control" id="avatar_url" name="avatar_url"
+                            <input type="file" class="form-control" id="ss_url" name="ss_url"
                                    placeholder="screenshot url">
                         </div>
                         <div class="modal-footer">

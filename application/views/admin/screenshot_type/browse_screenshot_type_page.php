@@ -104,8 +104,8 @@
 
                         <div class="form-group">
                             <label for="ss_type_description">Description</label>
-                            <textarea name="ss_type_description" id="ss_type_description" class="form-control" rows="3" data-parsley-maxlength="128"></textarea>
-                            <span class="help-block">Limited to 128 characters.</span>
+                            <textarea name="ss_type_description" id="ss_type_description" class="form-control" rows="3" data-parsley-maxlength="512"></textarea>
+                            <span class="help-block">Limited to 512 characters.</span>
                         </div>
 
                         <p class="text-danger text-right">* required fields</p>

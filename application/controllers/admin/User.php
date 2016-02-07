@@ -155,14 +155,14 @@ class User extends CI_Controller
                 $this->session->set_userdata($user["avatar_url"]);
             }
 
-            $this->session->set_userdata("message", "Avatar uploaded successfully.");
-            $this->User_log_model->log_message("Avatar uploaded sucessfully. | uid: " . $this->session->userdata("edit_uid"));
+            $this->session->set_userdata("message", "Avatar <mark>uploaded</mark> successfully.");
+            $this->User_log_model->log_message("Avatar UPLOADED sucessfully. | uid: " . $this->session->userdata("edit_uid"));
             $this->session->unset_userdata("avatar_upload_errors");
         }
         else
         {
-            $this->session->set_userdata("message", "Unable to upload image.");
-            $this->User_log_model->log_message("Unable to upload image. | uid: " . $this->session->userdata("edit_uid"));
+            $this->session->set_userdata("message", "<mark>Unable</mark> to upload avatar.");
+            $this->User_log_model->log_message("Unable to UPLOAD avatar. | uid: " . $this->session->userdata("edit_uid"));
             $this->session->set_userdata("avatar_upload_errors", $this->upload->display_errors());
         }
 

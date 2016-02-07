@@ -29,7 +29,7 @@ class Upload_helper
         return $config;
     }
 
-    public function upload_config_filename($file_name="", $upload_path="", $allowed_types="", $max_size=2048)
+    public function upload_config_filename($file_name="", $upload_path="", $allowed_types="", $max_size=MAX_UPLOAD_FILE_SIZE)
     {
         $config["file_name"] = $file_name;
         $config["upload_path"] = $upload_path;
@@ -59,6 +59,7 @@ class Upload_helper
         $config["overwrite"] = $overwrite;
         $config["min_width"] = $min_width;
         $config["min_width"] = $min_height;
+        $config["max_size"] = MAX_UPLOAD_FILE_SIZE; //3 MB
         $config["allowed_types"] = "gif|jpg|jpeg|png|bmp";
 
         return $config;
