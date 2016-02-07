@@ -35,11 +35,12 @@ class Game_genre extends CI_Controller
             {
                 if($genre_id = $this->Game_genre_model->insert($this->_prepare_add_game_genre()) )
                 {
-                    $this->Common_functions->_send_common_message("create", "Game Genre", "genre_id", $genre_id);
+                    $this->User_log_model->_set_common_message("create", "Game Genre", "genre_id", $genre_id);
+                    redirect("admin/game_genre/browse_game_genre");
                 }
                 else
                 {
-                    $this->Common_functions->_send_common_message("create failed", "Game Genre", "genre_id", $genre_id)
+                    $this->common_functions->_set_common_message("create failed", "Game Genre", "genre_id", $genre_id);
                 }
             }
 
@@ -83,11 +84,11 @@ class Game_genre extends CI_Controller
             {
                 if($this->Game_genre_model->update($this->_prepare_edit_game_genre($game_genre)))
                 {
-                    $this->Common_functions->_send_common_message("edit", "Game Genre", "genre_id", $genre_id);
+                    $this->User_log_model->_set_common_message("edit", "Game Genre", "genre_id", $genre_id);
                 }
                 else
                 {
-                    $this->Common_functions->_send_common_message("edit failed", "Game Genre", "genre_id", $genre_id);
+                    $this->User_log_model->_set_common_message("edit failed", "Game Genre", "genre_id", $genre_id);
                 }
             }
 
@@ -110,12 +111,13 @@ class Game_genre extends CI_Controller
         {
             if($this->Game_genre_model->delete_by_id($genre_id))
             {
-                $this->Common_functions->_send_common_message("delete", "Game Genre", "genre_id", $genre_id);
+                $this->User_log_model->_set_common_message("delete", "Game Genre", "genre_id", $genre_id);
             }
             else
             {
-                $this->Common_functions->_send_common_message("delete failed", "Game Genre", "genre_id", $genre_id);
+                $this->User_log_model->_set_common_message("delete failed", "Game Genre", "genre_id", $genre_id);
             }
+            redirect("admin/game_genre/browse_game_genre");
         }
         else
         {

@@ -53,13 +53,11 @@ class Screenshot_type extends CI_Controller
             {
                 if($ss_type_id = $this->Screenshot_type_model->insert($this->_prepare_new_screenshot_type()) )
                 {
-                    $this->User_log_model->log_message("New Screenshot Type CREATED successfully. | ss_type_id: " . $ss_type_id);
-                    $this->session->set_userdata("message" , "New Screenshot Type <mark>created</mark> successfully.");
+                    $this->User_log_model->_set_common_message("create", "Screenshot Type", "ss_type_id", $ss_type_id);
                 }
                 else
                 {
-                    $this->User_log_model->log_message("<mark>Unable</mark> to create new Screenshot Type.");
-                    $this->session->set_userdata("message" , "Unable to CREATE new Screenshot Type.");
+                    $this->User_log_model->_set_common_message("create failed", "Screenshot Type");
                 }
             }
 
@@ -70,6 +68,19 @@ class Screenshot_type extends CI_Controller
             $this->session->set_userdata("message", "This user has invalid access rights.");
             redirect('/admin/authenticate/login/');
         }
+    }
+
+    private function _new_screenshot_type_validation_rules()
+    {
+        $this->form_validation->set_rules("ss_type_name", "Screenshot Type Name", "trim|required|max_length[32]");
+        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[128]");
+    }
+
+    private function _prepare_new_screenshot_type()
+    {
+        $screenshot_type["ss_type_name"] = $this->input->post("ss_type_name");
+        $screenshot_type["ss_type_description"] = $this->input->post("ss_type_description");
+        return $screenshot_type;
     }
 
     public function edit_screenshot_type($ss_type_id=FALSE)
@@ -83,14 +94,12 @@ class Screenshot_type extends CI_Controller
             {
                 if($ss_type_id = $this->Screenshot_type_model->update($this->_prepare_edit_screenshot_type($screenshot_type)) )
                 {
-                    $this->User_log_model->log_message("Screenshot Type UPDATED successfully. | ss_type_id: " . $ss_type_id);
-                    $this->session->set_userdata("message" , "New Screenshot Type <mark>updated</mark> successfully.");
+                    $this->User_log_model->_set_common_message("update", "Screenshot Type", "ss_type_id", $ss_type_id);
                     redirect("/admin/screenshot_type/browse_screenshot_type");
                 }
                 else
                 {
-                    $this->User_log_model->log_message("Unable to UPDATE Screenshot Type.");
-                    $this->session->set_userdata("message" , "<mark>Unable</mark> to update Screenshot Type.");
+                    $this->User_log_model->_set_common_message("create failed", "Screenshot Type", "ss_type_id", $ss_type_id);
                 }
             }
 
@@ -112,13 +121,11 @@ class Screenshot_type extends CI_Controller
         {
             if($this->Screenshot_type_model->delete_by_id($ss_type_id) )
             {
-                $this->User_log_model->log_message("Screenshot Type DELETED successfully. | ss_type_id: " . $ss_type_id);
-                $this->session->set_userdata("message" , "Screenshot Type <mark>deleted</mark> successfully.");
+                $this->User_log_model->_set_common_message("delete", "Screenshot Type", "ss_type_id", $ss_type_id);
             }
             else
             {
-                $this->User_log_model->log_message("Unable to DELETE Screenshot Type.");
-                $this->session->set_userdata("message" , "<mark>Unable</mark> to delete Screenshot Type.");
+                $this->User_log_model->_set_common_message("delete failed", "Screenshot Type", "ss_type_id", $ss_type_id);
             }
 
             redirect("/admin/screenshot_type/browse_screenshot_type");
@@ -130,23 +137,10 @@ class Screenshot_type extends CI_Controller
         }
     }
 
-    private function _new_screenshot_type_validation_rules()
-    {
-        $this->form_validation->set_rules("ss_type_name", "Screenshot Type Name", "trim|required|max_length[32]");
-        $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[128]");
-    }
-
     private function _edit_screenshot_type_validation_rules()
     {
         $this->form_validation->set_rules("ss_type_name", "Screenshot Type Name", "trim|required|max_length[32]");
         $this->form_validation->set_rules("ss_type_description", "Screenshot Type Description", "trim|max_length[128]");
-    }
-
-    private function _prepare_new_screenshot_type()
-    {
-        $screenshot_type["ss_type_name"] = $this->input->post("ss_type_name");
-        $screenshot_type["ss_type_description"] = $this->input->post("ss_type_description");
-        return $screenshot_type;
     }
 
     private function _prepare_edit_screenshot_type($screenshot_type)

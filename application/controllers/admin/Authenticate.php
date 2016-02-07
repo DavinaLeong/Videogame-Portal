@@ -86,6 +86,7 @@ class Authenticate extends CI_Controller
                     $user["password_hash"] = password_hash($this->input->post("new_password"), PASSWORD_DEFAULT);
                     if($this->User_model->update_password($user) )
                     {
+                        $this->User_log_model->set_message();
                         $this->session->set_userdata("message", "Password changed successfully.");
                         $this->User_log_model->log_message("Password changed successfully.");
                         redirect("admin/user/view_user/" . $user["uid"]);
@@ -114,6 +115,23 @@ class Authenticate extends CI_Controller
         }
     }
 
+    public function browse_userlogs()
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            $data = array(
+                "user_logs" => $this->User_log_model->get_all_user()
+            );
+
+            $this->load->view("admin/authenticate/browse_userlog_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect('/admin/authenticate/login/');
+        }
+    }
+
     private function _handle_login_form()
     {
         $this->_set_login_validation_rules();
@@ -132,7 +150,14 @@ class Authenticate extends CI_Controller
                         $this->session->set_userdata("avatar_url", $user["avatar_url"]);
                         $this->User_log_model->log_message("User has logged in. | uid: " . $user["uid"]);
 
-                        redirect("admin/authenticate/start", "refresh");
+                        if($this->session->userdata("access") == "A")
+                        {
+                            redirect("admin/authenticate/browse_userlogs", "refresh");
+                        }
+                        else
+                        {
+                            redirect("admin/authenticate/start", "refresh");
+                        }
                     }
                     else
                     {

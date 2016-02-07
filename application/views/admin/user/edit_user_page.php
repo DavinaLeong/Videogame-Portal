@@ -97,11 +97,11 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="status">
                                     <option
-                                        value="Active" <?= set_select('status', 'Active', $user['status'] == "Active" ? TRUE : FALSE) ?> >
+                                        value="Active" <?= set_select('status', 'Active', ($user['status'] == "Active")) ?> >
                                         Active
                                     </option>
                                     <option
-                                        value="Not Active" <?= set_select('status', 'Not Active', $user['status'] == "Not Active" ? TRUE : FALSE) ?> >
+                                        value="Not Active" <?= set_select('status', 'Not Active', ($user['status'] == "Not Active")) ?> >
                                         Not Active
                                     </option>
                                 </select>
@@ -114,9 +114,9 @@
 
                             <div class="col-sm-9">
                                 <select class="form-control" name="access">
-                                    <option>A</option>
-                                    <option>M</option>
-                                    <option>U</option>
+                                    <option value="A" <?=set_select("access", "A", ($user["access"] == "A"))?> >Admin</option>
+                                    <option value="M" <?=set_select("access", "M", ($user["access"] == "M"))?> >Manager</option>
+                                    <option value="U" <?=set_select("access", "U", ($user["access"] == "U"))?> >User</option>
                                 </select>
                             </div>
                         </div>

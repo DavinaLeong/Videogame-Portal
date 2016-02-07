@@ -35,15 +35,12 @@ class Game_platform extends CI_Controller
             {
                 if($platform_id = $this->Game_platform_model->insert($this->_prepare_add_game_platform()))
                 {
-                    $this->session->set_userdata("message", "New Game Platform <mark>added</mark>.");
-                    $this->User_log_model->log_message("New Game Platform ADDED |  platform_id: " . $platform_id);
-                    $this->session->set_userdata("message", "Upload a Platform Logo, or click <mark><i class='fa fa-ban'></i> Cancel</mark> to cancel.");
+                    $this->User_log_model->_set_common_message("create", "Game Platform", "platform_id", $platform_id);
                     redirect("admin/game_platform/edit_game_platform/" . $platform_id);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "<mark>Unable</mark> to add new Game Platform.");
-                    $this->User_log_model->log_message("Unable to ADD new Game Platform.");
+                    $this->User_log_model->_set_common_message("create failed", "Game Platform");
                 }
             }
 
@@ -86,14 +83,12 @@ class Game_platform extends CI_Controller
         {
             if($this->Game_platform_model->delete_by_id($platform_id))
             {
-                $this->session->set_userdata("message", "Game Platform <mark>deleted</mark> successfully.");
-                $this->User_log_model->log_message("Game Platform DELETED successfully. | platform_id: " . $platform_id);
+                $this->User_log_model->_set_common_message("delete_by_id", "Game Platform", "platform_id", $platform_id);
                 redirect("admin/game_platform/browse_game_platform");
             }
             else
             {
-                $this->session->set_userdata("message", "<mark>Unable</mark> to delete Game Platform record.");
-                $this->User_log_model->log_message("Unable to DELETE Game Platform record. | platform_id: " . $platform_id);
+                $this->User_log_model->_set_common_message("delete failed", "Game Platform", "platform_id", $platform_id);
             }
         }
         else
@@ -132,14 +127,12 @@ class Game_platform extends CI_Controller
                 if($this->Game_platform_model->update($this->_prepare_edit_game_platform($game_platform) ) ||
                     $this->session->userdata("logo_upload_errors") == "")
                 {
-                    $this->session->set_userdata("message", "Game Platform record <mark>updated</mark> successfully.");
-                    $this->User_log_model->log_message("Game Platform record UPDATED successfully. | platform_id: " . $platform_id);
+                    $this->User_log_model->_set_common_message("update", "Game Platform", "platform_id", $platform_id);
                     redirect("admin/game_platform/view_game_platform/" . $platform_id);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "An error has occured. <mark>Unable</mark> to update Game Platform record.");
-                    $this->User_log_model->log_message("Unable to UPDATE Game Platform record. | platform_id: " . $platform_id);
+                    $this->User_log_model->_set_common_message("update failed", "Game Platform", "platform_id", $platform_id);
                 }
             }
 

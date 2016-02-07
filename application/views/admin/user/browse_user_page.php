@@ -78,15 +78,15 @@
                             <?php switch($user["access"])
                             {
                                 case "A":
-                                    echo "Admin";
+                                    echo '<span class="access-admin">Admin</span>';
                                     break;
 
                                 case "U":
-                                    echo "User";
+                                    echo '<span class="access-user">User</span>';
                                     break;
 
                                 case "M":
-                                    echo "Manager";
+                                    echo '<span class="access-manager">Manager</span>';
                                     break;
 
                                 default:

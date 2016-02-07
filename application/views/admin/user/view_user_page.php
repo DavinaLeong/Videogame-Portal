@@ -39,7 +39,7 @@
 </head>
 <body>
     <div class="container">
-        
+
         <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
         <div class="page-header">

@@ -157,3 +157,18 @@ body
 {
     color: #999;
 }
+
+.access-admin
+{
+    color: #00bc99;
+}
+
+.access-manager
+{
+    color: #b001bc;
+}
+
+.access-user
+{
+    color: #bb3500;
+}

@@ -35,15 +35,12 @@ class User extends CI_Controller
             {
                 if($uid = $this->User_model->insert($this->_prepare_add_user() ))
                 {
-                    $this->session->set_userdata("message", "New User Record <mark>added</mark>.");
-                    $this->User_log_model->log_message("New User Record ADDED |  uid: " . $uid);
-                    $this->session->set_userdata("message", "Upload a <mark>Personal Avatar</mark>, or click \"Back\" to cancel.");
+                    $this->User_log_model->_set_common_message("create", "User", "uid", $uid);
                     redirect("admin/user/edit_user/" . $uid);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "Unable to ADD new User Record.");
-                    $this->User_log_model->log_message("<mark>Unable</mark> to add new User Record.");
+                    $this->User_log_model->_set_common_message("create failed", "User");
                 }
             }
 
@@ -104,14 +101,12 @@ class User extends CI_Controller
                 if($uid = $this->User_model->update($this->_prepare_edit_user($user) ) ||
                     $this->session->userdata("avatar_upload_errors") == "")
                 {
-                    $this->session->set_userdata("message", "User record <mark>updated</mark> successfully.");
-                    $this->User_log_model->log_message("User record UPDATED successfully. | uid: " . $uid);
+                    $this->User_log_model->_set_common_message("update", "User", "uid", $uid);
                     redirect("admin/user/view_user/" . $uid);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "An error has occured. <mark class='highlight-red'>Unable</mark> to update User record.");
-                    $this->User_log_model->log_message("<mark class='highlight-red'>Unable</mark> to UPDATE user record. | uid: " . $uid);
+                    $this->User_log_model->_set_common_message("update failed", "User", "uid", $uid);
                 }
             }
 

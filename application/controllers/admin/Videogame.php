@@ -34,13 +34,12 @@ class Videogame extends CI_Controller
             {
                 if($vg_id = $this->Videogame_model->insert($this->_prepare_new_videogame()))
                 {
-                    $this->session->set_userdata("message", "New Videogame record <mark>added</mark>.");
-                    $this->User_log_model->log_message("New Videogame record ADDED. | vg_id: " . $vg_id);
+                    $this->User_log_model->_set_common_message("create", "Videogame", "vg_id", $vg_id);
                     redirect("admin/videogame/browse_videogame");
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "<mark>Unable</mark> to ADDED new Videogame record.");
+                    $this->User_log_model->_set_common_message("create failed", "Videogame");
                     $this->User_log_model->log_message("Unable to ADD new Videogame record.");
                 }
             }
@@ -144,14 +143,12 @@ class Videogame extends CI_Controller
             {
                 if($this->Videogame_model->update($this->_prepare_edit_videogame($videogame)))
                 {
-                    $this->session->set_userdata("message", "Videogame record <mark>updated</mark> successfully.");
-                    $this->User_log_model->log_message("Videogame record UPDATED successfully. | vg_id: " . $vg_id);
+                    $this->User_log_model->_set_common_message("update", "Videogame", "vg_id", $vg_id);
                     redirect("admin/videogame/browse_videogame");
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "<mark>Unable</mark> to update Videogame record.");
-                    $this->User_log_model->log_message("Unable to UPDATE Videogame record. | vg_id: " . $vg_id);
+                    $this->User_log_model->_set_common_message("update failed", "Videogame", "vg_id", $vg_id);
                 }
             }
 
@@ -216,13 +213,11 @@ class Videogame extends CI_Controller
         {
             if($this->Videogame_model->delete_by_id($vg_id))
             {
-                $this->session->set_userdata("message", "Videogame record <mark>deleted</mark> successfully.");
-                $this->User_log_model->log_message("Videogame record DELETED successfully. | vg_id: " . $vg_id);
+                $this->User_log_model->_set_common_message("delete", "Videogame", "vg_id", $vg_id);
             }
             else
             {
-                $this->session->set_userdata("message", "<mark>Unaable</mark> to delete Videogame record.");
-                $this->User_log_model->log_message("Unable to DELETE Videogame record. | vg_id: " . $vg_id);
+                $this->User_log_model->_set_common_message("delete failed", "Videogame", "vg_id", $vg_id);
             }
 
             redirect("admin/videogame/browse_videogame");

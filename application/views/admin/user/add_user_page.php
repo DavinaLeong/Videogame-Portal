@@ -60,14 +60,14 @@
                     <div class="form-group">
                         <label for="password" class="col-sm-3 control-label">Password <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input id="password" type="password" class="form-control" name="password" placeholder="password" value="<?=set_value('password')?>" required data-parsley-minlength="8"/>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="password" required data-parsley-minlength="8"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="confirm_password" class="col-sm-3 control-label">Confirm Password <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="password" value="<?=set_value('password')?>" required data-parsley-minlength="8" data-parsley-equalto="#password"/>
+                            <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="password" required data-parsley-minlength="8" data-parsley-equalto="#password"/>
                         </div>
                     </div>
                     <div class="space col-sm-12">&nbsp;</div>
@@ -86,9 +86,9 @@
                         <label for="access" class="col-sm-3 control-label">Access Rights <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="access">
-                                <option>A</option>
-                                <option>M</option>
-                                <option>U</option>
+                                <option value="A">Admin</option>
+                                <option value="M">Manager</option>
+                                <option value="U">User</option>
                             </select>
                         </div>
                     </div>

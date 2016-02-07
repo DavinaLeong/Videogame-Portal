@@ -61,7 +61,7 @@ class Upload_helper
         $config["min_width"] = $min_height;
         $config["allowed_types"] = "gif|jpg|jpeg|png|bmp";
 
-        return $config
+        return $config;
     }
 
 }//end class upload_helper

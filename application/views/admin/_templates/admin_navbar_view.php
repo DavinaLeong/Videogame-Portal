@@ -110,8 +110,11 @@
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/authenticate/change_password')?>"><i class="fa fa-key"></i> Change
                 Password</a></li>
-            <li role="separator" class="divider"></li>
             <li><a href="<?=site_url('admin/authenticate/logout')?>"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <?php if($this->User_log_model->validate_access("A", $this->session->userdata("access"))): ?>
+            <li role="separator" class="divider"></li>
+            <li><a href="<?=site_url('admin/authenticate/browse_userlogs')?>"><i class="fa fa-list"></i> View Logged Messages</a></li>
+            <?php endif; ?>
           </ul>
         </li>
       </ul>

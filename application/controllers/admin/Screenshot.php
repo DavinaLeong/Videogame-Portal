@@ -33,14 +33,12 @@ class Screenshot extends CI_Controller
         {
             if($ss_id = $this->Screenshot_model->insert($this->_prepare_add_screenshot()))
             {
-                $this->session->set_userdata("message", "New Screenshot recored <mark>created</mark>.");
-                $this->User_log_model->log_message("New Screenshot recored CREATED. | ss_id: " . $ss_id);
+                $this->User_log_model->_set_common_message("create", "Screenshot", "ssid", $ss_id);
                 redirect("admin/screenshot/edit_screenshot/" . $ss_id);
             }
             else
             {
-                $this->session->set_userdata("message", "<mark>Unable</mark> to create new Screenshot record.");
-                $this->User_log_model->log_message("Unable to CREATE new Screenshot record.");
+                $this->User_log_model->_set_common_message("create failed", "Screenshot");
                 redirect("admin/screenshot/browse_screenshot");
             }
         }
@@ -111,14 +109,12 @@ class Screenshot extends CI_Controller
             {
                 if($this->Screenshot_model($this->_prepare_edit_screenshot($screenshot)))
                 {
-                    $this->session->set_userdata("message", "Screenshot record <mark>updated</mark> successfully.");
-                    $this->User_log_model->log_mesage("Screenshot record UPDATED successfully.");
+                    $this->User_log_model->_set_common_message("update", "Screenshot", "ssid", $ss_id);
                     redirect("admin/videogame/view_videogame/" . $screenshot["vg_id"]);
                 }
                 else
                 {
-                    $this->session->set_userdata("message", "<mark>Unable</mark> to update Screenshot record.");
-                    $this->User_log_model->log_message("Unable to UPDATE Screenshot record.");
+                    $this->User_log_model->_set_common_message("update failed", "Screenshot", "ssid", $ss_id);
                 }
             }
 
@@ -170,7 +166,8 @@ class Screenshot extends CI_Controller
 
             // File name:
             // <vg_name>_<ss_id>_<first 3 words of title, underscored>
-            $upload_config = $this->upload_config_images(); //$this->upload_helper->upload_config_filename(strtolower($screenshot                 ["username"] . "_avatar"), "./uploads/screenshots/", "gif|jpg|png");
+            $upload_config = $this->upload_config_images();
+            //$this->upload_helper->upload_config_filename(strtolower($screenshot["username"] . "_avatar"), "./uploads/screenshots/", "gif|jpg|png");
             $this->load->library("upload", $upload_config);
 
             if ($this->upload->do_upload("avatar_url"))
