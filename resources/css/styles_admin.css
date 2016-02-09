@@ -52,6 +52,17 @@ body
 {
     font-style: italic;
     color: #ccc;
+    width: 200px;
+    height: 200px;
+    vertical-align: middle;
+    margin: 1em auto;
+    text-align: center;
+}
+
+.image-preview-shaded
+{
+    font-style: italic;
+    color: #ccc;
     background-color: #eee;
     width: 200px;
     height: 200px;
