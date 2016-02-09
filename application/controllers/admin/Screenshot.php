@@ -176,26 +176,6 @@ class Screenshot extends CI_Controller
                 $screenshot["ss_height"] = $file_upload_data["image_height"];
                 $screenshot["ss_img_type"] = $file_upload_data["file_type"];
 
-                //Generate thumbnail
-                // TODO: Resolve error
-                $config["image_library"] = "gd2";
-                $config["source_image"] = $screenshot["ss_url"];
-                $config["create_thumb"] = TRUE;
-                $config["maintain_ratio"] = TRUE;
-                $config["width"] = 150;
-                $config["height"] = 150;
-                $config["new_image"] = "screenshots/thumbnails/" . $file_upload_data["file_name"];
-
-                $this->load->library("image_lib", $config);
-                if(!$this->image_lib->resize())
-                {
-                    show_error(
-                        $config["source_image"] . "<br>" .
-                        $config["new_image"] . "<br>" .
-                        $this->image_lib->display_errors()
-                    );
-                }
-
                 $this->Screenshot_model->update_screenshot_image($screenshot);
 
                 $this->session->set_userdata("message", "Screenshot <mark>uploaded</mark> successfully.");

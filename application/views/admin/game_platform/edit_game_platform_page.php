@@ -139,7 +139,7 @@
                         <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
                     <?php endif; ?>
                     <button class="btn btn-default center-div" style="margin: 0 auto;"  data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"
-></i> Upload Avatar</button>
+></i> Upload Logo</button>
                 </div>
             </div>
         </div>

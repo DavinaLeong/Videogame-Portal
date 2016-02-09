@@ -62,13 +62,9 @@ class Screenshot_model extends CI_Model
     {
         $data = array(
             "ss_name" => $screenshot["ss_name"],
-            "ss_url" => $screenshot["ss_url"],
-            "ss_width" => $screenshot["ss_width"],
-            "ss_height" => $screenshot["ss_height"],
             "ss_description" => $screenshot["ss_description"],
             "ss_type_id" => $screenshot["ss_type_id"],
             "vg_id" => $screenshot["vg_id"],
-            "ss_img_type" => $screenshot["ss_img_type"]
         );
 
         $now = new DateTime("now");
@@ -84,7 +80,6 @@ class Screenshot_model extends CI_Model
             "ss_width" => $screenshot["ss_width"],
             "ss_height" => $screenshot["ss_height"],
             "ss_img_type" => $screenshot["ss_img_type"],
-            "ss_thumb_url" => $screenshot["ss_thumb_url"]
         );
 
         $now = new DateTime("now");
