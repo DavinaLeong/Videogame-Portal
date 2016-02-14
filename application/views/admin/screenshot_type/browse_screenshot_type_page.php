@@ -23,10 +23,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
+    <link rel="stylesheet" type="text/css" href="<?=RESOURCES_FOLDER?>css/datatables.min.css"/>
 
     <title>Video Game Portal Admin</title>
 </head>
@@ -142,29 +141,27 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <?php
-    $this->load->view("admin/_templates/admin_footer_view");
-    $this->load->view("templates/js_common");
-    $this->load->view("templates/datatables_resources");
-    ?>
-
-    <script>
-        $(document).ready(function()
-        {
-            $("#ss_type_table").dataTable();
-        });
-
-        var ss_type_id = 0;
-        function onDeleteButtonClicked(delete_ss_type_id)
-        {
-            ss_type_id = delete_ss_type_id;
-        }
-
-        function onConfirmDelete()
-        {
-            window.location.href = "<?=site_url('admin/screenshot_type/delete_screenshot_type')?>/" + ss_type_id;
-        }
-    </script>
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
+<?php $this->load->view("templates/js_common"); ?>
+<script type="text/javascript" src="<?=RESOURCES_FOLDER?>js/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#ss_type_table").dataTable();
+    });
+
+    var ss_type_id = 0;
+    function onDeleteButtonClicked(delete_ss_type_id)
+    {
+        ss_type_id = delete_ss_type_id;
+    }
+
+    function onConfirmDelete()
+    {
+        window.location.href = "<?=site_url('admin/screenshot_type/delete_screenshot_type')?>/" + ss_type_id;
+    }
+</script>
 </body>
 </html>

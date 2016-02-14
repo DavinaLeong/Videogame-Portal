@@ -22,11 +22,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
+
     <title>Video Game Portal Admin</title>
 </head>
 <body>
@@ -149,7 +147,7 @@
                 <div class="image-preview"><img src="<?= site_url('uploads/' . $user['avatar_url']) ?>"
                                                 alt="<?= $user['username'] ?> avatar"/></div>
                 <p class="text-danger"><?= $this->session->userdata("file_upload_errors") ?></p>
-                <button class="btn btn-default center-div" style="margin: 0 auto;" data-toggle="modal"
+                <button class="btn btn-success center-div" style="margin: 0 auto;" data-toggle="modal"
                         data-target="#uploadModal"><i class="fa fa-upload"
                         ></i> Upload Avatar
                 </button>
@@ -178,9 +176,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i>
-                            Cancel
-                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i>Cancel</button>
                     </div>
                 </div>
             </form>
@@ -189,6 +185,6 @@
 
     <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
-
+<?php $this->load->view("templates/js_common"); ?>
 </body>
 </html>

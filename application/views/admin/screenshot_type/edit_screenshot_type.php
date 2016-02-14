@@ -22,11 +22,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
+
     <title>Video Game Portal Admin</title>
 </head>
 <body>
@@ -116,24 +114,23 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <?php
-    $this->load->view("admin/_templates/admin_footer_view");
-    $this->load->view("templates/js_common");
-    ?>
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 
-    <script>
-        var ss_type_id = 0;
-        function onDeleteButtonClicked(delete_ss_type_id)
-        {
-            ss_type_id = delete_ss_type_id;
-        }
 
-        function onConfirmDelete()
-        {
-            window.location.href = "<?=site_url('admin/screenshot_type/delete_screenshot_type')?>/" + ss_type_id;
-        }
-    </script>
 </div>
+<?php $this->load->view("templates/js_common"); ?>
 
+<script>
+    var ss_type_id = 0;
+    function onDeleteButtonClicked(delete_ss_type_id)
+    {
+        ss_type_id = delete_ss_type_id;
+    }
+
+    function onConfirmDelete()
+    {
+        window.location.href = "<?=site_url('admin/screenshot_type/delete_screenshot_type')?>/" + ss_type_id;
+    }
+</script>
 </body>
 </html>

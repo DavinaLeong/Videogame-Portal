@@ -23,10 +23,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
+    <link rel="stylesheet" type="text/css" href="<?=RESOURCES_FOLDER?>css/datatables.min.css"/>
 
     <title>Video Game Portal Admin</title>
 
@@ -114,7 +113,7 @@
                         }
                         ?>
                     </td>
-                    
+
                     <td class="button-col">
                         <button name="view" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
                         <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/edit_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
@@ -146,30 +145,28 @@
         </div>
     </div>
 
-    <?php
-    $this->load->view("admin/_templates/admin_footer_view");
-    $this->load->view("templates/js_common");
-    $this->load->view("templates/datatables_resources");
-    ?>
-
-    <script>
-        $(document).ready(function()
-        {
-            $("#videogame_table").dataTable();
-        });
-
-        var delete_videogame_id = 0;
-        function onDeleteButtonClicked(videogame_id)
-        {
-            delete_videogame_id = videogame_id;
-        }
-
-        function OnConfirmDelete()
-        {
-            var delete_videogame_url = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_videogame_id;
-            window.location.href = delete_videogame_url;
-        }
-    </script>
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
+<?php $this->load->view("templates/js_common"); ?>
+<script type="text/javascript" src="<?=RESOURCES_FOLDER?>js/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#videogame_table").dataTable();
+    });
+
+    var delete_videogame_id = 0;
+    function onDeleteButtonClicked(videogame_id)
+    {
+        delete_videogame_id = videogame_id;
+    }
+
+    function OnConfirmDelete()
+    {
+        var delete_videogame_url = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_videogame_id;
+        window.location.href = delete_videogame_url;
+    }
+</script>
 </body>
 </html>

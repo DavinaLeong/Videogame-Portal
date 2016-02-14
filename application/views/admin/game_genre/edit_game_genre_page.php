@@ -22,10 +22,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
 
     <title>Video Game Portal Admin</title>
 </head>
@@ -124,31 +122,22 @@
         </div>
     </div>
 
-    <?php
-    $this->load->view("admin/_templates/admin_footer_view");
-    $this->load->view("templates/js_common");
-    $this->load->view("templates/datatables_resources");
-    ?>
-
-    <script>
-        $(document).ready(function()
-        {
-            $("#genre_table").dataTable();
-        });
-
-        var delete_game_genre_id = 0;
-        function onDeleteButtonClicked(game_genre_id)
-        {
-            delete_game_genre_id = game_genre_id;
-        }
-
-        function OnConfirmDelete()
-        {
-            var delete_genre_url = "<?=site_url('admin/game_genre/delete_game_genre')?>" + "/" + delete_game_genre_id;
-            window.location.href = delete_genre_url;
-        }
-    </script>
-
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
+<?php $this->load->view("templates/js_common"); ?>
+
+<script>
+    var delete_game_genre_id = 0;
+    function onDeleteButtonClicked(game_genre_id)
+    {
+        delete_game_genre_id = game_genre_id;
+    }
+
+    function OnConfirmDelete()
+    {
+        var delete_genre_url = "<?=site_url('admin/game_genre/delete_game_genre')?>" + "/" + delete_game_genre_id;
+        window.location.href = delete_genre_url;
+    }
+</script>
 </body>
 </html>

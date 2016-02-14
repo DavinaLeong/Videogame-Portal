@@ -22,10 +22,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
+
     <title>Video Game Portal Admin</title>
 
     <style type="text/css">
@@ -38,114 +37,112 @@
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
+    <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
-        <div class="page-header">
-            <h1><i class="text-info fa fa-eye"></i> View User: <span class="text-info"><?=$user["name"]?></span></h1>
+    <div class="page-header">
+        <h1><i class="text-info fa fa-eye"></i> View User: <span class="text-info"><?=$user["name"]?></span></h1>
 
-            <div class="btn-group" role="group" aria-label="actionButtonGroup">
-                <button name="back" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
-                    <i class="fa fa-chevron-left"></i> Browse
-                </button>
+        <div class="btn-group" role="group" aria-label="actionButtonGroup">
+            <button name="back" onclick="window.location.replace('<?=site_url("admin/user/browse_user/")?>')" class="btn btn-default">
+                <i class="fa fa-chevron-left"></i> Browse
+            </button>
 
-                <button name="back" onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')"
-                        class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add
-                </button>
+            <button name="back" onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')"
+                    class="btn btn-default">
+                <i class="fa fa-plus"></i> Add
+            </button>
 
-                <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-default">
-                    <i class="fa fa-pencil-square-o"></i> Edit
-                </button>
-            </div>
+            <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-default">
+                <i class="fa fa-pencil-square-o"></i> Edit
+            </button>
         </div>
-
-        <?php $this->load->view("admin/_templates/user_message_view"); ?>
-
-        <p>User's details:</p>
-        <div class="image-preview">
-            <img class="img-rounded" src="<?=site_url('uploads/' . $user['avatar_url'])?>" alt="<?=$user['username']?>
-            avatar" />
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <td><?=$user["uid"]?></td>
-
-                    <th>Username</th>
-                    <td><?=$user["username"]?></td>
-                </tr>
-                <tr>
-                    <th>Access Rights</th>
-                    <td>
-                    <?php switch($user["access"])
-                    {
-                        case "A":
-                            echo "Admin";
-                            break;
-
-                        case "U":
-                            echo "User";
-                            break;
-
-                        case "M":
-                            echo "Manager";
-                            break;
-
-                        default:
-                            echo "<span class='text-danger'>invalid</span>";
-                            break;
-                    }
-                    ?>
-                    </td>
-
-                    <th>Status</th>
-                    <td>
-                    <?php
-                    switch($user["status"])
-                    {
-                        case "Active":
-                            echo "<span class='text-success'>" . $user["status"] . "</span>";
-                            break;
-
-                        case "Not Active":
-                            echo "<span class='text-danger'>" . $user["status"] . "</span>";
-                            break;
-
-                        default:
-                            echo "";
-                            break;
-                    }
-                    ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Last Updated</th>
-                    <td>
-                    <?php
-                    $display_last_updated = new Datetime($user["last_updated"], new DateTimeZone(DATETIMEZONE));
-                    echo $display_last_updated->format("d M Y");
-                    ?>
-                    </td>
-
-                    <th>Date Added</th>
-                    <td>
-                    <?php
-                    $display_date_added = new Datetime($user["date_added"], new DateTimeZone(DATETIMEZONE));
-                    echo $display_date_added->format("d M Y");
-                    ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <?php
-        $this->load->view("admin/_templates/admin_footer_view");
-        $this->load->view("templates/js_common");
-        ?>
     </div>
+
+    <?php $this->load->view("admin/_templates/user_message_view"); ?>
+
+    <p>User's details:</p>
+    <div class="image-preview">
+        <img class="img-rounded" src="<?=site_url('uploads/' . $user['avatar_url'])?>" alt="<?=$user['username']?>
+        avatar" />
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td><?=$user["uid"]?></td>
+
+                <th>Username</th>
+                <td><?=$user["username"]?></td>
+            </tr>
+            <tr>
+                <th>Access Rights</th>
+                <td>
+                <?php switch($user["access"])
+                {
+                    case "A":
+                        echo "Admin";
+                        break;
+
+                    case "U":
+                        echo "User";
+                        break;
+
+                    case "M":
+                        echo "Manager";
+                        break;
+
+                    default:
+                        echo "<span class='text-danger'>invalid</span>";
+                        break;
+                }
+                ?>
+                </td>
+
+                <th>Status</th>
+                <td>
+                <?php
+                switch($user["status"])
+                {
+                    case "Active":
+                        echo "<span class='text-success'>" . $user["status"] . "</span>";
+                        break;
+
+                    case "Not Active":
+                        echo "<span class='text-danger'>" . $user["status"] . "</span>";
+                        break;
+
+                    default:
+                        echo "";
+                        break;
+                }
+                ?>
+                </td>
+            </tr>
+            <tr>
+                <th>Last Updated</th>
+                <td>
+                <?php
+                $display_last_updated = new Datetime($user["last_updated"], new DateTimeZone(DATETIMEZONE));
+                echo $display_last_updated->format("d M Y");
+                ?>
+                </td>
+
+                <th>Date Added</th>
+                <td>
+                <?php
+                $display_date_added = new Datetime($user["date_added"], new DateTimeZone(DATETIMEZONE));
+                echo $display_date_added->format("d M Y");
+                ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
+</div>
+<?php $this->load->view("templates/js_common"); ?>
 </body>
 </html>

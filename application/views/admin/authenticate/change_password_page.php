@@ -22,11 +22,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
     <title>Video Game Portal Admin</title>
 </head>
 <body>
@@ -86,7 +83,7 @@
                         <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="password" value="<?=set_value('password')?>" required data-parsley-minlength="8" data-parsley-equalto="#new_password"/>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-9 col-sm-offset-3">
                     <p class="text-danger">* required fields</p>
                 </div>
@@ -103,6 +100,6 @@
 
     <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
-
+<?php $this->load->view("templates/js_common"); ?>
 </body>
 </html>

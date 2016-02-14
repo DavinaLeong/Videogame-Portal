@@ -23,10 +23,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
+    <link rel="stylesheet" type="text/css" href="<?=RESOURCES_FOLDER?>css/datatables.min.css"/>
 
     <title>Video Game Portal Admin</title>
 
@@ -129,30 +128,28 @@
         </div>
     </div>
 
-    <?php
-    $this->load->view("admin/_templates/admin_footer_view");
-    $this->load->view("templates/js_common");
-    $this->load->view("templates/datatables_resources");
-    ?>
-
-    <script>
-        $(document).ready(function()
-        {
-            $("#platform_table").dataTable();
-        });
-
-        var delete_platform_id = 0;
-        function onDeleteButtonClicked(platform_id)
-        {
-            delete_platform_id = platform_id;
-        }
-
-        function OnConfirmDelete()
-        {
-            var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform')?>" + "/" + delete_platform_id;
-            window.location.href = delete_platform_url;
-        }
-    </script>
+    <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
+<?php $this->load->view("templates/js_common"); ?>
+<script type="text/javascript" src="<?=RESOURCES_FOLDER?>js/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#platform_table").dataTable();
+    });
+
+    var delete_platform_id = 0;
+    function onDeleteButtonClicked(platform_id)
+    {
+        delete_platform_id = platform_id;
+    }
+
+    function OnConfirmDelete()
+    {
+        var delete_platform_url = "<?=site_url('admin/game_platform/delete_game_platform')?>" + "/" + delete_platform_id;
+        window.location.href = delete_platform_url;
+    }
+</script>
 </body>
 </html>

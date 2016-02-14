@@ -22,23 +22,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    $this->load->view("templates/meta_common");
-    $this->load->view("templates/css_common");
-    $this->load->view("templates/js_common");
-    $this->load->view("admin/_templates/datepicker_view");
-    ?>
+    <?php $this->load->view("templates/meta_common"); ?>
+    <?php $this->load->view("templates/css_common"); ?>
 
     <title>Video Game Portal Admin</title>
-
-    <script>
-        $(document).ready(function()
-        {
-            $("#date_purchased").datepicker({
-                format: "dd-mm-yyyy"
-            });
-        });
-    </script>
 </head>
 <body>
 <div class="container">
@@ -107,6 +94,16 @@
 
     <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
+<?php $this->load->view("templates/js_common"); ?>
+<script src="<?=RESOURCES_FOLDER?>js/bootstrap-datepicker.js"></script>
 
+<script>
+    $(document).ready(function()
+    {
+        $("#date_purchased").datepicker({
+            format: "dd-mm-yyyy"
+        });
+    });
+</script>
 </body>
 </html>
