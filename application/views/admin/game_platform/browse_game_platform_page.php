@@ -31,7 +31,7 @@
 
     <style type="text/css">
         .button-col {
-            width: 30%;
+            width: 22%;
         }
     </style>
 </head>
@@ -70,7 +70,7 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_platform["platform_name"]?></td>
-                    <td><span class="badge" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
+                    <td><span class="badge" style="background-color: <?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
                     <td>
                         <?php if($game_platform["platform_logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["platform_logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
@@ -98,9 +98,11 @@
                     </td>
 
                     <td class="button-col">
-                        <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                        <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        <div class="btn-group">
+                            <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>

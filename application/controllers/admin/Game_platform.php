@@ -192,10 +192,11 @@ class Game_platform extends CI_Controller
 
     private function _add_game_platform_validation_rules()
     {
-        $this->form_validation->set_rules("platform_name", "Name", "trim|required|max_length[64]");
-        $this->form_validation->set_rules("year_intro", "Year Introduced", "trim|required|is_natural");
+        $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
+        $this->form_validation->set_rules("year_intro", "Year Introduced", "trim|required|is_natural|max_length[4]");
         $this->form_validation->set_rules("platform_developer", "Developer", "trim|max_length[128]");
         $this->form_validation->set_rules("platform_abbr", "Abbreviation", "trim|required|alpha_numeric|max_length[16]");
+        $this->form_validation->set_rules("platform_label_col", "Label Color", "trim|max_length[7]|callback_validate_hex_col");
     }
 
     private function _prepare_add_game_platform()
@@ -205,16 +206,24 @@ class Game_platform extends CI_Controller
         $game_platform["platform_developer"] = $this->input->post("platform_developer");
         $game_platform["platform_abbr"] = $this->input->post("platform_abbr");
         $game_platform["platform_logo_url"] = "platform_logo/default_logo.png";
-        $game_platform["platform_label_col"] = "5CB85C";
+        if($this->input->post("platform_label_col"))
+        {
+            $game_platform["platform_label_col"] = $this->input->post("platform_label_col");
+        }
+        else
+        {
+            $game_platform["platform_label_col"] = "#5CB85C";
+        }
         return $game_platform;
     }
 
     private function _edit_game_platform_validation_rules()
     {
         $this->form_validation->set_rules("platform_name", "Platform Name", "trim|max_length[64]");
-        $this->form_validation->set_rules("year_into", "Year Introduced", "trim|is_natural");
+        $this->form_validation->set_rules("year_into", "Year Introduced", "trim|is_natural|max_length[4]");
         $this->form_validation->set_rules("platform_developer", "Developer", "trim|max_length[128]");
         $this->form_validation->set_rules("platform_abbr", "Abbreviation", "trim|alpha_numeric|max_length[16]");
+        $this->form_validation->set_rules("platform_label_col", "Label Color", "trim|max_length[7]callback_validate_hex_col");
     }
 
     private function _prepare_edit_game_platform($game_platform)
@@ -223,7 +232,28 @@ class Game_platform extends CI_Controller
         $game_platform["year_intro"] = $this->input->post("year_intro");
         $game_platform["platform_developer"] = $this->input->post("platform_developer");
         $game_platform["platform_abbr"] = $this->input->post("platform_abbr");
+        if($this->input->post("platform_label_col"))
+        {
+            $game_platform["platform_label_col"] = $this->input->post("platform_label_col");
+        }
+        else
+        {
+            $game_platform["platform_label_col"] = "#5CB85C";
+        }
         return $game_platform;
+    }
+
+    public function validate_hex_col($hex_col)
+    {
+        if(preg_match("/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/]", $hex_col))
+        {
+            return TRUE;
+        }
+        else
+        {
+            $this->form_validation->set_rules("platform_label_col", "{field} is not a valid hexadecimal value.");
+            return FALSE;
+        }
     }
 
 } //end Game_platform controller class

@@ -51,7 +51,6 @@
                     <label for="platform_name" class="col-sm-3 control-label">Platform Name <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="platform_name" placeholder="Platform Name <?=$total_entries?>" data-parsley-required data-parsley-maxlength="64"/>
-                        <span class="help-block">Limited to 64 characters.</span>
                     </div>
                 </div>
 
@@ -59,7 +58,6 @@
                     <label for="platform_abbr" class="col-sm-3 control-label">Abbr. <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="platform_abbr" placeholder="Abbreviation" value="" data-parsley-required data-parsley-type="alphanum" data-parsley-maxlength="16"/>
-                        <span class="help-block">Limited to 16 characters.</span>
                     </div>
                 </div>
 
@@ -74,7 +72,13 @@
                     <label for="platform_developer" class="col-sm-3 control-label">Platform Developer</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="platform_developer" placeholder="Developer" data-parsley-maxlength="128"/>
-                        <span class="help-block">Limited to 128 characters.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="platform_label_col" class="col-sm-3 control-label">Label Color</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="platform_label_col" placeholder="Hex value" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
                     </div>
                 </div>
 

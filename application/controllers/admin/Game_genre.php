@@ -130,7 +130,14 @@ class Game_genre extends CI_Controller
     {
         $game_genre["genre_name"] = $this->input->post("genre_name");
         $game_genre["genre_abbr"] = $this->input->post("genre_abbr");
-        $game_genre["genre_label_col"] = "5BC0DE";
+        if($this->input->post("genre_label_col"))
+        {
+            $game_platform["genre_label_col"] = $this->input->post("genre_label_col");
+        }
+        else
+        {
+            $game_platform["genre_label_col"] = "#5BC0DE";
+        }
         return $game_genre;
     }
 
@@ -138,12 +145,21 @@ class Game_genre extends CI_Controller
     {
         $this->form_validation->set_rules("genre_name", "Game Genre Name", "trim|required|max_length[32]");
         $this->form_validation->set_rules("genre_abbr", "Game Genre Abbr", "trim|required|max_length[32]");
+        $this->form_validation->set_rules("genre_label_col", "Label Color", "trim|max_length[7]callback_validate_hex_col");
     }
 
     private function _prepare_edit_game_genre($game_genre)
     {
         $game_genre["genre_name"] = $this->input->post("genre_name");
         $game_genre["genre_abbr"] = $this->input->post("genre_abbr");
+        if($this->input->post("genre_label_col"))
+        {
+            $game_platform["genre_label_col"] = $this->input->post("genre_label_col");
+        }
+        else
+        {
+            $game_platform["genre_label_col"] = "#5BC0DE";
+        }
         return $game_genre;
     }
 
@@ -151,6 +167,20 @@ class Game_genre extends CI_Controller
     {
         $this->form_validation->set_rules("genre_name", "Game Genre Name", "trim|required|max_length[32]");
         $this->form_validation->set_rules("genre_abbr", "Game Genre Abbr", "trim|required|max_length[32]");
+        $this->form_validation->set_rules("genre_label_col", "Label Color", "trim|max_length[7]callback_validate_hex_col");
+    }
+
+    public function validate_hex_col($hex_col)
+    {
+        if(preg_match("/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/]", $hex_col))
+        {
+            return TRUE;
+        }
+        else
+        {
+            $this->form_validation->set_rules("platform_label_col", "{field} is not a valid hexadecimal value.");
+            return FALSE;
+        }
     }
 
 } //end Game_genre controller class

@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="admin_navbar">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users"> </i> User <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users"> </i> Users <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/user/add_user')?>"><i class="fa fa-plus"></i> Add User</a></li>
             <li><a href="<?=site_url('admin/user/browse_user')?>"><i class="fa fa-file-text-o"></i> Browse Users</a></li>
@@ -42,7 +42,7 @@
 
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-gamepad"></i> Owned Videogames <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-gamepad"></i> Videogames <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/videogame/new_videogame')?>"><i class="fa fa-plus"></i> Add Video Game</a></li>
             <li><a href="<?=site_url('admin/videogame/browse_videogame')?>"><i class="fa fa-file-text-o"></i> Browse Video Games</a></li>
@@ -53,7 +53,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa
-          fa-laptop"></i> Game Platform <span class="caret"></span></a>
+          fa-laptop"></i> Game Platforms <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/game_platform/new_game_platform')?>"><i class="fa fa-plus"></i> Add Game
                 Platform</a></li>
@@ -67,7 +67,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa
-          fa-sitemap"></i> Game Genre <span class="caret"></span></a>
+          fa-sitemap"></i> Game Genres <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?=site_url('admin/game_genre/new_game_genre')?>"><i class="fa fa-plus"></i> Add Game
                 Genre</a></li>

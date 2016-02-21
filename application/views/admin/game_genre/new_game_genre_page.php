@@ -26,12 +26,7 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1>
-            <i class="text-info fa fa-plus"></i> Add Game Genre&nbsp;
-            <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/game_genre/browse_game_genre/")?>')" >
-                <i class="fa fa-file-text-o"></i> Browse Game Genres
-            </button>
-        </h1>
+        <h1><i class="text-info fa fa-plus"></i> Add Game Genre</h1>
     </div>
 
     <?php $this->load->view("admin/_templates/user_message_view"); ?>
@@ -53,6 +48,13 @@
                     <label class="col-sm-3 control-label" for="genre_abbr">Abbr. <span class="text-danger">*</span></label>
                     <div class="col-md-9">
                         <input class="form-control" name="genre_abbr" type="text" placeholder="abbr" data-parsley-maxlength="32" data-parsley-required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="platform_label_col" class="col-sm-3 control-label">Label Color</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="platform_label_col" placeholder="Hex value" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
                     </div>
                 </div>
 

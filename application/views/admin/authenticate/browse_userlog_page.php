@@ -63,7 +63,7 @@
             <?php foreach($user_logs as $index=>$user_log): ?>
                 <tr>
                     <td><?= $index + 1; ?></td>
-                    <td><?= $user_log["ulid"]; ?></td>
+                    <td><em><?= $user_log["ulid"]; ?></em></td>
                     <td>
                         <?= $user_log["uid"]; ?> | <strong><?= $user_log["username"]; ?></strong><br>
                         (<?= $user_log["name"]; ?> /

@@ -32,31 +32,22 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-pencil-square-o"></i> Edit Game Platform</h1>
+        <h1>
+            <i class="text-info fa fa-pencil-square-o"></i> Edit Game Platform&nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>"><i class="fa fa-pencil-square-o"></i> View Platform</a></li>
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete Platform</a></li>
+                </ul>
+            </div>
+        </h1>
 
         <p class="lead">
             Edit in the fields and click <span class="text-info">Submit</span> to save changes.
         </p>
-
-        <div class="btn-group" role="group" aria-label="actionButtonGroup">
-            <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform")?>')" class="btn btn-default">
-                <i class="fa fa-file-text-o"></i> Browse
-            </button>
-
-            <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/add_game_platform")?>')"
-                    class="btn btn-default">
-                <i class="fa fa-plus"></i> Add
-            </button>
-
-            <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default">
-                <i class="fa fa-eye"></i> View
-            </button>
-
-            <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)"
-                    class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
-                <i class="fa fa-trash"></i> Delete
-            </button>
-        </div>
     </div>
 
     <?php $this->load->view("admin/_templates/user_message_view"); ?>
@@ -102,6 +93,16 @@
                             <label for="platform_developer" class="col-sm-3 control-label">Platform Developer</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="platform_developer" placeholder="Developer" value="<?=$game_platform["platform_developer"]?>" data-parsley-maxlength="128"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="platform_label_col" class="col-sm-3 control-label">Label Color</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="platform_label_col" placeholder="Hex value" value="<?=$game_platform['platform_label_col']?>" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
+                                    <div class="input-group-addon"><div style="display: inline-block; background-color: <?=$game_platform['platform_label_col']?>; width: 16px; height: 16px; border: thin solid #ccc;"></div></div>
+                                </div>
                             </div>
                         </div>
 

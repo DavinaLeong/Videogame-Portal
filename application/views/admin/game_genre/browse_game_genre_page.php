@@ -30,8 +30,9 @@
     <title>Video Game Portal Admin</title>
 
     <style type="text/css">
-        .button-col {
-            width: 30%;
+        .button-col
+        {
+            width: 15%;
         }
     </style>
 </head>
@@ -55,11 +56,11 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Genre Abbr</th>
                 <th>Genre Name</th>
+                <th>Genre Abbr</th>
                 <th>Date Added</th>
                 <th>Last Updated</th>
-                <th class="button-col"></th>
+                <th class="button-col">&nbsp;</th>
             </tr>
             </thead>
 
@@ -72,7 +73,7 @@
                         <?php if (strtolower($game_genre["genre_abbr"]) == "none"): ?>
                             <span class="text-placeholder"><?=$game_genre["genre_abbr"]?></span>
                         <?php elseif ($game_genre["genre_abbr"]): ?>
-                            <span class="label" style="background: #<?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
+                            <span class="label" style="background-color: <?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
                         <?php else: ?>
                             <span class="text-placeholder">no abbr</span>
                         <?php endif; ?>
@@ -92,8 +93,10 @@
                         </span>
                     </td>
                     <td class="button-col">
-                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_genre/edit_game_genre/".$game_genre["genre_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                        <button name="delete" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        <div class="btn-group">
+                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_genre/edit_game_genre/".$game_genre["genre_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="delete" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>

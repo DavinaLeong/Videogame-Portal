@@ -29,13 +29,12 @@
 
     <title>Video Game Portal Admin</title>
 
-    <style type="type/css">
+    <style type="text/css">
         .button-col
         {
-            width: 25%;
+            width: 22%;
         }
     </style>
-
 </head>
 <body>
 <div class="container">
@@ -59,7 +58,6 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Abbr</th>
                 <th>Platform</th>
                 <th>Genre</th>
                 <th>Logo</th>
@@ -73,14 +71,14 @@
             <?php foreach($videogames as $index=>$videogame): ?>
                 <tr>
                     <td><?= $index + 1; ?></td>
-                    <td><?=$videogame["vg_name"]?></td>
-                    <td>
-                    <?php if($videogame["vg_abbr"]): ?>
-                        <span class="vg-abbr-block"><?=$videogame["vg_abbr"]?></span>
-                    <?php endif; ?>
+                    <td><?=$videogame["vg_name"]?>
+                        <?php if($videogame["vg_abbr"]): ?>
+                            <br>
+                            <span class="vg-abbr-block"><?=$videogame["vg_abbr"]?></span>
+                        <?php endif; ?>
                     </td>
-                    <td><span class="badge" style="background: #<?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span></td>
-                    <td><span class="label" style="background: #<?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
+                    <td><span class="badge" style="background: <?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span></td>
+                    <td><span class="label" style="background: <?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
                     <td>
                         <?php if($videogame["platform_logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $videogame["platform_logo_url"])?>" alt="<?=$videogame['platform_abbr']?>_logo" width="50px" height="50px"/>
@@ -113,11 +111,12 @@
                         }
                         ?>
                     </td>
-
                     <td class="button-col">
-                        <button name="view" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/edit_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                        <button name="delete" onclick="onDeleteButtonClicked(<?=$videogame['vg_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        <div class="btn-group">
+                            <button name="view" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/edit_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="delete" onclick="onDeleteButtonClicked(<?=$videogame['vg_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>

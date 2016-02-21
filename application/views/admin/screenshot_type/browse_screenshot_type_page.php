@@ -28,6 +28,13 @@
     <link rel="stylesheet" type="text/css" href="<?=RESOURCES_FOLDER?>css/datatables.min.css"/>
 
     <title>Video Game Portal Admin</title>
+
+    <style type="text/css">
+        .button-col
+        {
+            width: 15%;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -73,8 +80,10 @@
                     </td>
 
                     <td class="button-col">
-                        <button name="edit" onclick="window.location.replace('<?=site_url("admin/screenshot_type/edit_screenshot_type") . "/" . $screenshot_type["ss_type_id"]?>')" type="button" class="btn btn-default" data-toggle="modal" data-target="#edit_modal"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                        <button name="delete" onclick="onDeleteButtonClicked(<?=$screenshot_type['ss_type_id']?>)" type="button" class="btn btn-default confirm-delete" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        <div class="btn-group">
+                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/screenshot_type/edit_screenshot_type") . "/" . $screenshot_type["ss_type_id"]?>')" type="button" class="btn btn-default" data-toggle="modal" data-target="#edit_modal"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="delete" onclick="onDeleteButtonClicked(<?=$screenshot_type['ss_type_id']?>)" type="button" class="btn btn-default confirm-delete" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>

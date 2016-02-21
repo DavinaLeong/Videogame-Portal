@@ -46,27 +46,18 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-eye"></i> View Game Platform</h1>
-
-        <div class="btn-group" role="group" aria-label="actionButtonGroup">
-            <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform")?>')" class="btn btn-default">
-                <i class="fa fa-file-text-o"></i> Browse
-            </button>
-
-            <button name="back" onclick="window.location.replace('<?=site_url("admin/game_platform/add_game_platform")?>')"
-                    class="btn btn-default">
-                <i class="fa fa-plus"></i> Add
-            </button>
-
-            <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default">
-                <i class="fa fa-pencil-square-o"></i> Edit
-            </button>
-
-            <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)"
-                    class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
-                <i class="fa fa-trash"></i> Delete
-            </button>
-        </div>
+        <h1>
+            <i class="text-info fa fa-eye"></i> View Game Platform&nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>"><i class="fa fa-eye"></i> Edit Platform</a></li>
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete Platform</a></li>
+                </ul>
+            </div>
+        </h1>
     </div>
 
     <?php $this->load->view("admin/_templates/user_message_view"); ?>
@@ -92,7 +83,7 @@
                     </tr>
                     <tr>
                         <th>Platform Abbr:</th>
-                        <td><span class="badge" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
+                        <td><span class="badge" style="background-color: <?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
                     </tr>
                     <tr>
                         <th>Platform Developer:</th>

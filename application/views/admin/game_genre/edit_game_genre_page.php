@@ -34,23 +34,10 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-plus"></i> Edit Game Genre&nbsp;
-
-            <div class="btn-group" role="group" aria-label="actionButtonGroup">
-                <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_genre/browse_game_genre")?>')" class="btn btn-default">
-                    <i class="fa fa-file-text-o"></i> Browse
-                </button>
-
-                <button name="back" onclick="window.location.replace('<?=site_url("admin/game_genre/new_game_genre")?>')"
-                        class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add
-                </button>
-
-                <button name="delete" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)"
-                        class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
-                    <i class="fa fa-trash"></i> Delete
-                </button>
-            </div>
-
+            <button name="delete" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)"
+                    class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
+                <i class="fa fa-trash"></i> Delete
+            </button>
         </h1>
     </div>
 
@@ -73,6 +60,16 @@
                     <label class="col-sm-3 control-label" for="genre_abbr">Abbr. <span class="text-danger">*</span></label>
                     <div class="col-md-9">
                         <input class="form-control" name="genre_abbr" type="text" value="<?=$game_genre['genre_abbr']?>" data-parsley-maxlength="32" data-parsley-required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="genre_label_col" class="col-sm-3 control-label">Label Color</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="genre_label_col" placeholder="Hex value" value="<?=$game_genre['genre_label_col']?>" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
+                            <div class="input-group-addon"><div style="display: inline-block; background-color: <?=$game_genre['genre_label_col']?>; width: 16px; height: 16px; border: thin solid #ccc;"></div></div>
+                        </div>
                     </div>
                 </div>
 

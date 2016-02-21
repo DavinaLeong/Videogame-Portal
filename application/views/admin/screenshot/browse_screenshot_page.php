@@ -81,8 +81,10 @@
                     </td>
                     <td style="width: 15%;">
                         <button name="view_videogame" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$screenshot["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-gamepad"></i> View Videogame</button>
-                        <button name="view_post" onclick="window.location.replace('<?=site_url("admin/screenshot/view_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/screenshot/edit_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        <div class="btn-group">
+                            <button name="view_post" onclick="window.location.replace('<?=site_url("admin/screenshot/view_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                            <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/screenshot/edit_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
