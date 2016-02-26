@@ -187,3 +187,7 @@ body
 {
     color: #bb3500;
 }
+
+.carousel-inner img {
+    margin: auto;
+}

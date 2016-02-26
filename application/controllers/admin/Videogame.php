@@ -120,8 +120,10 @@ class Videogame extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
+            $this->load->model("Screenshot_model");
             $data = array(
-                "videogame" => $this->Videogame_model->get_by_id_genre_platform($vg_id)
+                "videogame" => $this->Videogame_model->get_by_id_genre_platform($vg_id),
+                "screenshots" => $this->Screenshot_model->get_all_by_vgid($vg_id)
             );
             $this->load->view("admin/videogame/view_videogame_page", $data);
         }

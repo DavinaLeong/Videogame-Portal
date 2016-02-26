@@ -198,11 +198,39 @@ class Screenshot extends CI_Controller
         }
     }
 
-    public function delete_screenshot()
+    public function view_screenshot($ss_id)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
-            show_error("delete_screenshot not implemented");
+            $data = array(
+                "screenshot" => $this->Screenshot_model->get_by_id_videogames_screenshotTypes($ss_id)
+            );
+
+            $this->load->view("admin/screenshot/view_screenshot_page", $data);
+        }
+        else
+        {
+            $this->session->set_userdata("message", "This user has invalid access rights.");
+            redirect("/admin/authenticate/login/");
+        }
+    }
+
+    public function delete_screenshot($ss_id)
+    {
+        if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
+        {
+            if($this->Screenshot_model->delete_by_id($ss_id))
+            {
+                $this->session->set_userdata("message", "Screenshot <mark>deleted</mark>.");
+                $this->User_log_model->log_message("Screenshot DELETED. | ss_id: " . $ss_id);
+            }
+            else
+            {
+                $this->session->set_userdata("message", "<mark>Unable</mark> to delete Screenshot.");
+                $this->User_log_model->log_message("Unable to DELETE Screenshot. | ss_id: " . $ss_id);
+            }
+
+            redirect("admin/screenshot/browse_screenshot");
         }
         else
         {

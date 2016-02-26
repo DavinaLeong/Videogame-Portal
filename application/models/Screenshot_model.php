@@ -38,6 +38,16 @@ class Screenshot_model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_all_by_vgid($vg_id)
+    {
+        $sql = "SELECT screenshots.*, screenshot_type.ss_type_name FROM screenshots
+LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
+WHERE screenshots.vg_id = ?
+ORDER BY screenshots.date_added;";
+        $query = $this->db->query($sql, array((int) $vg_id));
+        return $query->result_array();
+    }
+
     public function insert($screenshot)
     {
         $data = array(
@@ -114,12 +124,18 @@ ORDER BY screenshots.ss_name";
     WHERE screenshots.ss_id = ?
     ORDER BY screenshots.ss_name";
             $query = $this->db->query($sql, array((int) $ss_id));
-            return $query->result_array();
+            return $query->row_array();
         }
         else
         {
             return 0;
         }
+    }
+
+    public function delete_by_id($ss_id=FALSE)
+    {
+        $this->db->delete(TABLE_SCREENSHOTS, array("ss_id" => $ss_id));
+        return $this->db->affected_rows();
     }
 
 } //end Screenshot_model class

@@ -45,7 +45,7 @@
     <?php $this->load->view("admin/_templates/user_message_view"); ?>
 
     <div class="table-responsive">
-        <table class="table table-hover" id="users_table">
+        <table class="table table-hover" id="screenshots_table">
             <thead>
             <tr>
                 <th>#</th>
@@ -55,7 +55,7 @@
                 <th>Type</th>
                 <th>Date Added</th>
                 <th>Last Updated</th>
-                <th style="width: 15%;">&nbsp;</th>
+                <th style="width: 20%;">&nbsp;</th>
             </tr>
             </thead>
 
@@ -64,7 +64,7 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$screenshot["ss_name"]?></td>
-                    <td class="text-center" style="width: 20%;"><img src="<?=UPLOADS_FOLDER.$screenshot['ss_url']?>" alt="<?=$screenshot['ss_name']?> thumbnail - <?=$screenshot['vg_name']?>" width="150px"/></td>
+                    <td class="text-center" style="width: 20%;"><img src="<?=UPLOADS_FOLDER.$screenshot['ss_url']?>" alt="<?=$screenshot['ss_name']?> - <?=$screenshot['vg_name']?>" width="150px"/></td>
                     <td><?=$screenshot["vg_name"]?></td>
                     <td><?=$screenshot["ss_type_name"]?></td>
                     <td>
@@ -79,11 +79,12 @@
                         echo $display_last_updated->format("Y/m/d");
                         ?>
                     </td>
-                    <td style="width: 15%;">
+                    <td style="width: 20%;">
                         <button name="view_videogame" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$screenshot["vg_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-gamepad"></i> View Videogame</button>
-                        <div class="btn-group">
-                            <button name="view_post" onclick="window.location.replace('<?=site_url("admin/screenshot/view_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                            <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/screenshot/edit_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        <div class="btn-group btn-group-sm">
+                            <button name="view" onclick="window.location.replace('<?=site_url("admin/screenshot/view_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/screenshot/edit_screenshot/".$screenshot["ss_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="delete" onclick="onDeleteButtonClicked(<?=$screenshot['ss_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -91,6 +92,26 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirm_delete_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete Screenshot</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                    <p>This action <strong class="text-danger">cannot</strong> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
@@ -100,8 +121,19 @@
 <script>
     $(document).ready(function()
     {
-        $("#users_table").dataTable();
+        $("#screenshots_table").dataTable();
     });
+
+    var ss_id = 0;
+    function onDeleteButtonClicked(delete_ss_id)
+    {
+        ss_id = delete_ss_id;
+    }
+
+    function onConfirmDelete()
+    {
+        window.location.href = "<?=site_url('admin/screenshot/delete_screenshot')?>/" + ss_id;
+    }
 </script>
 </body>
 </html>
