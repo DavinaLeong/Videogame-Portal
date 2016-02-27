@@ -42,7 +42,7 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Game Platforms <span class="badge"><?=$total_entries?></span>&nbsp;
-            <button onclick="window.location.replace('<?= site_url("admin/game_platform/new_game_platform/") ?>')" type="button"
+            <button onclick="window.location.href = '<?= site_url("admin/game_platform/new_game_platform/") ?>'" type="button"
                     class="btn btn-danger"><i class="fa
             fa-plus"></i> Add Game Platform
             </button>
@@ -99,8 +99,8 @@
 
                     <td class="button-col">
                         <div class="btn-group">
-                            <button name="view" onclick="window.location.replace('<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="view" onclick="window.location.href = '<?=site_url("admin/game_platform/view_game_platform/".$game_platform["platform_id"])?>'" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                            <button name="edit" onclick="window.location.href = '<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>'" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                             <button name="delete" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                     </td>

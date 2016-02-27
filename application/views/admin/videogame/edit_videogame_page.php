@@ -152,7 +152,7 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/videogame/browse_videogame/")?>')"><i class="fa fa-ban"></i> Cancel</button>
+                <button type="button" class="btn btn-default" onclick="window.location.href = '<?=site_url("admin/videogame/browse_videogame/")?>'"><i class="fa fa-ban"></i> Cancel</button>
             </div>
         </div>
     </form>

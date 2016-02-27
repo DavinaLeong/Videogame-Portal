@@ -43,7 +43,7 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Game Genres <span class="badge"><?=$total_entries?></span>&nbsp;
-            <button type="button" class="btn btn-danger" onclick="window.location.replace('<?=site_url("admin/game_genre/new_game_genre/")?>')" >
+            <button type="button" class="btn btn-danger" onclick="window.location.href = '<?=site_url("admin/game_genre/new_game_genre/")?>'" >
                 <i class="fa fa-plus"></i> Add Game Genre
             </button>
         </h1>
@@ -94,7 +94,7 @@
                     </td>
                     <td class="button-col">
                         <div class="btn-group">
-                            <button name="edit" onclick="window.location.replace('<?=site_url("admin/game_genre/edit_game_genre/".$game_genre["genre_id"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="edit" onclick="window.location.href = '<?=site_url("admin/game_genre/edit_game_genre/".$game_genre["genre_id"])?>'" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                             <button name="delete" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                     </td>

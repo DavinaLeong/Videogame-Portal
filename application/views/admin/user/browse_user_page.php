@@ -43,7 +43,7 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-file-text-o"></i> Browse Users&nbsp;
-            <button onclick="window.location.replace('<?=site_url("admin/user/add_user/")?>')" type="button"
+            <button onclick="window.location.href = '<?=site_url("admin/user/add_user/")?>'" type="button"
                     class="btn btn-danger"><i class="fa
         fa-plus"></i> Add New User</button>
         </h1>
@@ -132,8 +132,8 @@
                         ?>
                     </td>
                     <td class="button-col">
-                        <button name="view_post" onclick="window.location.replace('<?=site_url("admin/user/view_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                        <button name="edit_post" onclick="window.location.replace('<?=site_url("admin/user/edit_user/".$user["uid"])?>')" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                        <button name="view_post" onclick="window.location.href = '<?=site_url("admin/user/view_user/".$user["uid"])?>'" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                        <button name="edit_post" onclick="window.location.href = '<?=site_url("admin/user/edit_user/".$user["uid"])?>'" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                     </td>
                 </tr>
             <?php endforeach; ?>

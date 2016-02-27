@@ -49,7 +49,7 @@
         </p>
 
         <div class="btn-group" role="group" aria-label="actionButtonGroup">
-            <button name="browse" onclick="window.location.replace('<?=site_url("admin/screenshot_type/browse_screenshot_type")?>')" class="btn btn-default">
+            <button name="browse" onclick="window.location.href = '<?=site_url("admin/screenshot_type/browse_screenshot_type")?>'" class="btn btn-default">
                 <i class="fa fa-file-text-o"></i> Browse
             </button>
 
@@ -94,7 +94,7 @@
                     <div class="col-sm-8 col-sm-offset-4">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
                         <button type="button" class="btn btn-default"
-                                onclick="window.location.replace('<?= site_url("admin/screenshot_type/browse_screenshot_type") ?>')">
+                                onclick="window.location.href = '<?= site_url("admin/screenshot_type/browse_screenshot_type") ?>'">
                             <i class="fa fa-ban"></i> Cancel
                         </button>
                     </div>

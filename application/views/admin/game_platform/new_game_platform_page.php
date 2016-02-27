@@ -32,9 +32,7 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-plus"></i> New Game Platform <button name="browse" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')" class="btn btn-default">
-            <i class="fa fa-file-text-o"></i> Browse Game Platforms
-        </button></h1>
+        <h1><i class="text-info fa fa-plus"></i> New Game Platform</h1>
         <p class="lead">
             Fill in the fields and click <span class="text-info">Submit</span> to add a new Game Platform.
         </p>
@@ -91,7 +89,7 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('<?=site_url("admin/game_platform/browse_game_platform/")?>')"><i class="fa fa-ban"></i> Cancel</button>
+                <button type="button" class="btn btn-default" onclick="window.location.href = '<?=site_url("admin/game_platform/browse_game_platform/")?>'"><i class="fa fa-ban"></i> Cancel</button>
             </div>
         </div>
     </form>
