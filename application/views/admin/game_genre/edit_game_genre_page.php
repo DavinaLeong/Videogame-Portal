@@ -34,10 +34,14 @@
     <div class="page-header">
         <h1>
             <i class="text-info fa fa-plus"></i> Edit Game Genre&nbsp;
-            <button name="delete" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)"
-                    class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
-                <i class="fa fa-trash"></i> Delete
-            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$game_genre['genre_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i>&nbsp;Delete Game Genre</a></li>
+                </ul>
+            </div>
         </h1>
     </div>
 

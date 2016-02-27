@@ -32,7 +32,17 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-pencil-square-o"></i> Edit Screenshot Type</h1>
+        <h1>
+            <i class="text-info fa fa-pencil-square-o"></i> Edit Screenshot Type&nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$screenshot_type['ss_type_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i>&nbsp;Delete Screenshot Type</a></li>
+                </ul>
+            </div>
+        </h1>
 
         <p class="lead">
             Edit the fields and click <span class="text-info">Submit</span> to save changes.

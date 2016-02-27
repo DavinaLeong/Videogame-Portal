@@ -32,29 +32,21 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-pencil-square-o"></i> Edit User</h1>
+        <h1>
+            <i class="text-info fa fa-pencil-square-o"></i> Edit User&nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="<?= site_url('admin/user/view_user/' . $user['uid']) ?>"><i class="fa fa-eye"></i>&nbsp;View User</a></li>
+                </ul>
+            </div>
+        </h1>
 
         <p class="lead">
             Edit in the fields and click <span class="text-info">Submit</span> to save changes.
         </p>
-
-        <div class="btn-group" role="group" aria-label="actionButtonGroup">
-            <button name="browse" onclick="window.location.replace('<?= site_url("admin/user/browse_user/") ?>')"
-                    class="btn btn-default">
-                <i class="fa fa-file-text-o"></i> Browse
-            </button>
-
-            <button name="back" onclick="window.location.replace('<?= site_url("admin/user/add_user/") ?>')"
-                    class="btn btn-default">
-                <i class="fa fa-plus"></i> Add
-            </button>
-
-            <button name="edit_post"
-                    onclick="window.location.replace('<?= site_url("admin/user/view_user/" . $user["uid"]) ?>')"
-                    type="button" class="btn btn-default">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </div>
     </div>
 
     <?php $this->load->view("admin/_templates/user_message_view"); ?>

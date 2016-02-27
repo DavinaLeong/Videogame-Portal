@@ -34,9 +34,18 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-plus"></i> Edit Screenshot <button name="browse" onclick="window.location.replace('<?=site_url("admin/screenshot/browse_screenshot/")?>')" class="btn btn-default">
-            <i class="fa fa-file-text-o"></i> Browse Screenshots
-        </button> </h1>
+        <h1>
+            <i class="text-info fa fa-plus"></i> Edit Screenshot&nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="<?= site_url('admin/screenshot/view_screenshot/' . $screenshot['ss_id']) ?>"><i class="fa fa-eye"></i>&nbsp;View Screenshot</a></li>
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$screenshot['ss_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i>&nbsp;Delete Screenshot</a></li>
+                </ul>
+            </div>
+        </h1>
         <p class="lead">
             Fill in the fields and click <span class="text-info">Submit</span> to add a new screenshot.
         </p>
@@ -175,8 +184,40 @@
         </div>
     </div>
 
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirm_delete_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete Screenshot</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                    <p>This action <strong class="text-danger">cannot</strong> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onConfirmDelete()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i> Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <?php $this->load->view("admin/_templates/admin_footer_view"); ?>
 </div>
 <?php $this->load->view("templates/js_common"); ?>
+<script>
+    var ss_id = 0;
+    function onDeleteButtonClicked(delete_ss_id)
+    {
+        ss_id = delete_ss_id;
+    }
+
+    function onConfirmDelete()
+    {
+        window.location.href = "<?=site_url('admin/screenshot/delete_screenshot')?>/" + ss_id;
+    }
+</script>
 </body>
 </html>

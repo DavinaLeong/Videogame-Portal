@@ -225,7 +225,8 @@ class User_log_model extends CI_Model
                 break;
 
             default:
-                return show_error($action . " is not assigned.");
+                show_error("User_log->_set_common_message, " . $action . " is not assigned.");
+                break;
         }
     }
 

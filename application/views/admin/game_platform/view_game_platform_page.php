@@ -53,8 +53,8 @@
                     Action <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>"><i class="fa fa-eye"></i> Edit Platform</a></li>
-                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i> Delete Platform</a></li>
+                    <li><a href="<?=site_url("admin/game_platform/edit_game_platform/".$game_platform["platform_id"])?>"><i class="fa fa-eye"></i>&nbsp;Edit Platform</a></li>
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$game_platform['platform_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i>&nbsp;Delete Platform</a></li>
                 </ul>
             </div>
         </h1>

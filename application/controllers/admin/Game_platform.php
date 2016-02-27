@@ -29,11 +29,11 @@ class Game_platform extends CI_Controller
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
-            $this->_add_game_platform_validation_rules();
+            $this->_new_game_platform_validation_rules();
 
             if($this->form_validation->run())
             {
-                if($platform_id = $this->Game_platform_model->insert($this->_prepare_add_game_platform()))
+                if($platform_id = $this->Game_platform_model->insert($this->_prepare_new_game_platform()))
                 {
                     $this->session->set_userdata("message", 'New Game Platform record <mark>created</mark> successfully.<br>Either upload a platform logo or click <mark><i class="fa fa-ban"></i> Cancel</mark> to finish.');
                     $this->User_log_model->log_message("Game Platform reeord CREATED successfully. | platform_id: " . $platform_id);
@@ -58,7 +58,7 @@ class Game_platform extends CI_Controller
         }
     }
 
-    public function browse_game_platform($use_react=false)
+    public function browse_game_platform()
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
@@ -84,7 +84,7 @@ class Game_platform extends CI_Controller
         {
             if($this->Game_platform_model->delete_by_id($platform_id))
             {
-                $this->User_log_model->_set_common_message("delete_by_id", "Game Platform", "platform_id", $platform_id);
+                $this->User_log_model->_set_common_message("delete", "Game Platform", "platform_id", $platform_id);
             }
             else
             {
@@ -190,16 +190,16 @@ class Game_platform extends CI_Controller
         redirect("/admin/game_platform/edit_game_platform/" . $this->session->userdata("platform_id"));
     }
 
-    private function _add_game_platform_validation_rules()
+    private function _new_game_platform_validation_rules()
     {
         $this->form_validation->set_rules("platform_name", "Platform Name", "trim|required|max_length[64]");
         $this->form_validation->set_rules("year_intro", "Year Introduced", "trim|required|is_natural|max_length[4]");
         $this->form_validation->set_rules("platform_developer", "Developer", "trim|max_length[128]");
         $this->form_validation->set_rules("platform_abbr", "Abbreviation", "trim|required|alpha_numeric|max_length[16]");
-        $this->form_validation->set_rules("platform_label_col", "Label Color", "trim|max_length[7]|callback_validate_hex_col");
+        $this->form_validation->set_rules("platform_label_col", "Label Color", "trim|max_length[7]");
     }
 
-    private function _prepare_add_game_platform()
+    private function _prepare_new_game_platform()
     {
         $game_platform["platform_name"] = $this->input->post("platform_name");
         $game_platform["year_intro"] = $this->input->post("year_intro");
@@ -223,7 +223,7 @@ class Game_platform extends CI_Controller
         $this->form_validation->set_rules("year_into", "Year Introduced", "trim|is_natural|max_length[4]");
         $this->form_validation->set_rules("platform_developer", "Developer", "trim|max_length[128]");
         $this->form_validation->set_rules("platform_abbr", "Abbreviation", "trim|alpha_numeric|max_length[16]");
-        $this->form_validation->set_rules("platform_label_col", "Label Color", "trim|max_length[7]callback_validate_hex_col");
+        $this->form_validation->set_rules("platform_label_col", "Label Color", "trim|max_length[7]");
     }
 
     private function _prepare_edit_game_platform($game_platform)
@@ -245,13 +245,13 @@ class Game_platform extends CI_Controller
 
     public function validate_hex_col($hex_col)
     {
-        if(preg_match("/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/]", $hex_col))
+        if(preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$]/", $hex_col))
         {
             return TRUE;
         }
         else
         {
-            $this->form_validation->set_rules("platform_label_col", "{field} is not a valid hexadecimal value.");
+            $this->form_validation->set_rules("platform_label_col", "Lobel Color is not a valid hexadecimal value.");
             return FALSE;
         }
     }

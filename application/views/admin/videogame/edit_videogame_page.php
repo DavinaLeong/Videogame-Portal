@@ -35,27 +35,18 @@
     <?php $this->load->view("admin/_templates/admin_navbar_view"); ?>
 
     <div class="page-header">
-        <h1><i class="text-info fa fa-pencil-square-o"></i> Edit Owned Videogame</h1>
-
-        <div class="btn-group" role="group" aria-label="actionButtonGroup">
-            <button name="browse" onclick="window.location.replace('<?=site_url("admin/videogame/browse_videogame")?>')" class="btn btn-default">
-                <i class="fa fa-file-text-o"></i> Browse
-            </button>
-
-            <button name="back" onclick="window.location.replace('<?=site_url("admin/videogame/new_videogame/")?>')" type="button"
-                    class="btn btn-default">
-                <i class="fa fa-plus"></i> Add
-            </button>
-
-            <button name="edit" onclick="window.location.replace('<?=site_url("admin/videogame/view_videogame/".$videogame["vg_id"])?>')" type="button" class="btn btn-default">
-                <i class="fa fa-eye"></i> View
-            </button>
-
-            <button name="delete" onclick="onDeleteButtonClicked(<?=$videogame['vg_id']?>)"
-                    class="btn btn-default" data-toggle="modal" data-target="#confirm_delete_modal">
-                <i class="fa fa-trash"></i> Delete
-            </button>
-        </div>
+        <h1>
+            <i class="text-info fa fa-pencil-square-o"></i> Edit Owned Videogame&nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="<?= site_url('admin/videogame/view_videogame/' . $videogame['vg_id']) ?>"><i class="fa fa-eye"></i>&nbsp;View Videogame</a></li>
+                    <li><a style="cursor: pointer;" onclick="onDeleteButtonClicked(<?=$videogame['vg_id']?>)" data-toggle="modal" data-target="#confirm_delete_modal"><i class="fa fa-trash"></i>&nbsp;Delete Videogame</a></li>
+                </ul>
+            </div>
+        </h1>
     </div>
 
     <?php $this->load->view("admin/_templates/user_message_view"); ?>
@@ -175,7 +166,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Delete Game Platform</h4>
+                <h4 class="modal-title">Delete Videogame</h4>
             </div>
             <div class="modal-body">
                 <p>Are you sure?</p>
@@ -199,16 +190,15 @@
         });
     });
 
-    var delete_platform_id = 0;
-    function onDeleteButtonClicked(platform_id)
+    var delete_vg_id = 0;
+    function onDeleteButtonClicked(vg_id)
     {
-        delete_platform_id = platform_id;
+        delete_vg_id = vg_id;
     }
 
     function OnConfirmDelete()
     {
-        var delete_platform_url = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_platform_id;
-        window.location.href = delete_platform_url;
+        window.location.href = "<?=site_url('admin/videogame/delete_videogame')?>" + "/" + delete_vg_id;
     }
 </script>
 </body>
