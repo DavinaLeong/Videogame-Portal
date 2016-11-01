@@ -61,9 +61,9 @@ ORDER BY screenshots.date_added;";
             "ss_img_type" => $screenshot["ss_img_type"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('date_added', $now->format('c'));
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("date_added", $this->datetime_helper->now());
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->insert(TABLE_SCREENSHOTS, $data);
         return $this->db->insert_id();
     }
@@ -77,8 +77,8 @@ ORDER BY screenshots.date_added;";
             "vg_id" => $screenshot["vg_id"],
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
         return $this->db->affected_rows();
     }
@@ -92,8 +92,8 @@ ORDER BY screenshots.date_added;";
             "ss_img_type" => $screenshot["ss_img_type"],
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->update(TABLE_SCREENSHOTS, $data, array("ss_id" => $screenshot["ss_id"]));
         return $this->db->affected_rows();
     }

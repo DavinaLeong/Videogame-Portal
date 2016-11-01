@@ -19,23 +19,13 @@ class Migration_Initial_setup extends CI_Migration
 	// Public Functions ----------------------------------------------------------------
 	public function up()
 	{
-		_script_create_tables();
+        $this->_script_create_tables();
 		$this->_generate_users();
 	}
 	
 	public function down()
 	{
-		if($this->db->query($this->_script_drop_tables()))
-		{
-			echo '<p>Tables dropped.</p>';
-			echo '<hr/>';
-			$this->_generate_users();
-		}
-		else
-		{
-			echo '<p>Failed to drop Tables.</p>';
-			echo '<hr/>';
-		}
+        $this->_script_drop_tables();
 	}
 	
 	// Private Functions ---------------------------------------------------------------
@@ -68,7 +58,7 @@ class Migration_Initial_setup extends CI_Migration
 		$this->dbforge->add_key('timestamp', TRUE);
 		if($this->dbforge->create_table('ci_sessions'))
 		{
-			echo '<p><small>CI Sessions</small></p>';
+			echo '<div><small>CI Sessions</small></div>';
 		}
 
         // --- user ---
@@ -92,6 +82,12 @@ class Migration_Initial_setup extends CI_Migration
                 'type' => 'VARCHAR',
                 'constraint' => '512'
             ),
+            'avatar_url' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '512',
+                'null' => TRUE,
+                'default' => 'admin_avatar/default_avatar.png'
+            ),
             'access' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '512',
@@ -102,16 +98,18 @@ class Migration_Initial_setup extends CI_Migration
                 'constraint' => '512',
                 'default' => 'Active'
             ),
+            'date_added' => array(
+                'type' =>' TIMESTAMP'
+            ),
             'last_updated' => array(
-                'type' =>' TIMESTAMP',
-                'default' => 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+                'type' =>' TIMESTAMP'
             )
         );
         $this->dbforge->add_field($user);
         $this->dbforge->add_key('user_id', TRUE);
         if($this->dbforge->create_table('user', TRUE))
         {
-            echo '<p><small>User</small></p>';
+            echo '<div><small>User</small></div>';
         }
 
         // --- user log ---
@@ -132,15 +130,14 @@ class Migration_Initial_setup extends CI_Migration
                 'type' => 'text'
             ),
             'timestamp' => array(
-                'type' => 'TIMESTAMP',
-                'default' => 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+                'type' => 'TIMESTAMP'
             )
         );
-        $this->dbfroge->add_field($user_log);
+        $this->dbforge->add_field($user_log);
         $this->dbforge->add_key('ulid', TRUE);
         if($this->dbforge->create_table('user_log', TRUE))
         {
-            echo '<p><small>User Log</small></p>';
+            echo '<div><small>User Log</small></div>';
         }
 
         // -- videogames ---
@@ -185,13 +182,13 @@ class Migration_Initial_setup extends CI_Migration
         );
         $this->dbforge->add_field($videogames);
         $this->dbforge->add_key('vg_id', TRUE);
-        if($this->dbforge->drop_table('videogames', TRUE))
+        if($this->dbforge->create_table('videogames', TRUE))
         {
-            echo '<p><small>Videogames</small></p>>';
+            echo '<div><small>Videogames</small></div>';
         }
 
         // --- game genre ---
-        $this->dbforge->drop_table('game_genre');
+        $this->dbforge->drop_table('game_genre', TRUE);
         $game_genre = array(
             'genre_id' => array(
                 'type' => 'INT',
@@ -229,7 +226,7 @@ class Migration_Initial_setup extends CI_Migration
         $this->dbforge->add_key('genre_id', TRUE);
         if($this->dbforge->create_table('game_genre', TRUE))
         {
-            echo '<p><small>Game Genre</small></p>';
+            echo '<div><small>Game Genre</small></div>';
         }
 
         // --- game platform ---
@@ -276,7 +273,7 @@ class Migration_Initial_setup extends CI_Migration
         $this->dbforge->add_key('platform_id', TRUE);
         if($this->dbforge->create_table('game_platform', TRUE))
         {
-            echo '<p><small>Game Platform</small></p>';
+            echo '<div><small>Game Platform</small></div>';
         }
 
         // --- screenshot ---
@@ -290,7 +287,7 @@ class Migration_Initial_setup extends CI_Migration
             ),
             'ss_name' => array(
                 'type' => 'VARCHAR',
-                'constriant' => '512',
+                'constraint' => '512',
                 'default' => 'Screenshot Name'
             ),
             'ss_url' => array(
@@ -314,8 +311,7 @@ class Migration_Initial_setup extends CI_Migration
             'vg_id' => array(
                 'type' => 'INT',
                 'constraint' => '11',
-                'unsigned' => TRUE,
-                'auto_increment' => TRUE
+                'unsigned' => TRUE
             ),
             'ss_width' => array(
                 'type' => 'INT',
@@ -362,7 +358,7 @@ class Migration_Initial_setup extends CI_Migration
         $this->dbforge->add_key('ss_id', TRUE);
         if($this->dbforge->create_table('screenshot', TRUE))
         {
-            echo '<p><small>Screenshot</small></p>';
+            echo '<div><small>Screenshot</small></div>';
         }
 
         // --- screenshot type ---
@@ -393,8 +389,10 @@ class Migration_Initial_setup extends CI_Migration
         $this->dbforge->add_key('ss_type_id', TRUE);
         if($this->dbforge->create_table('screenshot_type', TRUE))
         {
-            echo '<p><small>Screenshot Type</small></p>';
+            echo '<div><small>Screenshot Type</small></div>';
         }
+
+        echo '<hr/>';
 	}
 	
 	private function _script_drop_tables()
@@ -403,52 +401,63 @@ class Migration_Initial_setup extends CI_Migration
 
 		if($this->dbforge->drop_table('user', TRUE))
 		{
-			echo '<p><small>User</small></p>';
+			echo '<div><small>User</small></div>';
 		}
 
 		if($this->dbforge->drop_table('user_log', TRUE))
 		{
-			echo '<p><small>User Log</small></p>';
+			echo '<div><small>User Log</small></div>';
 		}
 
 		if($this->dbforge->drop_table('videogames', TRUE))
 		{
-			echo '<p><small>Videogames</small></p>';
+			echo '<div><small>Videogames</small></div>';
 		}
 
 		if($this->dbforge->drop_table('game_genre', TRUE))
 		{
-			echo '<p><small>Game Genre</small></p>';
+			echo '<div><small>Game Genre</small></div>';
 		}
 
 		if($this->dbforge->drop_table('game_platform', TRUE))
 		{
-			echo '<p><small>Game Platform</small></p>';
+			echo '<div><small>Game Platform</small></div>';
 		}
 
 		if($this->dbforge->drop_table('screenshot', TRUE))
 		{
-			echo '<p><small>Screenshot</small></p>';
+			echo '<div><small>Screenshot</small></div>';
 		}
 
 		if($this->dbforge->drop_table('screenshot_type', TRUE))
 		{
-			echo '<p><small>Screenshot Type</small></p>';
+			echo '<div><small>Screenshot Type</small></div>';
 		}
+        echo '<hr/>';
 	}
 	
 	private function _generate_users()
 	{
+        echo '<h1>Generate Users</h1>';
 		$this->load->model('User_log_model');
 		$this->load->model('User_model');
-		$user = array(
-			'username' => 'admin',
-			'name' => 'Default Admin',
-			'password_hash' => password_hash('password', PASSWORD_DEFAULT),
-			'access' => 'A',
-			'status' => 'Active'
+		$users = array(
+			array(
+                'username' => 'admin',
+                'name' => 'Default Admin',
+                'password_hash' => password_hash('password', PASSWORD_DEFAULT),
+                'avatar_url' => NULL,
+                'access' => 'A',
+                'status' => 'Active'
+            )
 		);
-		$this->User_model->insert($user);
+
+        foreach($users as $user)
+        {
+            $insert_id = $this->User_model->insert($user);
+            echo '<p><small>User (' . $insert_id . ', ' . $user['username'] . ')</small></p>';
+        }
+        echo '<hr/>';
 	}
 	
 } // end 20161031210023_initial_setup class

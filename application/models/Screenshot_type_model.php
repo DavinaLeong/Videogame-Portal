@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 class Screenshot_type_model extends CI_Model
@@ -45,10 +45,9 @@ class Screenshot_type_model extends CI_Model
             "ss_type_description" => $screenshot_type["ss_type_description"],
         );
 
-        $now = new DateTime("now");
-        $this->db->set('date_added', $now->format('c'));
-        $this->db->set('last_updated', $now->format('c'));
-        $this->db->insert(TABLE_SCREENSHOT_TYPE, $data);
+        $this->load->library("Datetime_helper");
+        $this->db->set("date_added", $this->datetime_helper->now());
+        $this->db->set("last_updated", $this->datetime_helper->now());        $this->db->insert(TABLE_SCREENSHOT_TYPE, $data);
         return $this->db->insert_id();
     }
 
@@ -59,8 +58,8 @@ class Screenshot_type_model extends CI_Model
             "ss_type_description" => $screenshot_type["ss_type_description"],
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->update(TABLE_SCREENSHOT_TYPE, $data, array("ss_type_id" => $screenshot_type["ss_type_id"]));
         return $this->db->affected_rows();
     }

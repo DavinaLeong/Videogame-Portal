@@ -69,4 +69,14 @@ class Migrate extends CI_Controller
         $this->load->view('migrate/result_view');
     }
 
+    public function new_script($descriptive_name='New_migration')
+    {
+        $this->load->model('User_log_model');
+        $this->load->library('datetime_helper');
+        $data = array(
+            'descriptive_name' => ucfirst($descriptive_name),
+        );
+        $this->load->view('migrate/new_script_template', $data);
+    }
+
 } // end Migrate controller class

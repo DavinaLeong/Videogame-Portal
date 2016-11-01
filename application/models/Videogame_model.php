@@ -50,10 +50,9 @@ class Videogame_model extends CI_Model
             "from_steam" => $videogame["from_steam"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('date_added', $now->format('c'));
-        $this->db->set('last_updated', $now->format('c'));
-        $this->db->insert(TABLE_VIDEOGAMES, $data);
+        $this->load->library("Datetime_helper");
+        $this->db->set("date_added", $this->datetime_helper->now());
+        $this->db->set("last_updated", $this->datetime_helper->now());        $this->db->insert(TABLE_VIDEOGAMES, $data);
         return $this->db->insert_id();
     }
 
@@ -68,9 +67,8 @@ class Videogame_model extends CI_Model
             "from_steam" => $videogame["from_steam"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
-        $this->db->update(TABLE_VIDEOGAMES, $data, array("vg_id" => $videogame["vg_id"]));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());        $this->db->update(TABLE_VIDEOGAMES, $data, array("vg_id" => $videogame["vg_id"]));
         return $this->db->affected_rows();
     }
 

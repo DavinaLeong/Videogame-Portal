@@ -60,7 +60,7 @@ class User_log_model extends CI_Model
             'message'=>$message
         );
 
-        $now = new DateTime("now");
+        $now = new DateTime("now", new DateTimeZone(DATETIMEZONE));
         $this->db->set('timestamp', $now->format('c'));
         $this->db->insert(TABLE_USER_LOG, $data);
         return $this->db->insert_id();

@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 	`username` VARCHAR(512) NOT NULL,
 	`password_hash` VARCHAR(512) NOT NULL,
 	`name` VARCHAR(512) DEFAULT NULL,
+	`avatar_url` VARCHAR(512) NULL DEFAULT 'admin_avatar / default_avatar.png',
 	`access` VARCHAR(512) NOT NULL,
 	`status` VARCHAR(30) NOT NULL,
 	`last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

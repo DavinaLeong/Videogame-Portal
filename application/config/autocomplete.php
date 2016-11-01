@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 /**
@@ -63,6 +63,7 @@
  * @property Game_genre $game_genre
  * @property Screenshot $screenshot
  * @property Screenshot_type $screenshot_type
+ * @property Migrate $migrate
  *
  * MODEL
  * @property User_log_model $User_log_model
@@ -72,6 +73,7 @@
  * @property Game_genre_model $Game_genre_model
  * @property Screenshot_model $Screenshot_model
  * @property Screenshot_type_model $Screenshot_type_model
+ * @property Migration_model $Migration_model
  */
 class CI_Controller {};
 class MY_Controller extends CI_Controller {};
@@ -127,6 +129,7 @@ class MY_Controller extends CI_Controller {};
  * @property Game_genre $game_genre
  * @property Screenshot $screenshot
  * @property Screenshot_type $screenshot_type
+ * @property Migrate $migrate
  *
  * MODEL
  * @property User_log_model $User_log_model
@@ -136,5 +139,6 @@ class MY_Controller extends CI_Controller {};
  * @property Game_genre_model $Game_genre_model
  * @property Screenshot_model $Screenshot_model
  * @property Screenshot_type_model $Screenshot_type_model
+ * @property Migration_model $Migration_model
  */
 class CI_Model {};

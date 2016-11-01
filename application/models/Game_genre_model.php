@@ -9,7 +9,7 @@
         Email	: leong.shi.yun@gmail.com
         Mobile	: (+65) 9369 3752 [Singapore]
 
-    All content © DAVINA Leong Shi Yun. All Rights Reserved.
+    All content ï¿½ DAVINA Leong Shi Yun. All Rights Reserved.
  ***********************************************************************************/
 
 class Game_genre_model extends CI_Model
@@ -47,9 +47,9 @@ class Game_genre_model extends CI_Model
             "genre_label_col" => $game_genre["genre_label_col"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('date_added', $now->format('c'));
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("date_added", $this->datetime_helper->now());
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->insert(TABLE_GAME_GENRE, $data);
         return $this->db->insert_id();
     }
@@ -62,8 +62,8 @@ class Game_genre_model extends CI_Model
             "genre_label_col" => $game_genre["genre_label_col"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->update(TABLE_GAME_GENRE, $data, array("genre_id" => $game_genre["genre_id"]));
         return $this->db->affected_rows();
     }

@@ -2,6 +2,18 @@
 
 class Datetime_helper
 {
+    public function now($format_str='Y-m-d H:i:s')
+    {
+        $now = new DateTime('now', new DateTimeZone(DATETIMEZONE));
+        return $now->format($format_str);
+    }
+
+    public function today($format_str='Y-m-d H:i:s')
+    {
+        $today = new DateTime('today', new DateTimeZone(DATETIMEZONE));
+        return $today->format($format_str);
+    }
+
     public function get_date_time($date_str,$time_str)
     {
         /*

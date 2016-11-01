@@ -50,9 +50,9 @@ class Game_platform_model extends CI_Model
             "platform_label_col" => $game_platform["platform_label_col"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('date_added', $now->format('c'));
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("date_added", $this->datetime_helper->now());
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->insert(TABLE_GAME_PLATFORM, $data);
         return $this->db->insert_id();
     }
@@ -68,8 +68,8 @@ class Game_platform_model extends CI_Model
             "platform_label_col" => $game_platform["platform_label_col"]
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
         return $this->db->affected_rows();
     }
@@ -80,8 +80,8 @@ class Game_platform_model extends CI_Model
             "platform_logo_url" => $game_platform["platform_logo_url"],
         );
 
-        $now = new DateTime("now");
-        $this->db->set('last_updated', $now->format('c'));
+        $this->load->library("Datetime_helper");
+        $this->db->set("last_updated", $this->datetime_helper->now());
         $this->db->update(TABLE_GAME_PLATFORM, $data, array("platform_id" => $game_platform["platform_id"]));
         return $this->db->affected_rows();
     }
