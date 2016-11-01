@@ -18,7 +18,7 @@ class Authenticate extends CI_Controller
     {
         if($this->session->userdata("id") || $this->session->userdata("access"))
         {
-            $this->session->unset_userdata("uid");
+            $this->session->unset_userdata("user_id");
             $this->session->unset_userdata("access");
             redirect("/admin/authenticate/start");
         }
@@ -31,10 +31,10 @@ class Authenticate extends CI_Controller
     public function login()
     {
         // Check if there is an existing session
-        if($this->session->userdata("uid") || $this->session->userdata("access"))
+        if($this->session->userdata("user_id") || $this->session->userdata("access"))
         {
-            $this->User_log_model->log_message("User has been LOGGED OUT. | uid: " . $this->session->userdata("uid"));
-            $this->session->unset_userdata("uid");
+            $this->User_log_model->log_message("User has been LOGGED OUT. | uid: " . $this->session->userdata("user_id"));
+            $this->session->unset_userdata("user_id");
             $this->session->unset_userdata("access");
             $this->session->unset_userdata("name");
             $this->session->unset_userdata("avatar_url");
@@ -61,7 +61,7 @@ class Authenticate extends CI_Controller
     public function logout()
     {
         $this->session->set_userdata("message", "You've logged out.");
-        $this->User_log_model->log_message("User has LOOGED OUT. | uid: " . $this->session->userdata("uid"));
+        $this->User_log_model->log_message("User has LOOGED OUT. | uid: " . $this->session->userdata("user_id"));
         redirect("/admin/authenticate/login");
     }
 
@@ -75,7 +75,7 @@ class Authenticate extends CI_Controller
             $this->form_validation->set_rules("confirm_password", "Confirm New Password",
                 "required|matches[new_password]|min_length[6]");
 
-            $user = $this->User_model->get_by_id($this->session->userdata("uid"));
+            $user = $this->User_model->get_by_id($this->session->userdata("user_id"));
 
             if($this->form_validation->run())
             {
@@ -89,7 +89,7 @@ class Authenticate extends CI_Controller
                         $this->User_log_model->set_message();
                         $this->session->set_userdata("message", "Password changed successfully.");
                         $this->User_log_model->log_message("Password changed successfully.");
-                        redirect("admin/user/view_user/" . $user["uid"]);
+                        redirect("admin/user/view_user/" . $user["user_id"]);
                     }
                     else
                     {
@@ -144,11 +144,11 @@ class Authenticate extends CI_Controller
                 {
                     if(password_verify($this->input->post("password"), $user["password_hash"]))
                     {
-                        $this->session->set_userdata("uid", $user["uid"]);
+                        $this->session->set_userdata("user_id", $user["user_id"]);
                         $this->session->set_userdata("access", $user["access"]);
                         $this->session->set_userdata("name", $user["name"]);
                         $this->session->set_userdata("avatar_url", $user["avatar_url"]);
-                        $this->User_log_model->log_message("User has logged in. | uid: " . $user["uid"]);
+                        $this->User_log_model->log_message("User has logged in. | uid: " . $user["user_id"]);
 
                         if($this->session->userdata("access") == "A")
                         {

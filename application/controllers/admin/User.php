@@ -33,10 +33,10 @@ class User extends CI_Controller
 
             if($this->form_validation->run())
             {
-                if($uid = $this->User_model->insert($this->_prepare_add_user() ))
+                if($user_id = $this->User_model->insert($this->_prepare_add_user() ))
                 {
-                    $this->User_log_model->_set_common_message("create", "User", "uid", $uid);
-                    redirect("admin/user/edit_user/" . $uid);
+                    $this->User_log_model->_set_common_message("create", "User", "user_id", $user_id);
+                    redirect("admin/user/edit_user/" . $user_id);
                 }
                 else
                 {
@@ -72,12 +72,12 @@ class User extends CI_Controller
         }
     }
 
-    public function view_user($uid=0)
+    public function view_user($user_id=0)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
             $data = array(
-                "user" => $this->User_model->get_by_id($uid)
+                "user" => $this->User_model->get_by_id($user_id)
             );
             $this->load->view("admin/user/view_user_page", $data);
         }
@@ -88,25 +88,25 @@ class User extends CI_Controller
         }
     }
 
-    public function edit_user($uid)
+    public function edit_user($user_id)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
-            $this->session->set_userdata("edit_uid", $uid);
-            $user = $this->User_model->get_by_id($uid);
+            $this->session->set_userdata("edit_uid", $user_id);
+            $user = $this->User_model->get_by_id($user_id);
             $this->_edit_user_set_form_validation_rules();
 
             if($this->form_validation->run())
             {
-                if($uid = $this->User_model->update($this->_prepare_edit_user($user) ) ||
+                if($user_id = $this->User_model->update($this->_prepare_edit_user($user) ) ||
                     $this->session->userdata("avatar_upload_errors") == "")
                 {
-                    $this->User_log_model->_set_common_message("update", "User", "uid", $uid);
-                    redirect("admin/user/view_user/" . $uid);
+                    $this->User_log_model->_set_common_message("update", "User", "user_id", $user_id);
+                    redirect("admin/user/view_user/" . $user_id);
                 }
                 else
                 {
-                    $this->User_log_model->_set_common_message("update failed", "User", "uid", $uid);
+                    $this->User_log_model->_set_common_message("update failed", "User", "user_id", $user_id);
                 }
             }
 
@@ -150,7 +150,7 @@ class User extends CI_Controller
 
             //If the edit uid matches the logged in user's id, update the session's
             // avatar url.
-            if($this->session->userdata("uid") == $this->session->userdata("edit_uid"))
+            if($this->session->userdata("user_id") == $this->session->userdata("edit_uid"))
             {
                 $this->session->set_userdata($user["avatar_url"]);
             }

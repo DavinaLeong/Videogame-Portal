@@ -26,15 +26,15 @@ class User_model extends CI_Model
         return $query->row_array();
     }
 
-    public function get_by_id($uid=FALSE)
+    public function get_by_id($user_id=FALSE)
     {
-        $query = $this->db->get_where(TABLE_USER, array('uid' => $uid));
+        $query = $this->db->get_where(TABLE_USER, array('uid' => $user_id));
         return $query->row_array();
     }
 
     public function get_all_limit_offset($limit, $offset)
     {
-        $this->db->order_by("uid");
+        $this->db->order_by("user_id");
         $query = $this->db->get(TABLE_USER, $limit, $offset);
         return $query->result_array();
     }
@@ -102,10 +102,10 @@ class User_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function delete_by_uid($uid=FALSE)
+    public function delete_by_uid($user_id=FALSE)
     {
-        if($uid!==FALSE){
-            $this->db->delete(TABLE_USER, array('uid' => $uid));
+        if($user_id!==FALSE){
+            $this->db->delete(TABLE_USER, array('uid' => $user_id));
             return $this->db->affected_rows();
         }else{
             return 0;

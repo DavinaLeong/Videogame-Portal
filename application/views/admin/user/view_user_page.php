@@ -67,7 +67,7 @@
         <table class="table table-bordered">
             <tr>
                 <th>ID</th>
-                <td><?=$user["uid"]?></td>
+                <td><?=$user["user_id"]?></td>
 
                 <th>Username</th>
                 <td><?=$user["username"]?></td>

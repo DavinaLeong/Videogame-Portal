@@ -65,7 +65,7 @@
                     <td><?= $index + 1; ?></td>
                     <td><em><?= $user_log["ulid"]; ?></em></td>
                     <td>
-                        <?= $user_log["uid"]; ?> | <strong><?= $user_log["username"]; ?></strong><br>
+                        <?= $user_log["user_id"]; ?> | <strong><?= $user_log["username"]; ?></strong><br>
                         (<?= $user_log["name"]; ?> /
                         <?php switch($user_log["access"])
                         {

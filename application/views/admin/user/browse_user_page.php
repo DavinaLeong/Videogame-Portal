@@ -133,8 +133,8 @@
                     </td>
                     <td class="button-col">
                         <div class="btn-group">
-                            <button name="view_post" onclick="window.location.href = '<?=site_url("admin/user/view_user/".$user["uid"])?>'" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
-                            <button name="edit_post" onclick="window.location.href = '<?=site_url("admin/user/edit_user/".$user["uid"])?>'" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                            <button name="view_post" onclick="window.location.href = '<?=site_url("admin/user/view_user/".$user["user_id"])?>'" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button>
+                            <button name="edit_post" onclick="window.location.href = '<?=site_url("admin/user/edit_user/".$user["user_id"])?>'" type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</button>
                         </div>
                     </td>
                 </tr>
