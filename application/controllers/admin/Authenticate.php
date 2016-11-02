@@ -33,7 +33,7 @@ class Authenticate extends CI_Controller
         // Check if there is an existing session
         if($this->session->userdata("user_id") || $this->session->userdata("access"))
         {
-            $this->User_log_model->log_message("User has been LOGGED OUT. | uid: " . $this->session->userdata("user_id"));
+            $this->User_log_model->log_message("User has been LOGGED OUT. | user_id: " . $this->session->userdata("user_id"));
             $this->session->unset_userdata("user_id");
             $this->session->unset_userdata("access");
             $this->session->unset_userdata("name");
@@ -61,7 +61,7 @@ class Authenticate extends CI_Controller
     public function logout()
     {
         $this->session->set_userdata("message", "You've logged out.");
-        $this->User_log_model->log_message("User has LOOGED OUT. | uid: " . $this->session->userdata("user_id"));
+        $this->User_log_model->log_message("User has LOOGED OUT. | user_id: " . $this->session->userdata("user_id"));
         redirect("/admin/authenticate/login");
     }
 
@@ -148,7 +148,7 @@ class Authenticate extends CI_Controller
                         $this->session->set_userdata("access", $user["access"]);
                         $this->session->set_userdata("name", $user["name"]);
                         $this->session->set_userdata("avatar_url", $user["avatar_url"]);
-                        $this->User_log_model->log_message("User has logged in. | uid: " . $user["user_id"]);
+                        $this->User_log_model->log_message("User has logged in. | user_id: " . $user["user_id"]);
 
                         if($this->session->userdata("access") == "A")
                         {

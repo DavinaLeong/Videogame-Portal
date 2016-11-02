@@ -119,7 +119,7 @@ class Migration_Initial_setup extends CI_Migration
                 'type' => 'INT',
                 'constraint' => '11',
                 'unsigned' => TRUE,
-                'auto_incremnt' => TRUE
+                'auto_increment' => TRUE
             ),
             'user_id' => array(
                 'type' => 'INT',

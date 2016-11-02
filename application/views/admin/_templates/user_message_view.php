@@ -14,12 +14,9 @@
 ?>
 	<?php if($this->session->userdata('message')):?>
 		<div class="alert alert-info" role="alert">
-			<div class="row">
-				<div class="col-sm-1" style="width: 2%;"><i class="fa fa-info fa-lg"></i></div>
-				<div class="col-sm-10"><?=$this->session->userdata('message')?></div>
-				<div class="col-sm-1 pull-right"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button></div>
-			</div>
+            <div class="pull-right"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button></div>
+            <p><i class="fa fa-info fa-fw"></i>&nbsp;<?=$this->session->userdata('message')?></p>
 		</div>
 		<?php $this->session->unset_userdata('message') ?>
 	<?php endif;?>

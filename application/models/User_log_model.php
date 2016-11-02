@@ -28,7 +28,7 @@ class User_log_model extends CI_Model
     public function get_all_user()
     {
         $sql = "SELECT user_log.*, user.name, user.username, user.access FROM user_log
-        LEFT JOIN user ON user_log.uid = user.uid
+        LEFT JOIN user ON user_log.user_id = user.user_id
         ORDER BY user_log.timestamp DESC";
 
         $query = $this->db->query($sql);
@@ -45,7 +45,7 @@ class User_log_model extends CI_Model
     public function get_all_user_limit_offset($limit=1000, $offset=0)
     {
         $sql = "SELECT user_log.*, user.name, user.username, user.access FROM user_log
-        LEFT JOIN user ON user_log.uid = user.uid
+        LEFT JOIN user ON user_log.user_id = user.user_id
         ORDER BY user_log.timestamp DESC
         LIMIT ? OFFSET ?";
 
@@ -56,12 +56,12 @@ class User_log_model extends CI_Model
     public function log_message($message)
     {
         $data = array(
-            'uid'=>$this->session->userdata('uid'),
+            'user_id'=>$this->session->userdata('user_id'),
             'message'=>$message
         );
 
-        $now = new DateTime("now", new DateTimeZone(DATETIMEZONE));
-        $this->db->set('timestamp', $now->format('c'));
+        $this->load->library('Datetime_helper');
+        $this->db->set('timestamp', $this->datetime_helper->now());
         $this->db->insert(TABLE_USER_LOG, $data);
         return $this->db->insert_id();
     }

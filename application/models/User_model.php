@@ -28,7 +28,7 @@ class User_model extends CI_Model
 
     public function get_by_id($user_id=FALSE)
     {
-        $query = $this->db->get_where(TABLE_USER, array("uid" => $user_id));
+        $query = $this->db->get_where(TABLE_USER, array("user_id" => $user_id));
         return $query->row_array();
     }
 
@@ -74,7 +74,7 @@ class User_model extends CI_Model
 
         $this->load->library("Datetime_helper");
         $this->db->set("last_updated", $this->datetime_helper->now());
-        $this->db->update(TABLE_USER, $data, array("uid" => $user["uid"]));
+        $this->db->update(TABLE_USER, $data, array("user_id" => $user["user_id"]));
         return $this->db->affected_rows();
     }
 
@@ -86,7 +86,7 @@ class User_model extends CI_Model
 
         $this->load->library("Datetime_helper");
         $this->db->set("last_updated", $this->datetime_helper->now());
-        $this->db->update(TABLE_USER, $data, array("uid" => $user["uid"]));
+        $this->db->update(TABLE_USER, $data, array("user_id" => $user["user_id"]));
         return $this->db->affected_rows();
     }
 
@@ -98,14 +98,14 @@ class User_model extends CI_Model
 
         $this->load->library("Datetime_helper");
         $this->db->set("last_updated", $this->datetime_helper->now());
-        $this->db->update(TABLE_USER, $data, array("uid" => $user["uid"]));
+        $this->db->update(TABLE_USER, $data, array("user_id" => $user["user_id"]));
         return $this->db->affected_rows();
     }
 
     public function delete_by_uid($user_id=FALSE)
     {
         if($user_id!==FALSE){
-            $this->db->delete(TABLE_USER, array("uid" => $user_id));
+            $this->db->delete(TABLE_USER, array("user_id" => $user_id));
             return $this->db->affected_rows();
         }else{
             return 0;

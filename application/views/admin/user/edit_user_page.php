@@ -39,7 +39,7 @@
                     Action <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="<?= site_url('admin/user/view_user/' . $user['uid']) ?>"><i class="fa fa-eye"></i>&nbsp;View User</a></li>
+                    <li><a href="<?= site_url('admin/user/view_user/' . $user['user_id']) ?>"><i class="fa fa-eye"></i>&nbsp;View User</a></li>
                 </ul>
             </div>
         </h1>
