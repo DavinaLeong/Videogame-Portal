@@ -212,7 +212,7 @@ class Game_platform extends CI_Controller
         }
         else
         {
-            $game_platform["platform_label_col"] = "#5CB85C";
+            $game_platform["platform_label_col"] = "5CB85C";
         }
         return $game_platform;
     }
@@ -238,7 +238,7 @@ class Game_platform extends CI_Controller
         }
         else
         {
-            $game_platform["platform_label_col"] = "#5CB85C";
+            $game_platform["platform_label_col"] = "5CB85C";
         }
         return $game_platform;
     }

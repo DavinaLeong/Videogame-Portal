@@ -42,9 +42,9 @@
 
     <div class="page-header">
         <h1>
-            <i class="text-info fa fa-file-text-o"></i> Browse Screenshot Types <span class="badge"><?=$total_entries?></span>&nbsp;
+            <i class="text-info fa fa-file-text-o fa-fw"></i> Browse Screenshot Types <span class="badge"><?=$total_entries?></span>&nbsp;
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#new_screenshot_type_modal">
-                <i class="fa fa-plus"></i> New Screenshot Type</button>
+                <i class="fa fa-plus fa-fw"></i> New Screenshot Type</button>
         </h1>
     </div>
 
@@ -99,7 +99,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Add New Screenshot Type</h4>
+                        <h4 class="modal-title"><i class="fa fa-plus fa-fw"></i> Add New Screenshot Type</h4>
                     </div>
 
                     <div class="modal-body">
@@ -136,7 +136,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Delete Screenshot Type</h4>
+                    <h4 class="modal-title"><i class="fa fa-trash fa-fw"></i> Delete Screenshot Type</h4>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure?</p>

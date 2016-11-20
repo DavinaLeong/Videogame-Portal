@@ -100,8 +100,8 @@
                             <label for="platform_label_col" class="col-sm-3 control-label">Label Color</label>
                             <div class="col-sm-9">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="platform_label_col" placeholder="Hex value" value="<?=$game_platform['platform_label_col']?>" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
-                                    <div class="input-group-addon"><div style="display: inline-block; background-color: <?=$game_platform['platform_label_col']?>; width: 16px; height: 16px; border: thin solid #ccc;"></div></div>
+                                    <input type="text" class="form-control" name="platform_label_col" placeholder="000000" value="<?=$game_platform['platform_label_col']?>" data-parsley-maxlength="7" data-parsley-pattern="<?=HEX_REGEX_PARSLEY;?>"/>
+                                    <div class="input-group-addon"><div style="display: inline-block; background-color: #<?=$game_platform['platform_label_col']?>; width: 16px; height: 16px; border: thin solid #ccc;"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-4">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                        <button type="button" class="btn btn-default" onclick="window.location.href = '<?=site_url("admin/game_platform/browse_game_platform/")?>'"><i class="fa fa-ban"></i> Cancel</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = '<?=site_url("admin/game_platform/view_game_platform/" . $game_platform["platform_id"])?>'"><i class="fa fa-ban"></i> Cancel</button>
                     </div>
                 </div>
 

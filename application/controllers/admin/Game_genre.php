@@ -85,6 +85,7 @@ class Game_genre extends CI_Controller
                 if($this->Game_genre_model->update($this->_prepare_edit_game_genre($game_genre)))
                 {
                     $this->User_log_model->_set_common_message("edit", "Game Genre", "genre_id", $genre_id);
+                    redirect("admin/game_genre/browse_game_genre");
                 }
                 else
                 {
@@ -132,11 +133,11 @@ class Game_genre extends CI_Controller
         $game_genre["genre_abbr"] = $this->input->post("genre_abbr");
         if($this->input->post("genre_label_col"))
         {
-            $game_platform["genre_label_col"] = $this->input->post("genre_label_col");
+            $game_genre["genre_label_col"] = $this->input->post("genre_label_col");
         }
         else
         {
-            $game_platform["genre_label_col"] = "#5BC0DE";
+            $game_genre["genre_label_col"] = "5BC0DE";
         }
         return $game_genre;
     }
@@ -154,11 +155,11 @@ class Game_genre extends CI_Controller
         $game_genre["genre_abbr"] = $this->input->post("genre_abbr");
         if($this->input->post("genre_label_col"))
         {
-            $game_platform["genre_label_col"] = $this->input->post("genre_label_col");
+            $game_genre["genre_label_col"] = $this->input->post("genre_label_col");
         }
         else
         {
-            $game_platform["genre_label_col"] = "#5BC0DE";
+            $game_genre["genre_label_col"] = "5BC0DE";
         }
         return $game_genre;
     }

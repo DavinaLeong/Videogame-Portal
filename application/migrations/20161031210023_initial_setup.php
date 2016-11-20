@@ -172,6 +172,7 @@ class Migration_Initial_setup extends CI_Migration
             'from_steam' => array(
                 'type' => 'INT',
                 'constraint' => '11',
+                'unsigned' => TRUE
             ),
             'date_added' => array(
                 'type' => 'DATETIME'
@@ -213,7 +214,7 @@ class Migration_Initial_setup extends CI_Migration
             'genre_label_col' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '6',
-                'null' => TRUE
+                'default' => '5BC0DE'
             ),
             'date_added' => array(
                 'type' => 'DATETIME'
@@ -260,7 +261,8 @@ class Migration_Initial_setup extends CI_Migration
             ),
             'platform_logo_col' => array(
                 'type' => 'VARCHAR',
-                'constraint' => '6'
+                'constraint' => '6',
+                'default' => '5CB85C'
             ),
             'date_added' => array(
                 'type' => 'DATETIME'

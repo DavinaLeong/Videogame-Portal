@@ -83,7 +83,7 @@
                     </tr>
                     <tr>
                         <th>Platform Abbr:</th>
-                        <td><span class="badge" style="background-color: <?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
+                        <td><span class="label-platform" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
                     </tr>
                     <tr>
                         <th>Platform Developer:</th>
@@ -107,6 +107,10 @@
                                 <?= $game_platform["year_intro"]; ?>
                             <?php endif; ?>
                         </td>
+                    </tr>
+                    <tr>
+                        <th>Label Colour:</th>
+                        <td><?= $game_platform["platform_label_col"]; ?></td>
                     </tr>
                     <tr>
                         <th>Date Added:</th>

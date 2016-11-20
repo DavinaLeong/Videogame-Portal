@@ -32,20 +32,20 @@
     <div class="collapse navbar-collapse" id="admin_navbar">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users"> </i> Users <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users fa-fw"> </i> Users <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/user/add_user')?>"><i class="fa fa-plus"></i> Add User</a></li>
-            <li><a href="<?=site_url('admin/user/browse_user')?>"><i class="fa fa-file-text-o"></i> Browse Users</a></li>
+            <li><a href="<?=site_url('admin/user/add_user')?>"><i class="fa fa-plus fa-fw"></i> Add User</a></li>
+            <li><a href="<?=site_url('admin/user/browse_user')?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Users</a></li>
           </ul>
         </li>
       </ul>
 
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-gamepad"></i> Videogames <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-gamepad fa-fw"></i> Videogames <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/videogame/new_videogame')?>"><i class="fa fa-plus"></i> Add Video Game</a></li>
-            <li><a href="<?=site_url('admin/videogame/browse_videogame')?>"><i class="fa fa-file-text-o"></i> Browse Video Games</a></li>
+            <li><a href="<?=site_url('admin/videogame/new_videogame')?>"><i class="fa fa-plus fa-fw"></i> Add Video Game</a></li>
+            <li><a href="<?=site_url('admin/videogame/browse_videogame')?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Video Games</a></li>
           </ul>
         </li>
       </ul>
@@ -53,12 +53,12 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa
-          fa-laptop"></i> Game Platforms <span class="caret"></span></a>
+          fa-laptop fa-fw"></i> Game Platforms <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/game_platform/new_game_platform')?>"><i class="fa fa-plus"></i> Add Game
+            <li><a href="<?=site_url('admin/game_platform/new_game_platform')?>"><i class="fa fa-plus fa-fw"></i> Add Game
                 Platform</a></li>
             <li><a href="<?=site_url('admin/game_platform/browse_game_platform/0')?>"><i class="fa
-            fa-file-text-o"></i> Browse
+            fa-file-text-o fa-fw"></i> Browse
                 Game Platforms</a></li>
           </ul>
         </li>
@@ -67,11 +67,11 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa
-          fa-sitemap"></i> Game Genres <span class="caret"></span></a>
+          fa-sitemap fa-fw"></i> Game Genres <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/game_genre/new_game_genre')?>"><i class="fa fa-plus"></i> Add Game
+            <li><a href="<?=site_url('admin/game_genre/new_game_genre')?>"><i class="fa fa-plus fa-fw"></i> Add Game
                 Genre</a></li>
-            <li><a href="<?=site_url('admin/game_genre/browse_game_genre')?>"><i class="fa fa-file-text-o"></i> Browse
+            <li><a href="<?=site_url('admin/game_genre/browse_game_genre')?>"><i class="fa fa-file-text-o fa-fw"></i> Browse
                 Game Genres</a></li>
           </ul>
         </li>
@@ -80,16 +80,16 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa
-          fa-picture-o"></i> Screenshots <span class="caret"></span></a>
+          fa-picture-o fa-fw"></i> Screenshots <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Screenshots</li>
-            <li><a href="<?=site_url('admin/screenshot/new_screenshot')?>"><i class="fa fa-plus"></i> Add
+            <li><a href="<?=site_url('admin/screenshot/new_screenshot')?>"><i class="fa fa-plus fa-fw"></i> Add
                 Screenshot</a></li>
-            <li><a href="<?=site_url('admin/screenshot/browse_screenshot')?>"><i class="fa fa-file-text-o"></i> Browse
+            <li><a href="<?=site_url('admin/screenshot/browse_screenshot')?>"><i class="fa fa-file-text-o fa-fw"></i> Browse
                 Screenshots</a></li>
             <li class="divider" role="separator"></li>
             <li class="dropdown-header">Screenshot Types</li>
-            <li><a href="<?=site_url('admin/screenshot_type/browse_screenshot_type')?>"><i class="fa fa-file-text-o"></i>
+            <li><a href="<?=site_url('admin/screenshot_type/browse_screenshot_type')?>"><i class="fa fa-file-text-o fa-fw"></i>
                 Browse Screenshot Types</a></li>
           </ul>
         </li>
@@ -108,12 +108,12 @@
               <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="<?=site_url('admin/authenticate/change_password')?>"><i class="fa fa-key"></i> Change
+            <li><a href="<?=site_url('admin/authenticate/change_password')?>"><i class="fa fa-key fa-fw"></i> Change
                 Password</a></li>
-            <li><a href="<?=site_url('admin/authenticate/logout')?>"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a href="<?=site_url('admin/authenticate/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
             <?php if($this->User_log_model->validate_access("A", $this->session->userdata("access"))): ?>
             <li role="separator" class="divider"></li>
-            <li><a href="<?=site_url('admin/authenticate/browse_userlogs')?>"><i class="fa fa-list"></i> View Logged Messages</a></li>
+            <li><a href="<?=site_url('admin/authenticate/browse_userlogs')?>"><i class="fa fa-list fa-fw"></i> View Logged Messages</a></li>
             <?php endif; ?>
           </ul>
         </li>

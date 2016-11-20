@@ -118,3 +118,6 @@ define("DISPLAY_SCREENSHOT_HEIGHT", 480);
 define("DISPLAY_THUMBNAIL_WIDTH", 150);
 define("DISPLAY_THUMBNAIL_HEIGHT", 84);
 define("MAX_UPLOAD_FILE_SIZE", 1024 * 1024 * 3); // in MB
+
+define("HEX_REGEX", "/^[A-Fa-f0-9]{6}$/");
+define("HEX_REGEX_PARSLEY", "^[A-Fa-f0-9]{6}$");

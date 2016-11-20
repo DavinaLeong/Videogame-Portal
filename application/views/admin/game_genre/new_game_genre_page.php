@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="platform_label_col" class="col-sm-3 control-label">Label Color</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="platform_label_col" placeholder="Hex value" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
+                        <input type="text" class="form-control" name="platform_label_col" placeholder="000000" data-parsley-maxlength="7" data-parsley-pattern="<?=HEX_REGEX_PARSLEY;?>"/>
                     </div>
                 </div>
 

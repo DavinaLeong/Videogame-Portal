@@ -70,10 +70,8 @@
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_genre["genre_name"]?></td>
                     <td>
-                        <?php if (strtolower($game_genre["genre_abbr"]) == "none"): ?>
-                            <span class="text-placeholder"><?=$game_genre["genre_abbr"]?></span>
-                        <?php elseif ($game_genre["genre_abbr"]): ?>
-                            <span class="label" style="background-color: <?=$game_genre["genre_label_col"]?>"><?=$game_genre["genre_abbr"]?></span>
+                        <?php if ($game_genre["genre_abbr"]): ?>
+                            <span class="badge-genre" style="background-color: #<?=$game_genre['genre_label_col'];?>"><?=$game_genre["genre_abbr"]?></span>
                         <?php else: ?>
                             <span class="text-placeholder">no abbr</span>
                         <?php endif; ?>

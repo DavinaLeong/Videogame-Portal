@@ -71,8 +71,8 @@
                     <label for="genre_label_col" class="col-sm-3 control-label">Label Color</label>
                     <div class="col-sm-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="genre_label_col" placeholder="Hex value" value="<?=$game_genre['genre_label_col']?>" data-parsley-maxlength="7" data-parsley-pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
-                            <div class="input-group-addon"><div style="display: inline-block; background-color: <?=$game_genre['genre_label_col']?>; width: 16px; height: 16px; border: thin solid #ccc;"></div></div>
+                            <input type="text" class="form-control" name="genre_label_col" placeholder="000000" value="<?=$game_genre['genre_label_col']?>" data-parsley-maxlength="7" data-parsley-pattern="<?=HEX_REGEX_PARSLEY;?>"/>
+                            <div class="input-group-addon"><div style="display: inline-block; background-color: #<?=$game_genre['genre_label_col']?>; width: 16px; height: 16px; border: thin solid #ccc;"></div></div>
                         </div>
                     </div>
                 </div>
