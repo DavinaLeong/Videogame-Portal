@@ -58,7 +58,7 @@
     <?php $this->load->view("admin/_templates/user_message_view"); ?>
 
     <p>User's details:</p>
-    <div class="image-preview">
+    <div class="vgp-image-preview">
         <img class="img-rounded" src="<?=site_url('uploads/' . $user['avatar_url'])?>" alt="<?=$user['username']?>
         avatar" />
     </div>

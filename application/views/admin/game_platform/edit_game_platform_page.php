@@ -133,11 +133,11 @@
         <div class="col-md-3">
             <div class="well well-sm" style="background-color: transparent;">
                 <p><b>Upload Logo</b></p>
-                <div class="image-preview"><img src="<?=site_url('uploads/' . $game_platform['platform_logo_url'])?>" alt="<?=$game_platform['platform_name']?> avatar" /></div>
+                <div class="vgp-image-preview"><img src="<?=site_url('uploads/' . $game_platform['platform_logo_url'])?>" alt="<?=$game_platform['platform_name']?> avatar" /></div>
                 <?php if($this->session->userdata("logo_upload_errors")): ?>
                     <div class="text-danger"><?="Error:\n" . $this->session->userdata("logo_upload_errors")?></div>
                 <?php endif; ?>
-                <button class="btn btn-success center-div" style="margin: 0 auto;"  data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"
+                <button class="btn btn-success vgp-center-div" style="margin: 0 auto;"  data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"
 ></i> Upload Logo</button>
             </div>
         </div>

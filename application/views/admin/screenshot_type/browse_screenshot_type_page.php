@@ -74,7 +74,7 @@
                         }
                         else
                         {
-                            echo '<span class="text-placeholder">No description</span>';
+                            echo '<span class="vgp-text-placeholder">No description</span>';
                         }
                         ?>
                     </td>

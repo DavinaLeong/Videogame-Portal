@@ -70,15 +70,15 @@
                         <?php switch($user_log["access"])
                         {
                             case "A":
-                                echo '<span class="access-admin">Admin</span>';
+                                echo '<span class="vgp-access-admin">Admin</span>';
                                 break;
 
                             case "U":
-                                echo '<span class="access-user">User</span>';
+                                echo '<span class="vgp-access-user">User</span>';
                                 break;
 
                             case "M":
-                                echo '<span class="access-manager">Manager</span>';
+                                echo '<span class="vgp-access-manager">Manager</span>';
                                 break;
 
                             default:

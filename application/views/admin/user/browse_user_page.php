@@ -77,15 +77,15 @@
                         <?php switch($user["access"])
                         {
                             case "A":
-                                echo '<span class="access-admin">Admin</span>';
+                                echo '<span class="vgp-access-admin">Admin</span>';
                                 break;
 
                             case "U":
-                                echo '<span class="access-user">User</span>';
+                                echo '<span class="vgp-access-user">User</span>';
                                 break;
 
                             case "M":
-                                echo '<span class="access-manager">Manager</span>';
+                                echo '<span class="vgp-access-manager">Manager</span>';
                                 break;
 
                             default:
@@ -98,7 +98,7 @@
                         <?php if($user["avatar_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $user["avatar_url"])?>" alt="<?=$user['username']?>_avatar" width="50px" height="50px"/>
                         <?php else: ?>
-                            <span class="text-placeholder">No avatar</span>
+                            <span class="vgp-text-placeholder">No avatar</span>
                         <?php endif; ?>
                     </td>
                     <td>

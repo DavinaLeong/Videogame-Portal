@@ -136,10 +136,10 @@
             <div class="well well-sm" style="background-color: transparent;">
                 <p><b>Upload Avatar</b></p>
 
-                <div class="image-preview"><img src="<?= site_url('uploads/' . $user['avatar_url']) ?>"
+                <div class="vgp-image-preview"><img src="<?= site_url('uploads/' . $user['avatar_url']) ?>"
                                                 alt="<?= $user['username'] ?> avatar"/></div>
                 <p class="text-danger"><?= $this->session->userdata("file_upload_errors") ?></p>
-                <button class="btn btn-success center-div" style="margin: 0 auto;" data-toggle="modal"
+                <button class="btn btn-success vgp-center-div" style="margin: 0 auto;" data-toggle="modal"
                         data-target="#uploadModal"><i class="fa fa-upload"
                         ></i> Upload Avatar
                 </button>
@@ -157,7 +157,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="uploadModalLabel">Upload New Avatar</h4>
+                        <h4 class="modal-title" id="uploadModalLabel"><i class="fa fa-upload"></i> Upload New Avatar</h4>
                     </div>
                     <div class="modal-body">
 
@@ -168,7 +168,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i>Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
                     </div>
                 </div>
             </form>

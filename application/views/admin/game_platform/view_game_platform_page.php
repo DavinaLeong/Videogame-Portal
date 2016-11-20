@@ -66,11 +66,11 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <div class="row">
-                <div class="image-preview">
+                <div class="vgp-image-preview">
                     <?php if($game_platform["platform_logo_url"]): ?>
                         <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["platform_logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar"/>
                     <?php else: ?>
-                        <span class="text-placeholder">No logo</span>
+                        <span class="vgp-text-placeholder">No logo</span>
                     <?php endif; ?>
                 </div>
             </div>
@@ -79,22 +79,22 @@
                 <table class="table table-bordered table-hover">
                     <tr>
                         <th>Platform ID:</th>
-                        <td><span class="text-placeholder-left"><?= $game_platform["platform_id"] ?></span></td>
+                        <td><span class="vgp-text-placeholder-left"><?= $game_platform["platform_id"] ?></span></td>
                     </tr>
                     <tr>
                         <th>Platform Abbr:</th>
-                        <td><span class="label-platform" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
+                        <td><span class="vgp-badge-platform" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?= $game_platform["platform_abbr"] ?></span></td>
                     </tr>
                     <tr>
                         <th>Platform Developer:</th>
                         <td>
                             <?php if($game_platform["platform_developer"] == "none"): ?>
-                                <span class="text-placeholder-left"><?=$game_platform["platform_developer"]?></span>
+                                <span class="vgp-text-placeholder-left"><?=$game_platform["platform_developer"]?></span>
                             <?php elseif($game_platform["platform_developer"]):
                                 echo $game_platform["platform_developer"];
                             else:
                                 ?>
-                                <span class="text-placeholder">NA</span>
+                                <span class="vgp-text-placeholder">NA</span>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -102,7 +102,7 @@
                         <th>First Year Released:</th>
                         <td>
                             <?php if(intval($game_platform["year_intro"]) == 0): ?>
-                                <span class="text-placeholder-left">0</span>
+                                <span class="vgp-text-placeholder-left">0</span>
                             <?php else: ?>
                                 <?= $game_platform["year_intro"]; ?>
                             <?php endif; ?>

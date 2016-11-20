@@ -58,7 +58,7 @@
                         <p class="form-control-static"><?=$user["username"]?></p>
                     </div>
                 </div>
-                <div class="space col-sm-12">&nbsp;</div>
+                <div class="vgp-space col-sm-12">&nbsp;</div>
 
                 <div class="form-group">
                     <label for="old_password" class="col-sm-3 control-label">Old Password <span

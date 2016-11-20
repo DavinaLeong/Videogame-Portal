@@ -70,28 +70,28 @@
                 <tr>
                     <td><?= $index + 1; ?></td>
                     <td><?=$game_platform["platform_name"]?></td>
-                    <td><span class="label-platform" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
+                    <td><span class="vgp-badge-platform" style="background-color: #<?=$game_platform["platform_label_col"]?>;"><?=$game_platform["platform_abbr"]?></span></td>
                     <td>
                         <?php if($game_platform["platform_logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $game_platform["platform_logo_url"])?>" alt="<?=$game_platform['platform_name']?>_avatar" width="50px" height="50px"/>
                         <?php else: ?>
-                            <span class="text-placeholder">No logo</span>
+                            <span class="vgp-text-placeholder">No logo</span>
                         <?php endif; ?>
                     </td>
                     <td>
                         <?php if($game_platform["platform_developer"] == "none"): ?>
-                            <span class="text-placeholder"><?=$game_platform["platform_developer"]?></span>
+                            <span class="vgp-text-placeholder"><?=$game_platform["platform_developer"]?></span>
                         <?php elseif($game_platform["platform_developer"]):
                             echo $game_platform["platform_developer"];
                         else:
                             ?>
-                            <span class="text-placeholder-left">NA</span>
+                            <span class="vgp-text-placeholder-left">NA</span>
                         <?php endif; ?>
                     </td>
 
                     <td>
                         <?php if($game_platform["year_intro"] == "0"): ?>
-                            <span class="text-placeholder-left"><?= $game_platform["year_intro"] ?></span>
+                            <span class="vgp-text-placeholder-left"><?= $game_platform["year_intro"] ?></span>
                         <?php else: ?>
                             <?= $game_platform["year_intro"] ?>
                         <?php endif; ?>

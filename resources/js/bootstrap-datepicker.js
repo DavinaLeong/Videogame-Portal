@@ -1310,7 +1310,7 @@
                     }
                     break;
                 case 32: // spacebar
-                    // Spacebar is used in manually typing dates in some formats.
+                    // vgp-spacebar is used in manually typing dates in some formats.
                     // As such, its behavior should not be hijacked.
                     break;
                 case 13: // enter

@@ -137,7 +137,7 @@ class Game_genre extends CI_Controller
         }
         else
         {
-            $game_genre["genre_label_col"] = "5BC0DE";
+            $game_genre["genre_label_col"] = "888888";
         }
         return $game_genre;
     }
@@ -159,7 +159,7 @@ class Game_genre extends CI_Controller
         }
         else
         {
-            $game_genre["genre_label_col"] = "5BC0DE";
+            $game_genre["genre_label_col"] = "888888";
         }
         return $game_genre;
     }

@@ -57,10 +57,9 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Platform</th>
+                <th style="width: 20%">Name</th>
                 <th>Genre</th>
-                <th>Logo</th>
+                <th>Platform</th>
                 <th>Date Purchased</th>
                 <th>Steam Purchase</th>
                 <th class="button-col">&nbsp;</th>
@@ -74,17 +73,15 @@
                     <td><?=$videogame["vg_name"]?>
                         <?php if($videogame["vg_abbr"]): ?>
                             <br>
-                            <span class="vg-abbr-block"><?=$videogame["vg_abbr"]?></span>
+                            <span class="vgp-label-vg"><?=$videogame["vg_abbr"]?></span>
                         <?php endif; ?>
                     </td>
-                    <td><span class="badge" style="background: <?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span></td>
-                    <td><span class="label" style="background: <?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
+                    <td><span class="vgp-badge-genre" style="background: #<?=$videogame["genre_label_col"]?>"><?=$videogame["genre_abbr"]?></span></td>
                     <td>
                         <?php if($videogame["platform_logo_url"]): ?>
                             <img class="img-rounded" src="<?=site_url('uploads/' . $videogame["platform_logo_url"])?>" alt="<?=$videogame['platform_abbr']?>_logo" width="50px" height="50px"/>
-                        <?php else: ?>
-                            <span class="text-placeholder">No logo</span>
-                        <?php endif; ?>
+                        <?php endif; ?><br/>
+                        <span class="vgp-badge-platform" style="background: #<?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span>
                     </td>
                     <td>
                     <?php
@@ -95,19 +92,19 @@
                     }
                     else
                     {
-                        echo "<span class='text-placeholder'>?</span>";
+                        echo "<span class='vgp-text-placeholder'>?</span>";
                     }
                     ?>
                     </td>
                     <td>
                         <?php
-                        if($videogame["from_steam"] )
+                        if($videogame["from_steam"])
                         {
-                            echo "Yes";
+                            echo '<span class="text-success"><i class="fa fa-check fa-lg"></i></span>';
                         }
                         else
                         {
-                            echo "No";
+                            echo '<span class="text-danger"><i class="fa fa-times fa-lg"></i></span>';
                         }
                         ?>
                     </td>

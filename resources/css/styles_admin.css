@@ -30,17 +30,17 @@ body
     color: #ccc;
 }
 
-.space
+.vgp-space
 {
     height: 20px;
 }
 
-.indent
+.vgp-indent
 {
     margin-left: 20px;
 }
 
-.search-results
+.vgp-search-results
 {
     font-size: 10pt;
     font-style: italic;
@@ -48,7 +48,7 @@ body
     color: #888;
 }
 
-.image-preview
+.vgp-image-preview
 {
     font-style: italic;
     color: #ccc;
@@ -59,7 +59,7 @@ body
     text-align: center;
 }
 
-.image-preview-shaded
+.vgp-image-preview-shaded
 {
     font-style: italic;
     color: #ccc;
@@ -71,7 +71,7 @@ body
     text-align: center;
 }
 
-.screenshot-preview
+.vgp-screenshot-preview
 {
     font-style: italic;
     color: #ccc;
@@ -83,14 +83,14 @@ body
     text-align: center;
 }
 
-.center-div
+.vgp-center-div
 {
     margin: 1em auto;
     display: block;
     text-align: center;
 }
 
-.text-phrase
+.vgp-text-phrase
 {
     padding-left: 2px;
     padding-right: 2px;
@@ -99,7 +99,7 @@ body
     background-color: #eee;
 }
 
-.text-placeholder
+.vgp-text-placeholder
 {
     font-style: italic;
     display: inline-block;
@@ -108,7 +108,7 @@ body
     font-size: 12pt;
 }
 
-.text-placeholder-left
+.vgp-text-placeholder-left
 {
     font-style: italic;
     text-align: left;
@@ -116,7 +116,7 @@ body
     font-size: 12pt;
 }
 
-.box-placeholder
+.vgp-box-placeholder
 {
     display: block;
     text-align: center;
@@ -133,34 +133,9 @@ body
     text-transform: uppercase;
 }
 
-.divider-space
+.vgp-divider-space
 {
     height: 30px;
-}
-
-.vg-abbr-block
-{
-    color: #fff;
-    background-color: #bbb;
-    padding: 2px 4px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 8pt;
-    text-transform: uppercase;
-    display: inline-block;
-}
-
-.vg-abbr
-{
-    color: #fff;
-    background-color: #bbb;
-    padding: 2px 4px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 8pt;
-    text-transform: uppercase;
 }
 
 .text-danger
@@ -173,17 +148,17 @@ body
     color: #999;
 }
 
-.access-admin
+.vgp-access-admin
 {
     color: #00bc99;
 }
 
-.access-manager
+.vgp-access-manager
 {
     color: #b001bc;
 }
 
-.access-user
+.vgp-access-user
 {
     color: #bb3500;
 }
@@ -192,7 +167,22 @@ body
     margin: auto;
 }
 
-.badge-genre {
+.vgp-label-vg {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 1px;
+}
+
+.vgp-badge-genre {
     display: inline-block;
     min-width: 10px;
     padding: 3px 7px;
@@ -207,7 +197,7 @@ body
     border-radius: 10px;
 }
 
-.label-platform {
+.vgp-badge-platform {
     display: inline-block;
     min-width: 10px;
     padding: 3px 7px;
@@ -220,4 +210,14 @@ body
     vertical-align: middle;
     background-color: #777;
     border-radius: 2px;
+}
+
+.vgp-ss-col .vg-caption-text {
+    height: 120px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.vgp-ss-col > .thumbnail > a > img {
+    height: 200px;
 }

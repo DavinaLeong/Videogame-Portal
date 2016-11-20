@@ -11,9 +11,12 @@
 ***********************************************************************************/
 class Upload_helper
 {
-    public function upload_config($upload_path="", $allowed_types="", $max_size=2048,
-                                           $min_width=50,
-                                           $min_height=50, $remove_spaces=FALSE)
+    public function upload_config($upload_path="",
+                                  $allowed_types="",
+                                  $max_size=2048,
+                                  $min_width=50,
+                                  $min_height=50,
+                                  $remove_spaces=FALSE)
     {
         $config["upload_path"] = $upload_path;
         $config["allowed_types"] = $allowed_types;

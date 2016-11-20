@@ -67,7 +67,7 @@
     <table class="table table-bordered">
         <tr>
             <th>Videogame</th>
-            <td><?=$screenshot["vg_name"]?>&nbsp;<span class="vg-abbr-block"><?=$screenshot["vg_abbr"]?></td>
+            <td><?=$screenshot["vg_name"]?>&nbsp;&nbsp;<span class="vgp-label-vg"><?=$screenshot["vg_abbr"]?></td>
         </tr>
         <tr>
             <th>Screenshot Type</th>
@@ -91,7 +91,7 @@
             <td>
                 <?php
                 $last_updated = new DateTime($screenshot["last_updated"], new DateTimeZone(DATETIMEZONE));
-                echo $last_updated->format("d M Y");
+                echo $last_updated->format("r");
                 ?>
             </td>
         </tr>

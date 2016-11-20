@@ -214,7 +214,7 @@ class Migration_Initial_setup extends CI_Migration
             'genre_label_col' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '6',
-                'default' => '5BC0DE'
+                'default' => '888888'
             ),
             'date_added' => array(
                 'type' => 'DATETIME'

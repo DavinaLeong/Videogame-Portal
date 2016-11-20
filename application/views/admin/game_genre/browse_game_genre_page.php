@@ -71,9 +71,9 @@
                     <td><?=$game_genre["genre_name"]?></td>
                     <td>
                         <?php if ($game_genre["genre_abbr"]): ?>
-                            <span class="badge-genre" style="background-color: #<?=$game_genre['genre_label_col'];?>"><?=$game_genre["genre_abbr"]?></span>
+                            <span class="vgp-badge-genre" style="background-color: #<?=$game_genre['genre_label_col'];?>"><?=$game_genre["genre_abbr"]?></span>
                         <?php else: ?>
-                            <span class="text-placeholder">no abbr</span>
+                            <span class="vgp-text-placeholder">no abbr</span>
                         <?php endif; ?>
                     </td>
                     <td>

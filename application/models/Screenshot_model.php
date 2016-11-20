@@ -40,10 +40,10 @@ class Screenshot_model extends CI_Model
 
     public function get_all_by_vgid($vg_id)
     {
-        $sql = "SELECT screenshots.*, screenshot_type.ss_type_name FROM screenshots
-LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
-WHERE screenshots.vg_id = ?
-ORDER BY screenshots.date_added;";
+        $sql = "SELECT screenshot.*, screenshot_type.ss_type_name FROM screenshot
+LEFT JOIN screenshot_type ON screenshot.ss_type_id = screenshot_type.ss_type_id
+WHERE screenshot.vg_id = ?
+ORDER BY screenshot.date_added;";
         $query = $this->db->query($sql, array((int) $vg_id));
         return $query->result_array();
     }
@@ -100,13 +100,13 @@ ORDER BY screenshots.date_added;";
 
     public function get_all_videogames_screenshotTypes()
     {
-        $sql = "SELECT screenshots.*,
+        $sql = "SELECT screenshot.*,
 videogames.vg_name, videogames.vg_abbr,
 screenshot_type.ss_type_name
-FROM screenshots
-LEFT JOIN videogames ON screenshots.vg_id = videogames.vg_id
-LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
-ORDER BY screenshots.ss_name";
+FROM screenshot
+LEFT JOIN videogames ON screenshot.vg_id = videogames.vg_id
+LEFT JOIN screenshot_type ON screenshot.ss_type_id = screenshot_type.ss_type_id
+ORDER BY screenshot.ss_name";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -115,14 +115,14 @@ ORDER BY screenshots.ss_name";
     {
         if($ss_id)
         {
-            $sql = "SELECT screenshots.*,
+            $sql = "SELECT screenshot.*,
     videogames.vg_name, videogames.vg_abbr,
     screenshot_type.ss_type_name
-    FROM screenshots
-    LEFT JOIN videogames ON screenshots.vg_id = videogames.vg_id
-    LEFT JOIN screenshot_type ON screenshots.ss_type_id = screenshot_type.ss_type_id
-    WHERE screenshots.ss_id = ?
-    ORDER BY screenshots.ss_name";
+    FROM screenshot
+    LEFT JOIN videogames ON screenshot.vg_id = videogames.vg_id
+    LEFT JOIN screenshot_type ON screenshot.ss_type_id = screenshot_type.ss_type_id
+    WHERE screenshot.ss_id = ?
+    ORDER BY screenshot.ss_name";
             $query = $this->db->query($sql, array((int) $ss_id));
             return $query->row_array();
         }

@@ -143,19 +143,22 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                    <?php foreach($screenshots as $screenshot): ?>
-                        <div class="col-sm-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><a href="<?=site_url('admin/screenshot/view_screenshot/' . $screenshot['ss_id'])?>"><?=$screenshot["ss_name"]?></a></h3>
-                                </div>
-                                <div class="panel-body">
-                                    <a href="<?=site_url('admin/screenshot/view_screenshot/' . $screenshot['ss_id'])?>"><img class="img-rounded img-responsive" src="<?=UPLOADS_FOLDER . $screenshot["ss_url"];?>" alt="<?=$screenshot['ss_name']?>"></a><br>
-                                    <p><?=$screenshot["ss_description"]?></p>
+                    <div class="row">
+                        <?php foreach($screenshots as $screenshot): ?>
+                            <div class="col-sm-6 col-md-4 vgp-ss-col">
+                                <div class="thumbnail">
+                                    <a href="<?=site_url('admin/screenshot/view_screenshot/' . $screenshot['ss_id'])?>"><img class="img-rounded img-responsive" src="<?=UPLOADS_FOLDER . $screenshot["ss_url"];?>" alt="<?=$screenshot['ss_name']?>"></a>
+                                    <div class="caption">
+                                        <div class="vg-caption-text">
+                                            <h3><?=$screenshot['ss_name']?></h3>
+                                            <p><?=$screenshot["ss_description"]?></p>
+                                        </div>
+                                        <p><a href="<?=site_url('admin/screenshot/view_screenshot/' . $screenshot['ss_id'])?>" class="btn btn-default btn-sm" role="button"><i class="fa fa-eye fa-fw"></i> View Screenshot</a></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,7 +176,7 @@
                         <table class="table table-bordered table-hover">
                             <tr>
                                 <th>ID:</th>
-                                <td><span class="text-placeholder-left"><?= $videogame["vg_id"] ?></span></td>
+                                <td><span class="vgp-text-placeholder-left"><?= $videogame["vg_id"] ?></span></td>
                             </tr>
                             <tr>
                                 <th>Abbr:</th>
@@ -185,7 +188,12 @@
                             </tr>
                             <tr>
                                 <th>Platform:</th>
-                                <td><span class="badge" style="background-color: <?=$videogame["platform_label_col"]?>;"><?= $videogame["platform_abbr"] ?></span></td>
+                                <td>
+                                    <?php if($videogame["platform_logo_url"]): ?>
+                                        <img class="img-rounded" src="<?=site_url('uploads/' . $videogame["platform_logo_url"])?>" alt="<?=$videogame['platform_abbr']?>_logo" width="50px" height="50px"/>
+                                    <?php endif; ?><br/>
+                                    <span class="vgp-badge-platform" style="background: #<?=$videogame["platform_label_col"];?>"><?=$videogame["platform_abbr"]?></span>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Genre:</th>
@@ -202,11 +210,21 @@
                             </tr>
                             <tr>
                                 <th>Date Added:</th>
-                                <td><span class="text-muted"><?=$videogame["vg_date_added"]?></span></td>
+                                <td>
+                                    <?php
+                                    $date_purchased = new DateTime($videogame["vg_date_added"], new DateTimeZone(DATETIMEZONE));
+                                    echo $date_purchased->format("d M Y");
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Last Updated:</th>
-                                <td><span class="text-muted"><?=$videogame["vg_last_updated"]?></span></td>
+                                <td>
+                                    <?php
+                                    $date_purchased = new DateTime($videogame["vg_last_updated"], new DateTimeZone(DATETIMEZONE));
+                                    echo $date_purchased->format("r");
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Bought from Steam:</th>
@@ -214,11 +232,11 @@
                                     <?php
                                     if($videogame["from_steam"])
                                     {
-                                        echo '<span class="text-success">Yes</span>';
+                                        echo '<span class="text-success"><i class="fa fa-check fa-lg"></i></span>';
                                     }
                                     else
                                     {
-                                        echo '<span class="text-danger">No</span>';
+                                        echo '<span class="text-danger"><i class="fa fa-times fa-lg"></i></span>';
                                     }
                                     ?>
                                 </td>

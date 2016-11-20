@@ -35,7 +35,7 @@
 
     <div class="page-header">
         <h1>
-            <i class="text-info fa fa-plus"></i> Edit Screenshot&nbsp;
+            <i class="text-info fa fa-pencil-square-o"></i> Edit Screenshot&nbsp;
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Action <span class="caret"></span>
@@ -75,7 +75,7 @@
                          alt="<?=$screenshot['ss_name']?>" <?=$str_display_width_height?>/>
                 </div>
                 <p class="text-danger"><?= $this->session->userdata("file_upload_errors") ?></p>
-                <button class="btn btn-success center-div" style="margin: 0 auto;" data-toggle="modal"
+                <button class="btn btn-success vgp-center-div" style="margin: 0 auto;" data-toggle="modal"
                         data-target="#uploadModal"><i class="fa fa-upload"></i> Upload Screenshot
                 </button>
             </div>
@@ -153,7 +153,7 @@
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
-                <button type="button" class="btn btn-default" onclick="window.location.href = '<?=site_url("admin/user/browse_user/")?>'"><i class="fa fa-ban"></i> Cancel</button>
+                <button type="button" class="btn btn-default" onclick="window.location.href = '<?=site_url("admin/screenshot/view_screenshot/" . $screenshot["ss_id"])?>'"><i class="fa fa-ban"></i> Cancel</button>
             </div>
         </div>
     </form>
@@ -167,9 +167,11 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="uploadModalLabel">Upload New Screenshot</h4>
+                        <h4 class="modal-title" id="uploadModalLabel"><i class="fa fa-upload"></i> Upload New Screenshot</h4>
                     </div>
                     <div class="modal-body">
+                        <label><br/>Image cannot be more than <span class="text-danger">2048px wide</span>
+                            and <span class="text-danger">2048px tall</span>.</label>
                         <input type="file" class="form-control" id="ss_url" name="ss_url"
                                placeholder="screenshot url">
                     </div>

@@ -154,8 +154,7 @@ class Screenshot extends CI_Controller
             // vg<vg_id>_ss<ss_id>_<ss_type_name>
             $upload_config = $this->upload_helper->upload_config_images(
             "vg".$screenshot["vg_id"]."_ss".$screenshot["ss_id"]."_".implode("", explode(" ", strtolower($screenshot_type["ss_type_name"]))),
-            "./uploads/screenshots/",
-            1024, 1024);
+            "./uploads/screenshots/");
             $this->load->library("upload", $upload_config);
 
             if ($this->upload->do_upload("ss_url"))
