@@ -86,12 +86,38 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*
 |--------------------------------------------------------------------------
+| Date Time
+|--------------------------------------------------------------------------
+|
+| This is used for the setting of timezones in PHP's DateTime object
+|
+*/
+define('DATETIMEZONE',		'Asia/Singapore');
+
+/*
+|--------------------------------------------------------------------------
 | Custom Constants
 |--------------------------------------------------------------------------
 */
-define("LOCAL_STATIC_REPO", "../../../static_repo/");
-define("DB_POKEMON", "pokemon");
-define("TABLE_ABILITY", "abilities");
-define("TABLE_TYPE", "types");
-
+define("DB_VIDEOGAMES", "videogame_catalogue");
+define("SITE_NAME", "Video Games Catalogue");
+define("AUTHOR", "Davina Leong");
+define("UPLOADS_FOLDER", "http://localhost/videogame_portal/uploads/");
 define("RESOURCES_FOLDER", "http://localhost/videogame_portal/resources/");
+
+define("TABLE_VIDEOGAMES", "videogames");
+define("TABLE_GAME_PLATFORM", "game_platform");
+define("TABLE_GAME_GENRE", "game_genre");
+define("TABLE_SCREENSHOTS", "screenshot");
+define("TABLE_SCREENSHOT_TYPE", "screenshot_type");
+define("TABLE_USER", "user");
+define("TABLE_USER_LOG", "user_log");
+
+define("DISPLAY_SCREENSHOT_WIDTH", 854);
+define("DISPLAY_SCREENSHOT_HEIGHT", 480);
+define("DISPLAY_THUMBNAIL_WIDTH", 150);
+define("DISPLAY_THUMBNAIL_HEIGHT", 84);
+define("MAX_UPLOAD_FILE_SIZE", 1024 * 1024 * 3); // in MB
+
+define("HEX_REGEX", "/^[A-Fa-f0-9]{6}$/");
+define("HEX_REGEX_PARSLEY", "^[A-Fa-f0-9]{6}$");
