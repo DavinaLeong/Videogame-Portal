@@ -72,7 +72,7 @@ class User extends CI_Controller
         }
     }
 
-    public function view_user($user_id=0)
+    public function view_user($user_id)
     {
         if($this->User_log_model->validate_access("A", $this->session->userdata("access")))
         {
@@ -98,7 +98,7 @@ class User extends CI_Controller
 
             if($this->form_validation->run())
             {
-                if($user_id = $this->User_model->update($this->_prepare_edit_user($user) ) ||
+                if($this->User_model->update($this->_prepare_edit_user($user) ) ||
                     $this->session->userdata("avatar_upload_errors") == "")
                 {
                     $this->User_log_model->_set_common_message("update", "User", "user_id", $user_id);
