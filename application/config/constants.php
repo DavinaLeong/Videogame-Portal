@@ -100,10 +100,10 @@ define('DATETIMEZONE',		'Asia/Singapore');
 |--------------------------------------------------------------------------
 */
 define("DB_VIDEOGAMES", "videogame_catalogue");
-define("SITE_NAME", "Video Games Catalogue");
+define("SITE_NAME", "Videogame Portal");
 define("AUTHOR", "Davina Leong");
-define("UPLOADS_FOLDER", "http://localhost/videogame_portal/uploads/");
-define("RESOURCES_FOLDER", "http://localhost/videogame_portal/resources/");
+define("UPLOADS_FOLDER", "http://localhost/videogame-portal/uploads/");
+define("RESOURCES_FOLDER", "http://localhost/videogame-portal/resources/");
 
 define("TABLE_VIDEOGAMES", "videogames");
 define("TABLE_GAME_PLATFORM", "game_platform");

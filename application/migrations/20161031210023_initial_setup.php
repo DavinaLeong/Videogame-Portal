@@ -259,7 +259,7 @@ class Migration_Initial_setup extends CI_Migration
                 'type' => 'VARCHAR',
                 'constraint' => '16'
             ),
-            'platform_logo_col' => array(
+            'platform_label_col' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '6',
                 'default' => '5CB85C'
